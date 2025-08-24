@@ -1,0 +1,46 @@
+<section class="user_img_sec">
+    <div class="container">
+        <div class="row">
+            <h6 class="otp_head">{{"UpdateProfile" | translate}}</h6>
+            <div class="col-md-12">
+                <p class="text-center"><img *ngIf="profImage == null || profImage == ''" src="../../assets/images/login/login_user.svg" width="100px">
+                    <img class="photo" src="{{profImage}}" *ngIf="profImage !== null"  width="100px" class="img_file"/></p>
+                <!-- <p class="text-center mb-4">
+                    <input type="file" class="custom-file-input" multiple accept="image/*" id="customFile"
+                        style="display: none" (change)="uploadImageFile($event)" #fileinput />
+                    <button class="prof_img_btn" (click)="fileinput.click()">{{"ChangeProfileImage" |
+                        translate}}</button></p> -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <form [formGroup]="profileForm">
+                    <div class="form-group">
+                        <input type="text" class="form-control readonly" placeholder="Full Name"
+                            formControlName="userName" readonly>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control readonly" placeholder="MobileNumber"
+                            formControlName="mobileNumber" readonly>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control signup_form_field" placeholder="Email Address"
+                            formControlName="email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors}">
+                        <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                            <div *ngIf="f['email'].errors['required']">{{"EmailRequired" | translate}}</div>
+                            <div *ngIf="f['email'].errors['pattern']">{{"PleaseprovidevalidEmail" | translate}}
+                            </div>
+                        </div>
+                    </div>
+                    <button class="proced_btn" (click)="onSubmit()">{{"Update" | translate}}</button>
+                    <button class="delete_btn" (click)="deleteAccount()">{{"DeleteAccount" | translate}}</button>
+                </form>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+</section>
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white"> {{"Loading" | translate}}...</p>
+</ngx-spinner>

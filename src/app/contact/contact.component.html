@@ -1,0 +1,130 @@
+<!-- <section class="cont_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="contact_heading">{{"ContactUs" | translate}}</h2>
+            </div>
+        </div>
+    </div>
+</section> -->
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white"> {{"Loading" | translate}}...</p>
+</ngx-spinner>
+<section class="msg_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="left_content">
+                    <h2 class="cont_form_head">{{"DropYourMessageHere" | translate}}</h2>
+                    <form [formGroup]="contactForm">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control signup_form_field"
+                                        placeholder="{{'FullName' | translate}}*" formControlName="name"
+                                        [ngClass]="{ 'is-invalid': submitted && contF['name'].errors}">
+                                    <div *ngIf="submitted && contF['name'].errors" class="invalid-feedback">
+                                        <div *ngIf="contF['name'].errors['required']">{{"NameRequired" | translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="email" class="form-control signup_form_field"
+                                        placeholder="{{'EmailAddress' | translate}}*" formControlName="email"
+                                        [ngClass]="{ 'is-invalid': submitted && contF['email'].errors }">
+                                    <div *ngIf="submitted && contF['email'].errors" class="invalid-feedback">
+                                        <div *ngIf="contF['email'].errors['required']">{{"EmailRequired" | translate}}
+                                        </div>
+                                        <div *ngIf="contF['email'].errors['pattern']">{{"PleaseprovidevalidEmail" |
+                                            translate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-3 col-3">
+                                        <div class="form-group">
+                                            <input type="text" id="number" class="form-control signup_form_field text-center"
+                                                value='+966' readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9 col-md-9 col-9 col_set">
+                                        <div class="form-group">
+                                            <input type="number" class="form-control signup_form_field"
+                                                placeholder="{{'MobileNumber' | translate}}*"
+                                                formControlName="mobileNumber"
+                                                [ngClass]="{ 'is-invalid': submitted && contF['mobileNumber'].errors }">
+                                            <div *ngIf="submitted && contF['mobileNumber'].errors"
+                                                class="invalid-feedback">
+                                                <div *ngIf="contF['mobileNumber'].errors['required']">
+                                                    {{"MobileRrequired" | translate}}</div>
+                                                <div *ngIf="contF['mobileNumber'].errors['pattern']">
+                                                    {{"Ninedigitsonlyallowed" | translate}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <textarea class="form-control signup_form_field"
+                                        placeholder="{{'Message' | translate}}*" formControlName="message"
+                                        [ngClass]="{ 'is-invalid': submitted && contF['message'].errors}"></textarea>
+                                    <div *ngIf="submitted && contF['message'].errors" class="invalid-feedback">
+                                        <div *ngIf="contF['message'].errors['required']">{{"MsgRequired" |
+                                            translate}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="resume">{{"Upload" | translate}}
+                                        <p class="upload_img" *ngIf="!iconImg && !fileUpload"><img
+                                                src="assets/images/Icon-feather.svg"></p>
+                                        <p class="upload_img" *ngIf="fileImgUpload?.type == 'application/pdf'">
+                                            {{fileImgUpload.name}}</p>
+                                        <img class="upload-img"
+                                            *ngIf="fileImgUpload?.type == 'image/jpeg' || fileImgUpload?.type == 'image/png'"
+                                            src="{{fileUpload}}" />
+                                    </label>
+                                    <br>
+                                    <input type="file" class="custom-file-input" id="resume"
+                                        (change)="uploadImageFile($event)">
+                                </div>
+                                <button class="proced_btn" (click)="onSubmit()">{{"Submit" | translate}}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="detail_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="det_data">
+                    <p class="text-center"><img src="assets/images/location.svg" class="loc_img"></p>
+                    <p class="det_cont">{{"SaudiArabia" | translate}}</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="det_data">
+                    <p class="text-center"><img src="assets/images/whatsapp.svg" class="loc_img"></p>
+                    <p class="det_cont">0567959460</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="det_data">
+                    <p class="text-center"><img src="assets/images/mail.svg" class="loc_img"></p>
+                    <p class="det_cont">support&#64;saudideal.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

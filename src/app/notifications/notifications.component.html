@@ -1,0 +1,58 @@
+<!-- <section class="categ_sec">
+    <div class="container">
+        <div class="col-md-12">
+            <ul class="category_ul mb-0">
+                <li><a routerLink="/motors">{{"Motors" | translate}}</a></li>
+                <li><a routerLink="/property">{{"Property" | translate}}</a></li>
+            </ul>
+        </div>
+    </div>
+</section> -->
+<section class="subscription_list_sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-12">
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <h5 class="my_ad_head">{{"Notifications" | translate}}</h5>
+                    </div>
+                    <div class="col-md-6"></div>
+                    <div class="col-md-2" *ngIf="notifylength != 0">
+                        <p (click)="clearNotify()" class="clear_btn">{{"clearAll" | translate}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="notifyList">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" *ngIf="notifylength != 0">
+                <div class="notify_sec" *ngFor="let item of notifyArray | paginate : {
+                    itemsPerPage: tableSize,
+                    currentPage: page,
+                    totalItems: notifylength
+                  };let i = index">
+                    <h6 class="head" *ngIf="item.type != 'adminNotification'">{{item.type}} 
+                    <span>({{item.createdAt | date:'MMM d, y, h:mm a'}})</span></h6>
+                    <h6 class="head" *ngIf="item.type == 'adminNotification'">Saudi Deal
+                        <span>({{item.createdAt | date:'MMM d, y, h:mm a'}})</span></h6>
+                    <p *ngIf="item.orderId != 0">{{"OrderId" | translate}} : {{item.orderId}}</p>
+                    <p *ngIf="item.bookingId != 0">{{"BookingId" | translate}} : {{item.bookingId}}</p>
+                    <p class="msg">{{item.message}}</p>
+                </div>
+            </div>
+            <div class="col-md-12" *ngIf="notifylength == 0">
+                <p class="no_notify">{{"No notifications...yet!" | translate}}</p>
+            </div>
+            <div class="col-md-12" *ngIf="notifylength != 0">
+                <div class="d-flex justify-content-center mt-4">
+                    <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+                    </pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

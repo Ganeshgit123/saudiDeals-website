@@ -1,0 +1,26 @@
+<section class="whole_background">
+  <div>
+    <app-header *ngIf="header"></app-header>
+  </div>
+
+  <div class="common_hei_div" *ngIf="logoHeader">
+    <app-logo-header></app-logo-header>
+  </div>
+
+  <div *ngIf="isLoading" class="spinner-wrapper">
+    <div class="spinner">Loading...</div>
+  </div>
+
+  <div contentAnimate *ngIf="!isLoading">
+    <div *ngIf="dir == 'ltr'">
+      <router-outlet></router-outlet>
+    </div>
+    <div *ngIf="dir == 'rtl'" class="rtl">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</section>
+
+<div>
+  <app-footer *ngIf="footer"></app-footer>
+</div>

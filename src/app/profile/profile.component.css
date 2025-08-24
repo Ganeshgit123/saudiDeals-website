@@ -1,0 +1,89 @@
+.user_img_sec {
+    padding: 1rem 0 3rem 0;
+}
+
+.otp_head{
+    font-size: var(--heading-h4);
+    font-weight: 600;
+    color: var(--text-dark-color);
+    text-align: center;
+    margin: 10px 0 20px 0;
+}
+
+.proced_btn{
+    background: var(--main-color);
+    color: var(--white-color);
+    text-align: center;
+    font-size: var(--para-size);
+    font-weight: 600;
+    padding: 15px 0;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+}
+.proced_btn:hover{
+    background: white;
+    border: 2px solid var(--main-color);
+    color: var(--main-color);
+    transition: 0.5s;
+}
+.delete_btn{
+    background: red;
+    color: var(--white-color);
+    text-align: center;
+    font-size: var(--para-size);
+    font-weight: 600;
+    padding: 15px 0;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+.delete_btn:hover{
+    background: white;
+    border: 2px solid red;
+    color: red;
+    transition: 0.5s;
+}
+.agree_btn{
+    font-size: var(--small-size);
+    font-weight: 500;
+    color: var(--text-light-color);
+    text-align: center;
+    margin-top: 2rem;
+}
+.agree_btn a{
+    color: var(--main-color);
+}
+.form-group{
+    margin-bottom: 15px;
+}
+.signup_form_field{
+    border: 2px solid #f1f1f1;
+    height: 45px;
+    font-size: var(--para-size);
+    color: var(--text-light-color);
+}
+.readonly{
+    border: 2px solid #f1f1f1;
+    height: 45px;
+    font-size: var(--para-size);
+    color: var(--text-light-color);
+    background: var(--accord-color);
+}
+.readonly:focus{
+    border: 2px solid #f1f1f1 !important;
+}
+::placeholder{
+    color: var(--border-color) !important;
+}
+.prof_img_btn{
+    background: none;
+    border: none;
+    color: var(--main-dark-color);
+    font-size: var(--heading-h6);
+    font-weight: 600;
+}
+.img_file{
+    border-radius: 50%;
+}

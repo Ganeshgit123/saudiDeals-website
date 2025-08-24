@@ -1,0 +1,394 @@
+<section class="categ_sec">
+    <div class="container">
+        <div class="col-md-12">
+            <ul class="category_ul mb-0">
+                <li><a routerLink="/motors">{{"Motors" | translate}}</a></li>
+                <li><a routerLink="/property" class="active">{{"Property" | translate}}</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section class="search_sec">
+    <div class="container">
+        <!-- <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h2 class="search_head">{{"RentProperties" | translate}}</h2>
+            </div>
+            <div class="col-md-3"></div>
+        </div> -->
+        <!-- <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="toggle_switch">
+                    <a class="rent_btn active">{{"Rent" | translate}}</a>
+                    <a routerLink="/property_sale" class="rent_btn">{{"Sale" | translate}}</a>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div> -->
+        <!-- <div class="row">
+            <div class="col-md-12">
+                <div class="search_box">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <form>
+                                <input type="search" class="form-control search_type_box" placeholder="Enter keywords">
+                            </form>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="search_btn">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="motor_categ_filter_ul mb-0">
+                    <li [ngClass]="propSecondCategActive == 'Rent' ? 'active' : ''" (click)="propCategActive('Rent')">
+                        <a>{{"Rent" | translate}}</a>
+                    </li>
+                    <li [ngClass]="propSecondCategActive == 'Sale' ? 'active' : ''" (click)="propCategActive('Sale')">
+                        <a>{{"Sale" | translate}}</a>
+                    </li>
+                </ul>
+                <div class="motorFilter">
+                    <ul class="motor_subCateg_ul">
+                        <li>
+                            <p class="text-center">{{"SelectCategory" | translate}}</p>
+                            <div class="form-group">
+                                <select class="form-control" #propCate (change)="propCategSelect(propCate.value)">
+                                    <option selected disabled>{{"SelectCategory" | translate}}</option>
+                                    <option *ngFor="let item of progCategArray" [value]="item.id">
+                                        <span *ngIf="dir == 'ltr'">{{item.name}}</span>
+                                        <span *ngIf="dir == 'rtl'">{{item.ar_name}}</span>
+                                    </option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <p class="text-center">{{"Province" | translate}}</p>
+                            <div class="form-group">
+                                <select class="form-control" #province (change)="provinceClick(province.value)">
+                                    <option selected disabled value=''>{{"SelectProvince" | translate}}</option>
+                                    <option value='all'>{{"All" | translate}}</option>
+                                    <option *ngFor="let item of provinceList" [value]="item.id">
+                                        <span *ngIf="dir == 'ltr'">{{item.name}}</span>
+                                        <span *ngIf="dir == 'rtl'">{{item.arName}}</span>
+                                    </option>
+                                </select>
+                            </div>
+                        </li>
+                        <li *ngIf="cityActive">
+                            <p class="text-center">{{"City" | translate}}</p>
+                            <div class="form-group">
+                                <select class="form-control" #city (change)="cityClick(city.value)">
+                                    <option selected disabled>{{"SelectCity" | translate}}</option>
+                                    <option value='all'>{{"All" | translate}}</option>
+                                    <option *ngFor="let item of cityList" [value]="item.id">
+                                        <span *ngIf="dir == 'ltr'">{{item.city}}</span>
+                                        <span *ngIf="dir == 'rtl'">{{item.arCity}}</span>
+                                    </option>
+                                </select>
+                            </div>
+                        </li>
+                        <li *ngIf="propSecondCategActive == 'Rent'">
+                            <p class="text-center">{{"RentalTerm" | translate}}</p>
+                            <div class="form-group">
+                                <select class="form-control" #term (change)="termClick(term.value)">
+                                    <option selected disabled>{{"RentalTerm" | translate}}</option>
+                                    <option *ngFor="let item of rentalTermArray" [value]="item.value">
+                                        {{item.label | translate}}
+                                    </option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <p class="text-center">{{"beds" | translate}}</p>
+                            <div class="form-group">
+                                <select class="form-control" #bedClick (change)="bedValueClick(bedClick.value)">
+                                    <option selected disabled>{{"beds" | translate}}</option>
+                                    <option *ngFor="let item of bedNumber" [value]="item">
+                                        {{item}}
+                                    </option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <p class="text-center">{{"Baths" | translate}}</p>
+                            <div class="form-group">
+                                <select class="form-control" #bath (change)="bathClick(bath.value)">
+                                    <option selected disabled>{{"Baths" | translate}}</option>
+                                    <option *ngFor="let item of bathArray" [value]="item">
+                                        {{item}}
+                                    </option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <button class="search_btn" (click)="propertySearch()">{{"Search" |
+                                translate}}</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="data_show_sec">
+    <div class="container">
+        <div class="row" *ngIf="propSecondCategActive == 'Rent'">
+            <div class="col-md-3 col-6" *ngFor="let item of progCategArray;let i = index;">
+                <div class="data_show_box" *ngIf="i == 0">
+                    <a routerLink="/property_filter/rent/{{item.id}}">
+                        <h6>{{item.name}}</h6>
+                        <p *ngIf="countValue?.apartmentCount == null">0</p>
+                        <p *ngIf="countValue?.apartmentCount != null">{{countValue?.apartmentCount}}</p>
+                    </a>
+                </div>
+                <div class="data_show_box" *ngIf="i == 1">
+                    <a routerLink="/property_filter/rent/{{item.id}}">
+                        <h6>{{item.name}}</h6>
+                        <p *ngIf="countValue?.villaCount == null">0</p>
+                        <p *ngIf="countValue?.villaCount != null">{{countValue?.villaCount}}</p>
+                    </a>
+                </div>
+                <div class="data_show_box" *ngIf="i == 2">
+                    <a routerLink="/property_filter/rent/{{item.id}}">
+                        <h6>{{item.name}}</h6>
+                        <p *ngIf="countValue?.commercialCount == null">0</p>
+                        <p *ngIf="countValue?.commercialCount != null">{{countValue?.commercialCount}}</p>
+                    </a>
+                </div>
+                <div class="data_show_box" *ngIf="i == 3">
+                    <a routerLink="/property_filter/rent/{{item.id}}">
+                        <h6>{{item.name}}</h6>
+                        <p *ngIf="countValue?.villaCompoundCount == null">0</p>
+                        <p *ngIf="countValue?.villaCompoundCount != null">{{countValue?.villaCompoundCount}}</p>
+                    </a>
+                </div>
+                <div class="data_show_box" *ngIf="i == 4">
+                    <a routerLink="/property_filter/rent/{{item.id}}">
+                        <h6>{{item.name}}</h6>
+                        <p *ngIf="countValue?.penthouseCount == null">0</p>
+                        <p *ngIf="countValue?.penthouseCount != null">{{countValue?.penthouseCount}}</p>
+                    </a>
+                </div>
+                <div class="data_show_box" *ngIf="i == 5">
+                    <a routerLink="/property_filter/rent/{{item.id}}">
+                        <h6>{{item.name}}</h6>
+                        <p *ngIf="countValue?.residentialBuildingCount == null">0</p>
+                        <p *ngIf="countValue?.residentialBuildingCount != null">{{countValue?.residentialBuildingCount}}
+                        </p>
+                    </a>
+                </div>
+                <div class="data_show_box" *ngIf="i == 6">
+                    <a routerLink="/property_filter/rent/{{item.id}}">
+                        <h6>{{item.name}}</h6>
+                        <p *ngIf="countValue?.landCount == null">0</p>
+                        <p *ngIf="countValue?.landCount != null">{{countValue?.landCount}}</p>
+                    </a>
+                </div>
+                <div class="data_show_box" *ngIf="i == 7">
+                    <a routerLink="/property_filter/rent/{{item.id}}">
+                        <h6>{{item.name}}</h6>
+                        <p *ngIf="countValue?.roomsForRentCount == null">0</p>
+                        <p *ngIf="countValue?.roomsForRentCount != null">{{countValue?.roomsForRentCount}}</p>
+                    </a>
+                </div>
+                <div class="data_show_box" *ngIf="i == 8">
+                    <a routerLink="/property_filter/rent/{{item.id}}">
+                        <h6>{{item.name}}</h6>
+                        <p *ngIf="countValue?.warehouseCount == null">0</p>
+                        <p *ngIf="countValue?.warehouseCount != null">{{countValue?.warehouseCount}}</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="propSecondCategActive == 'Sale'">
+            <div class="col-md-3 col-6" *ngFor="let item of progCategArray;let i = index;">
+                <div class="data_show_box" *ngIf="i == 0">
+                    <a routerLink="/property_filter/sale/{{item.id}}">
+                        <h6>{{item.name}}</h6>
+                        <p *ngIf="countValue?.apartmentCount == null">0</p>
+                        <p *ngIf="countValue?.apartmentCount != null">{{countValue?.apartmentCount}}</p>
+                    </a>
+                </div>
+                <div class="data_show_box" *ngIf="i == 1">
+                    <a routerLink="/property_filter/sale/{{item.id}}">
+                        <h6>{{item.name}}</h6>
+                        <p *ngIf="countValue?.villaCount == null">0</p>
+                        <p *ngIf="countValue?.villaCount != null">{{countValue?.villaCount}}</p>
+                    </a>
+                </div>
+                <div class="data_show_box" *ngIf="i == 2">
+                    <a routerLink="/property_filter/sale/{{item.id}}">
+                        <h6>{{item.name}}</h6>
+                        <p *ngIf="countValue?.commercialCount == null">0</p>
+                        <p *ngIf="countValue?.commercialCount != null">{{countValue?.commercialCount}}</p>
+                    </a>
+                </div>
+                <div class="data_show_box" *ngIf="i == 3">
+                    <a routerLink="/property_filter/sale/{{item.id}}">
+                        <h6>{{item.name}}</h6>
+                        <p *ngIf="countValue?.villaCompoundCount == null">0</p>
+                        <p *ngIf="countValue?.villaCompoundCount != null">{{countValue?.villaCompoundCount}}</p>
+                    </a>
+                </div>
+                <div class="data_show_box" *ngIf="i == 4">
+                    <a routerLink="/property_filter/sale/{{item.id}}">
+                        <h6>{{item.name}}</h6>
+                        <p *ngIf="countValue?.penthouseCount == null">0</p>
+                        <p *ngIf="countValue?.penthouseCount != null">{{countValue?.penthouseCount}}</p>
+                    </a>
+                </div>
+                <div class="data_show_box" *ngIf="i == 5">
+                    <a routerLink="/property_filter/sale/{{item.id}}">
+                        <h6>{{item.name}}</h6>
+                        <p *ngIf="countValue?.residentialBuildingCount == null">0</p>
+                        <p *ngIf="countValue?.residentialBuildingCount != null">{{countValue?.residentialBuildingCount}}
+                        </p>
+                    </a>
+                </div>
+                <div class="data_show_box" *ngIf="i == 6">
+                    <a routerLink="/property_filter/sale/{{item.id}}">
+                        <h6>{{item.name}}</h6>
+                        <p *ngIf="countValue?.landCount == null">0</p>
+                        <p *ngIf="countValue?.landCount != null">{{countValue?.landCount}}</p>
+                    </a>
+                </div>
+                <div class="data_show_box" *ngIf="i == 7">
+                    <a routerLink="/property_filter/sale/{{item.id}}">
+                        <h6>{{item.name}}</h6>
+                        <p *ngIf="countValue?.warehouseCount == null">0</p>
+                        <p *ngIf="countValue?.warehouseCount != null">{{countValue?.warehouseCount}}</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- <section class="recent_sec">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <h4 class="head">Popular Categories</h4>
+            </div>
+            <div class="col-md-12">
+                <owl-carousel-o [options]="customOptions">
+                    <ng-template carouselSlide>
+                        <img src="../../assets/images/categ_img.png">
+                    </ng-template>  
+                    <ng-template carouselSlide>
+                        <img src="../../assets/images/categ_img.png">
+                    </ng-template> 
+                    <ng-template carouselSlide>
+                        <img src="../../assets/images/categ_img.png">
+                    </ng-template> 
+                    <ng-template carouselSlide>
+                        <img src="../../assets/images/categ_img.png">
+                    </ng-template> 
+                    <ng-template carouselSlide>
+                        <img src="../../assets/images/categ_img.png">
+                    </ng-template> 
+                    <ng-template carouselSlide>
+                        <img src="../../assets/images/categ_img.png">
+                    </ng-template> 
+                  </owl-carousel-o>
+            </div>
+        </div>
+    </div>
+</section> -->
+<!-- <section class="recent_sec">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <h4 class="head">Popular Areas in Saudi</h4>
+            </div>
+            <div class="col-md-3">
+                <div class="prod_box">
+                    <img src="../../assets/images/motor/car.png">
+                    <div class="price_det">
+                        <h6 class="price_tag">SAR 52,000</h6>
+                        <p class="features">Toyota • Prado • Prado VXR</p>
+                        <p class="locat">2011 • 151,575 km</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="prod_box">
+                    <img src="../../assets/images/motor/car.png">
+                    <div class="price_det">
+                        <h6 class="price_tag">SAR 52,000</h6>
+                        <p class="features">Toyota • Prado • Prado VXR</p>
+                        <p class="locat">2011 • 151,575 km</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="prod_box">
+                    <img src="../../assets/images/motor/car.png">
+                    <div class="price_det">
+                        <h6 class="price_tag">SAR 52,000</h6>
+                        <p class="features">Toyota • Prado • Prado VXR</p>
+                        <p class="locat">2011 • 151,575 km</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="prod_box">
+                    <img src="../../assets/images/motor/car.png">
+                    <div class="price_det">
+                        <h6 class="price_tag">SAR 52,000</h6>
+                        <p class="features">Toyota • Prado • Prado VXR</p>
+                        <p class="locat">2011 • 151,575 km</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->
+<section class="feature_list_sec" *ngIf="recentPropLength != 0">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <h4 class="head">{{"RecentListings" | translate}}</h4>
+            </div>
+            <div class="col-md-2 prod_box_col" *ngFor="let prod of recentProperty">
+                <a routerLink="/ad-details/property/{{prod.id}}">
+                    <div class="prod_box">
+                        <span *ngIf="!(prod.image == null || prod.image.length == 0)">
+                            <img src="{{sortImageArray(prod.image)[0]?.url}}" class="home_prod_img">
+                        </span>
+                        <span *ngIf="prod.image == null || prod.image.length == 0">
+                            <p class="text-center"><img src="../../assets/images/home/recent1.png"></p>
+                        </span>
+                        <div class="price_det">
+                            <h6 class="price_tag"><img src="assets/images/saudi_riyal_logo.svg" class="riyal_logo_size">
+                                {{prod.price | currency:'':'':'3.0'}}
+                                <span *ngIf="prod.type == 'RENT'">/ </span>
+                                <span>{{ prod.rentalTerm | translate}}</span>
+                            </h6>
+                            <p class="features">
+                                <span *ngIf="!(prod.propetyType == null || prod.propetyType == '')">
+                                    <span *ngIf="prod.propetyType == 'residential'">{{"Residential" |
+                                        translate}}</span>
+                                    <span *ngIf="prod.propetyType == 'commercial'">{{"Commercial" |
+                                        translate}}</span>
+                                </span>
+                                <span *ngIf="!(prod.noBedrooms == null || prod.noBedrooms == '')">{{prod.noBedrooms}}
+                                    {{"beds" | translate}} • </span>
+                                <span class="next_sent"
+                                    *ngIf="!(prod.noBathrooms == null || prod.noBathrooms == '')">{{prod.noBathrooms}}
+                                    {{"Baths" | translate}}
+                                </span>
+                            </p>
+                            <p class="locat">{{prod.provincesName}}, {{prod.cityName}}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

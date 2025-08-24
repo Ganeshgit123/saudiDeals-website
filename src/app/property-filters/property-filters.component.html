@@ -1,0 +1,379 @@
+<!-- <section class="categ_sec">
+    <div class="container">
+        <div class="col-md-12">
+            <ul class="category_ul mb-0">
+                <li><a routerLink="/motors">{{"Motors" | translate}}</a></li>
+                <li><a routerLink="/property">{{"Property" | translate}}</a></li>
+            </ul>
+        </div>
+    </div>
+  </section> -->
+<section class="filter_sec">
+    <div class="container">
+        <ul class="filt_bord">
+            <li>
+                <div (click)="onAllClick()">
+                    <mat-form-field class="example-form">
+                        <mat-label class="sel_label_class">{{"Category" | translate}}</mat-label>
+                        <mat-select class="sel_class" [(value)]="categId"
+                            (selectionChange)='onCategoryChange($event.value)'>
+                            <input matInput type="text" (keyup)="onCategoryKey($event)" class="example-input">
+                            <mat-option value="all">{{'All' | translate}}</mat-option>
+                            <mat-option *ngFor="let item of selectedCategory" [value]="item.id">
+                                <span *ngIf="dir == 'ltr'">{{item.name}}</span>
+                                <span *ngIf="dir == 'rtl'">{{item.ar_name}}</span>
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </li>
+            <li>
+                <div (click)="onAllClick()">
+                    <mat-form-field class="example-form">
+                        <mat-label class="sel_label_class">{{"Province" | translate}}</mat-label>
+                        <mat-select class="sel_class" [(value)]="provinceSelect"
+                            (selectionChange)='onProvinceChange($event.value)'>
+                            <input matInput type="text" (keyup)="onProvinceKey($event)" class="example-input">
+                            <mat-option value="all">{{'All' | translate}}</mat-option>
+                            <mat-option *ngFor="let item of provinceList" [value]="item.id">
+                                <span *ngIf="dir == 'ltr'">{{item.name}}</span>
+                                <span *ngIf="dir == 'rtl'">{{item.arName}}</span>
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </li>
+            <li *ngIf="cityOpen">
+                <div (click)="onAllClick()">
+                    <mat-form-field class="example-form">
+                        <mat-label class="sel_label_class">{{"City" | translate}}</mat-label>
+                        <mat-select class="sel_class" [(value)]="cityId" (selectionChange)='onCityChange($event.value)'>
+                            <input matInput type="text" (keyup)="onCityKey($event)" class="example-input">
+                            <mat-option value="all">{{'All' | translate}}</mat-option>
+                            <mat-option *ngFor="let item of cityList" [value]="item.id">
+                                <span *ngIf="dir == 'ltr'">{{item.city}}</span>
+                                <span *ngIf="dir == 'rtl'">{{item.arCity}}</span>
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </li>
+            <li *ngIf="params == 'rent'">
+                <div (click)="onAllClick()">
+                    <mat-form-field class="example-form">
+                        <mat-label class="sel_label_class">{{"RentalTerm" | translate}}</mat-label>
+                        <mat-select class="sel_class" [(value)]="termsValue"
+                            (selectionChange)='termsClick($event.value)'>
+                            <mat-option *ngFor="let terms of rentalTermArray" [value]="terms.value">{{terms.label |
+                                translate}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <!-- <div class="price_filt" (click)="dropShow($event)">
+                    <span class="price_title">{{"RentalTerm" | translate}}</span><br>
+                    <span class="text_set" *ngIf="termsValue == 0">{{"Any" | translate}}</span>
+                    <span class="text_set" *ngIf="termsValue !== 0">{{termsValue}}</span>
+                    <span class="drop_icon"><img src="assets/images/iconDown.svg"></span>
+                </div>
+                <div class="dropdown_content" *ngIf="showDropdown" (click)="$event.stopPropagation()">
+                    <ul class="beds_ul">
+                        <li *ngFor="let terms of rentalTermArray" (click)="termsClick(terms.value)"
+                            [ngClass]="{'active': termsValue == terms.value}">{{terms.label | translate}}</li>
+                    </ul>
+                    <div class="btn_sec">
+                        <button type="button" class="cancel_btn" (click)="clearTermsFilter()">{{"Clear" |
+                            translate}}</button>
+                        <button type="button" class="apply_btn" (click)="termsPropSubmitFilter()">{{"ApplyFilter" |
+                            translate}}</button>
+                    </div>
+                </div> -->
+            </li>
+            <li>
+                <div (click)="onAllClick()">
+                    <mat-form-field class="example-form">
+                        <mat-label class="sel_label_class">{{"beds" | translate}}</mat-label>
+                        <mat-select class="sel_class" [(value)]="bedsValue" (selectionChange)='bedsClick($event.value)'>
+                            <mat-option *ngFor="let beds of bedNumber" [value]="beds">{{beds}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <!-- <div class="price_filt" (click)="bedShow($event)">
+                    <span class="price_title">{{"beds" | translate}}</span><br>
+                    <span class="text_set" *ngIf="bedsValue == 0">{{"Any" | translate}}</span>
+                    <span class="text_set" *ngIf="bedsValue !== 0">{{bedsValue}}</span>
+                    <span class="drop_icon"><img src="assets/images/iconDown.svg"></span>
+                </div>
+                <div class="dropdown_content" *ngIf="showBedDropdown" (click)="$event.stopPropagation()">
+                    <ul class="beds_ul">
+                        <li *ngFor="let beds of bedNumber;let i = index" (click)="bedsClick(beds)"
+                            [ngClass]="{'active': bedsValue == beds}">{{beds}}</li>
+                    </ul>
+                    <div class="btn_sec">
+                        <button type="button" class="cancel_btn" (click)="clearBedFilter()">{{"Clear" |
+                            translate}}</button>
+                        <button type="button" class="apply_btn" (click)="bedSubmitFilter()">{{"ApplyFilter" |
+                            translate}}</button>
+                    </div>
+                </div> -->
+            </li>
+            <li *ngIf="!cityOpen">
+                <div (click)="onAllClick()">
+                    <mat-form-field class="example-form">
+                        <mat-label class="sel_label_class">{{"Baths" | translate}}</mat-label>
+                        <mat-select class="sel_class" [(value)]="bathTotValue"
+                            (selectionChange)='bathClick($event.value)'>
+                            <mat-option *ngFor="let bath of bathArray" [value]="bath">{{bath}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <!-- <div class="price_filt" (click)="bathShow($event)">
+                    <span class="price_title">{{"Baths" | translate}}</span><br>
+                    <span class="text_set" *ngIf="bathTotValue == 0">{{"Any" | translate}}</span>
+                    <span class="text_set" *ngIf="bathTotValue !== 0">{{bathTotValue}}</span>
+                    <span class="drop_icon"><img src="assets/images/iconDown.svg"></span>
+                </div>
+                <div class="dropdown_content" *ngIf="bathShowDropdown" (click)="$event.stopPropagation()">
+                    <ul class="beds_ul">
+                        <li *ngFor="let bath of bathArray;let i = index" (click)="bathClick(bath)"
+                            [ngClass]="{'active': bathTotValue == bath}">{{bath}}</li>
+                    </ul>
+                    <div class="btn_sec">
+                        <button type="button" class="cancel_btn" (click)="clearbathPropFilter()">{{"Clear" |
+                            translate}}</button>
+                        <button type="button" class="apply_btn" (click)="bathPropSubmitFilter()">{{"ApplyFilter" |
+                            translate}}</button>
+                    </div>
+                </div> -->
+            </li>
+            <li *ngIf="cityOpen && params == 'sale'">
+                <div (click)="onAllClick()">
+                    <mat-form-field class="example-form">
+                        <mat-label class="sel_label_class">{{"Baths" | translate}}</mat-label>
+                        <mat-select class="sel_class" [(value)]="bathTotValue"
+                            (selectionChange)='bathClick($event.value)'>
+                            <mat-option *ngFor="let bath of bathArray" [value]="bath">{{bath}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <!-- <div class="price_filt" (click)="bathShow($event)">
+                    <span class="price_title">{{"Baths" | translate}}</span><br>
+                    <span class="text_set" *ngIf="bathTotValue == 0">{{"Any" | translate}}</span>
+                    <span class="text_set" *ngIf="bathTotValue !== 0">{{bathTotValue}}</span>
+                    <span class="drop_icon"><img src="assets/images/iconDown.svg"></span>
+                </div>
+                <div class="dropdown_content" *ngIf="bathShowDropdown" (click)="$event.stopPropagation()">
+                    <ul class="beds_ul">
+                        <li *ngFor="let bath of bathArray;let i = index" (click)="bathClick(bath)"
+                            [ngClass]="{'active': bathTotValue == bath}">{{bath}}</li>
+                    </ul>
+                    <div class="btn_sec">
+                        <button type="button" class="cancel_btn" (click)="clearbathPropFilter()">{{"Clear" |
+                            translate}}</button>
+                        <button type="button" class="apply_btn" (click)="bathPropSubmitFilter()">{{"ApplyFilter" |
+                            translate}}</button>
+                    </div>
+                </div> -->
+            </li>
+            <li *ngIf="params == 'sale' && !cityOpen">
+                <div class="price_filt" (click)="propAgeShow($event)">
+                    <span class="price_title">{{"PropertyAge" | translate}}</span><br>
+                    <span class="text_set" *ngIf="propAgeValue == 0">{{"Any" | translate}}</span>
+                    <span class="text_set" *ngIf="propAgeValue !== 0">{{propAgeValue}}</span>
+                    <span class="drop_icon"><img src="assets/images/iconDown.svg"></span>
+                </div>
+                <div class="dropdown_content" *ngIf="propAgeDropdown" (click)="$event.stopPropagation()">
+                    <ul class="beds_ul">
+                        <li *ngFor="let age of propAgeArray" (click)="ageClick(age.value)"
+                            [ngClass]="{'active': propAgeValue == age.value}">{{age.label | translate}}</li>
+                    </ul>
+                    <div class="btn_sec">
+                        <button type="button" class="cancel_btn" (click)="clearAgePropFilter()">{{"Clear" |
+                            translate}}</button>
+                        <button type="button" class="apply_btn" (click)="agePropSubmitFilter()">{{"ApplyFilter" |
+                            translate}}</button>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="price_filt last" (click)="filterShow($event)">
+                    <span class="price_title">{{"Filters" | translate}}</span><br>
+                    <span class="text_set">{{"BathAreaSqft" | translate}}</span>
+                    <span class="drop_icon"><img src="assets/images/iconDown.svg"></span>
+                </div>
+                <div class="dropdown_content last" *ngIf="filterSecShow" (click)="$event.stopPropagation()">
+                    <div *ngIf="!cityOpen">
+                        <ul class="beds_ul" *ngIf="params == 'rent'">
+                            <h6 class="filt_title">{{"PropertyAge" | translate}}</h6>
+                            <li *ngFor="let age of propAgeArray" (click)="ageClick(age.value)"
+                                [ngClass]="{'active': propAgeValue == age.value}">{{age.label | translate}}</li>
+                        </ul>
+                    </div>
+                    <div *ngIf="cityOpen">
+                        <ul class="beds_ul" *ngIf="params == 'rent'">
+                            <h6 class="filt_title">{{"Baths" | translate}}</h6>
+                            <li *ngFor="let bath of bathArray" (click)="bathClick(bath)"
+                                [ngClass]="{'active': bathTotValue == bath}">{{bath}}</li>
+                        </ul>
+                        <ul class="beds_ul">
+                            <h6 class="filt_title">{{"PropertyAge" | translate}}</h6>
+                            <li *ngFor="let age of propAgeArray" (click)="ageClick(age.value)"
+                                [ngClass]="{'active': propAgeValue == age.value}">{{age.label | translate}}</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <form class="form_box">
+                            <h6 class="areaTitle">{{"areaSize" | translate}}</h6>
+                            <div class="row">
+                                <div class="col-md-6 col-6">
+                                    <div class="form-group">
+                                        <label for="from">{{"From" | translate}}</label>
+                                        <input type="number" class="form-control" (keyup)="areaStart($event)">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-6">
+                                    <div class="form-group">
+                                        <label for="upto">{{"Upto" | translate}}</label>
+                                        <input type="number" class="form-control" (keyup)="areaEnd($event)">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div>
+                        <form class="form_box">
+                            <h6 class="areaTitle">{{"PriceRange" | translate}}</h6>
+                            <div class="row">
+                                <div class="col-md-6 col-6">
+                                    <div class="form-group">
+                                        <label for="from">{{"From" | translate}}</label>
+                                        <input type="number" class="form-control" (keyup)="priceStart($event)">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-6">
+                                    <div class="form-group">
+                                        <label for="upto">{{"Upto" | translate}}</label>
+                                        <input type="number" class="form-control" (keyup)="priceEnd($event)">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="btn_sec">
+                        <button type="button" class="cancel_btn" (click)="clearAllFilter()">{{"Clear" |
+                            translate}}</button>
+                        <button type="button" class="apply_btn" (click)="allFilter()">{{"ApplyFilter" |
+                            translate}}</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+<section class="post_list_sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>{{"Total" | translate}} •
+                    <span>{{totalPostCount}} {{"ads" | translate}}</span>
+                </h3>
+            </div>
+            <div class="col-md-6">
+                <div class="sort_div">
+                    <button class="map_btn" (click)="mapShow()" *ngIf="!mapFilterShow"><img
+                            src="assets/images/location.svg">
+                        {{"ShowMap" |
+                        translate}}</button>
+                    <button class="map_btn" (click)="removeMapShow()" *ngIf="mapFilterShow"><img
+                            src="assets/images/location.svg">
+                        {{"RemoveMap" |
+                        translate}}</button>
+                    <button class="clear_btn" (click)="clearFiltersAll()" *ngIf="clearFiltBtn">{{"ClearFilters" |
+                        translate}}</button>
+                    <button class="sort_btn" (click)="sortFunc($event)"><img src="assets/images/sortIcon.svg"> <span
+                            class="sort_tit">{{"Sort" |
+                            translate}}:</span>
+                        <span class="sort_values" *ngIf="!(sortedValue == undefined || sortedValue == '')">{{sortedValue
+                            |
+                            translate}}</span>
+                        <span *ngIf="sortedValue == undefined || sortedValue == ''"> {{'Default' | translate}}</span>
+                    </button>
+                    <div class="sort_dropdown" *ngIf="sortShow" (click)="$event.stopPropagation()">
+                        <ul class="sort_ul">
+                            <li *ngFor="let item of sortArray" (click)="sortFilter(item)"
+                                [ngClass]="{'active': sortedValue == item}">
+                                {{item | translate}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!mapFilterShow">
+            <div *ngIf="postListCount !== 0">
+                <div *ngFor="let prod of postList | paginate : {
+                    itemsPerPage: tableSize,
+                    currentPage: page,
+                    totalItems: totalPostCount
+                  };let i = index">
+                    <a (click)="adDetailsPage(prod.id)">
+                        <div class="row prod_box">
+                            <div class="col-md-3">
+                                <span *ngIf="!(prod.image == null || prod.image.length == 0)">
+                                    <img src="{{sortImageArray(prod.image)[0]?.url}}" class="home_prod_img">
+                                </span>
+                                <span *ngIf="prod.image == null || prod.image.length == 0">
+                                    <p class="text-center"><img src="../../assets/images/home/recent1.png"></p>
+                                </span>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="price_det">
+                                    <h6 class="price_tag"><img src="assets/images/saudi_riyal_logo.svg"
+                                            class="riyal_logo_size"> {{prod.price | currency:'':'':'3.0'}}
+                                        <span *ngIf="prod.type == 'RENT'">/ </span>
+                                        <span>{{ prod.rentalTerm | translate}}</span>
+                                    </h6>
+                                    <p class="locat">
+                                        <span *ngIf="!(prod.propetyType == null || prod.propetyType == '')">
+                                            <span *ngIf="prod.propetyType == 'residential'">{{"Residential" |
+                                                translate}}</span>
+                                            <span *ngIf="prod.propetyType == 'commercial'">{{"Commercial" |
+                                                translate}}</span>
+                                        </span>
+                                        <span *ngIf="!(prod.noBedrooms == null || prod.noBedrooms == '')"><img
+                                                src="assets/images/property/beds.svg">{{prod.noBedrooms}}
+                                            {{"beds" | translate}}</span>
+                                        <span class="next_sent"
+                                            *ngIf="!(prod.noBathrooms == null || prod.noBathrooms == '')"><img
+                                                src="assets/images/property/bath_tub.svg">
+                                            {{prod.noBathrooms}} {{"Baths" | translate}}</span>
+                                        <span class="next_sent spec"><img src="assets/images/property/land.svg">
+                                            {{prod.areaInSqmt}} {{"m2" | translate}}</span>
+                                    </p>
+                                    <p class="title">{{prod.title}}</p>
+                                    <p class="locat"><img src="assets/images/location.svg">{{prod.provincesName}},
+                                        {{prod.cityName}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="d-flex justify-content-center mt-4">
+                    <pagination-controls previousLabel='{{"Prev" | translate}}' nextLabel='{{"Next" | translate}}'
+                        (pageChange)="onTableDataChange($event)">
+                    </pagination-controls>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="postListCount == 0">
+            <div class="no_ad_sec">
+                <h3>{{"Wecouldntcriteria" | translate}}</h3>
+                <p>{{"TryUsingFilters" | translate}}</p>
+            </div>
+        </div>
+        <div *ngIf="postListCount != 0">
+            <div *ngIf="mapFilterShow" class="map_div">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+</section>

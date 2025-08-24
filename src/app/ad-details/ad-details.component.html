@@ -1,0 +1,616 @@
+<!-- <section class="categ_sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="category_ul mb-0">
+                    <li><a routerLink="/motors">{{"Motors" | translate}}</a></li>
+                    <li><a routerLink="/property">{{"Property" | translate}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section> -->
+<ng-template #content role="document" let-modal="close">
+    <div class="modal-header">
+        <h5 class="modal-title">{{"" | translate}}</h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body p-3" *ngIf="userData?.length > 0">
+        <div class="row" *ngFor="let item of userData">
+            <div class="col-md-12">
+                <h6 class="user_name text-center">{{item?.userName}}</h6>
+            </div>
+            <div class="col-md-12">
+                <div class="content_sec">
+                    <a href="tel:{{item?.countryCode}} {{item?.mobileNumber}}">
+                        <p class="text-center ltr"><button class="number">{{item?.countryCode}}
+                                {{item?.mobileNumber}}</button>
+                        </p>
+                    </a>
+                    <div class="tip_sec">
+                        <h6>{{"TipsForSaferTransaction" | translate}}:</h6>
+                        <ul class="tip_ul">
+                            <li>{{"CheckTheConditionOfItem" | translate}}</li>
+                            <li>{{"MeetTheSellerPerson" | translate}}</li>
+                            <li>{{"DontWireMoneyOnline" | translate}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #shareContent role="document" let-modal="close">
+    <div class="modal-header">
+        <h5 class="modal-title">{{"ShareThisPost" | translate}}</h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body p-3">
+        <ul class="project_social_icon">
+            <li>
+                <a href="https://www.facebook.com/sharer.php?u=https://saudideal.com{{ currenturl }}" target="_blank"
+                    title="Share on Facebook" class="soc_btn">
+                    <i class="fa fa-facebook"></i>
+                </a>
+            </li>
+            <li>
+                <a href="https://api.whatsapp.com/send?text=https://saudideal.com{{ currenturl }}" target="_blank"
+                    class="soc_btn">
+                    <i class="fa fa-whatsapp"></i></a>
+            </li>
+            <li>
+                <a href="https://twitter.com/intent/tweet?url=https://saudideal.com{{ currenturl }}" target="_blank"
+                    class="soc_btn">
+                    <i class="fa fa-twitter"></i></a>
+            </li>
+            <li>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://saudideal.com{{ currenturl }}"
+                    target="_blank" class="soc_btn">
+                    <i class="fa fa-linkedin"></i></a>
+            </li>
+            <li>
+                <button cdkCopyToClipboard="https://saudideal.com{{ currenturl }}" ngbTooltip="Copy Project link"
+                    class="waves-effect waves-light btn">
+                    <>
+                </button>
+            </li>
+        </ul>
+    </div>
+</ng-template>
+
+<div class="container" *ngIf="category == 'motors'">
+    <div class="row" *ngFor="let item of postArray">
+        <div class="col-lg-12 col-md-12">
+            <div class="breadcrumb">
+                <p class="cate_head" *ngIf="category == 'motors'">
+                    <a style="cursor: inherit;">{{"Motors" | translate}}
+                        <img src="../../assets/images/header/right-arrow.png" width="8px" style="margin:0 5px;"></a>
+                    <a (click)="filterClick('main')">{{mainCategoryName}}
+                        <img src="../../assets/images/header/right-arrow.png" width="8px" style="margin:0 5px;">
+                    </a>
+                    <a (click)="filterClick('sub')" *ngIf="subCategoryName != null">{{subCategoryName}}
+                        <img src="../../assets/images/header/right-arrow.png" width="8px" style="margin:0 5px;">
+                    </a>
+                    <a (click)="filterClick('subSub')" *ngIf="subSubCategoryName != null">{{subSubCategoryName}}
+                        <img src="../../assets/images/header/right-arrow.png" width="8px" style="margin:0 5px;">
+                    </a>
+                    <a (click)="filterClick('make')" *ngIf="makeName != null">{{makeName}}
+                        <img src="../../assets/images/header/right-arrow.png" width="8px" style="margin:0 5px;">
+                    </a>
+                    <a (click)="filterClick('model')" *ngIf="modelName != null">{{modelName}}</a>
+                </p>
+                <p class="cate_head" *ngIf="category == 'property'">
+                    <a>{{"Property" | translate}}
+                        <img src="../../assets/images/header/right-arrow.png" width="8px" style="margin:0 5px;"></a>
+                    <a routerLink="/property_filter/{{propCategId}}">{{propCategName}}</a>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-9 ">
+            <div class="ad_title">
+                <h2>{{item.title}}</h2>
+                <p>{{"PostedAbout" | translate}} {{item.createdAt | dateAgo}}</p>
+            </div>
+            <div class="fav_sec">
+                <span *ngIf="motoFavLength == 0"><button class="favor_btn" (click)="favMotorClick(item.id)">
+                        <img src="assets/images/heart.svg">{{"Favorites" | translate}}</button></span>
+                <span *ngFor="let item of motorFavArray">
+                    <button class="favor_btn" (click)="unfavMotorClick(item.id)" *ngIf="item.isFavorites == 1">
+                        <img src="assets/images/heart_fill.svg">{{"Favorites" | translate}}</button>
+                </span>
+                <button class="share_btn" (click)="shareBtn(shareContent)">{{"Share" | translate}}</button>
+            </div>
+            <gallery gallerize id="basic-test" [items]="items" thumbPosition="bottom" class="gal_box"></gallery>
+            <div class="row mobile_price_section">
+                <div class="price_title">
+                    <h2><img src="assets/images/saudi_riyal_logo_main_color.svg" class="riyal_logo_size">
+                        {{item.price |
+                        currency:'':'':'3.0'}}</h2>
+                </div>
+                <div class="posted_sec" *ngFor="let item of userData">
+                    <div class="row mb-2">
+                        <div class="col-md-6 col-6">
+                            <p>{{"PostedBy" | translate}}</p>
+                        </div>
+                        <div class="col-md-6 col-6 end_class">
+                            <p class="uer_name">{{item.userName}}</p>
+                        </div>
+                    </div>
+                    <div class="btn_sec">
+                        <button class="num_btn" (click)="showPhone(content,item.userId)">{{"ShowPhoneNumber" |
+                            translate}}</button>
+                        <a href="https://api.whatsapp.com/send?phone={{item.countryCode}}{{item.mobileNumber}}&amp;text=Need%20to%20Talk%20About%20Ad!"
+                            target="_blank">
+                            <button class="whatapp_btn">{{"WhatsApp" | translate}}</button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="item_sec">
+                        <h3 class="mb-0">{{"itemOverview" | translate}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="item.mainMotorCategoryId == 1">
+                <div class="col-md-2 col-6 custom_width">
+                    <div class="data_box">
+                        <h6>{{"Trim" | translate}}</h6>
+                        <p class="text-center"><img src="assets/images/forms/trim.svg"></p>
+                        <h6 class="mb-0">{{item.trim}}</h6>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6 custom_width">
+                    <div class="data_box">
+                        <h6>{{"Kilometers" | translate}}</h6>
+                        <p class="text-center"><img src="assets/images/forms/kilometer.svg"></p>
+                        <h6 class="mb-0">{{item.kilometer}}</h6>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6 custom_width">
+                    <div class="data_box">
+                        <h6>{{"RegionalSpecs" | translate}}</h6>
+                        <p class="text-center"><img src="assets/images/forms/specs.svg"></p>
+                        <h6 class="mb-0">{{item.regionalSpecs}}</h6>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6 custom_width">
+                    <div class="data_box">
+                        <h6>{{"Year" | translate}}</h6>
+                        <p class="text-center"><img src="assets/images/forms/year.svg"></p>
+                        <h6 class="mb-0">{{item.year}}</h6>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6 custom_width" *ngIf="item.warranty == 1">
+                    <div class="data_box">
+                        <h6>{{"Warranty" | translate}}</h6>
+                        <p class="text-center"><img src="assets/images/forms/year.svg"></p>
+                        <h6 class="mb-0">
+                            <span>{{"Yes" | translate}}</span>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="item.mainMotorCategoryId == 2">
+                <div class="col-md-2 col-6 custom_width">
+                    <div class="data_box">
+                        <h6>{{"Kilometers" | translate}}</h6>
+                        <p class="text-center"><img src="assets/images/forms/kilometer.svg"></p>
+                        <h6 class="mb-0">{{item.kilometer}}</h6>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6 custom_width">
+                    <div class="data_box">
+                        <h6>{{"RegionalSpecs" | translate}}</h6>
+                        <p class="text-center"><img src="assets/images/forms/specs.svg"></p>
+                        <h6 class="mb-0">{{item.regionalSpecs}}</h6>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6 custom_width">
+                    <div class="data_box">
+                        <h6>{{"Year" | translate}}</h6>
+                        <p class="text-center"><img src="assets/images/forms/year.svg"></p>
+                        <h6 class="mb-0">{{item.year}}</h6>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6 custom_width">
+                    <div class="data_box">
+                        <h6>{{"Wheels" | translate}}</h6>
+                        <p class="text-center"><img src="assets/images/forms/wheel.svg"></p>
+                        <h6 class="mb-0">{{item.wheels}}</h6>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6 custom_width">
+                    <div class="data_box">
+                        <h6>{{"FinalDriveSystem" | translate}}</h6>
+                        <p class="text-center"><img src="assets/images/forms/final_drive_system.svg"></p>
+                        <h6 class="mb-0">{{item.finalDriveSystem}}</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="item.mainMotorCategoryId == 3">
+                <div class="col-md-2 col-6 custom_width">
+                    <div class="data_box">
+                        <h6>{{"Kilometers" | translate}}</h6>
+                        <p class="text-center"><img src="assets/images/forms/kilometer.svg"></p>
+                        <h6 class="mb-0">{{item.kilometer}}</h6>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6 custom_width">
+                    <div class="data_box">
+                        <h6>{{"Year" | translate}}</h6>
+                        <p class="text-center"><img src="assets/images/forms/year.svg"></p>
+                        <h6 class="mb-0">{{item.year}}</h6>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6 custom_width">
+                    <div class="data_box">
+                        <h6>{{"NoCylinders" | translate}}</h6>
+                        <p class="text-center"><img src="assets/images/forms/cylinders.svg"></p>
+                        <h6 class="mb-0">{{item.cylinders}}</h6>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6 custom_width">
+                    <div class="data_box">
+                        <h6>{{"Horsepower" | translate}}</h6>
+                        <p class="text-center"><img src="assets/images/forms/capacity.svg"></p>
+                        <h6 class="mb-0">{{item.horsePower}}</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="item.mainMotorCategoryId == 4">
+                <div class="col-md-2 col-6">
+                    <div class="data_box">
+                        <h6>{{"Age" | translate}}</h6>
+                        <p class="text-center"><img src="assets/images/forms/specs.svg"></p>
+                        <h6 class="mb-0">{{item.age}}</h6>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6">
+                    <div class="data_box">
+                        <h6>{{"Length" | translate}}</h6>
+                        <p class="text-center"><img src="assets/images/forms/specs.svg"></p>
+                        <h6 class="mb-0">{{item.length}}</h6>
+                    </div>
+                </div>
+                <div class="col-md-8 col-12">
+                    <div class="data_box">
+                        <h6>{{"BodyCondition" | translate}}</h6>
+                        <p class="text-center"><img src="assets/images/forms/body_condition.svg"></p>
+                        <h6 class="mb-0">{{item.bodyCondition}}</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="item_sec" *ngIf="!(item.mainMotorCategoryId ==2 || item.mainMotorCategoryId ==4)">
+                        <h3 class="mb-0">{{"additionalDetails" | translate}}</h3>
+                    </div>
+                    <ul class="additional_ul" *ngIf="item.interiorColor != null">
+                        <li class="left_side_cont">{{"InteriorColor" | translate}}</li>
+                        <li class="right_side_cont">{{item.interiorColor}}</li>
+                    </ul>
+                    <ul class="additional_ul" *ngIf="item.exteriorColor != null">
+                        <li class="left_side_cont">{{"ExteriorColor" | translate}}</li>
+                        <li class="right_side_cont">{{item.exteriorColor}}</li>
+                    </ul>
+                    <ul class="additional_ul" *ngIf="item.bodyType != null">
+                        <li class="left_side_cont">{{"BodyType" | translate}}</li>
+                        <li class="right_side_cont">{{item.bodyType}}</li>
+                    </ul>
+                    <ul class="additional_ul" *ngIf="item.transmissionType != null">
+                        <li class="left_side_cont">{{"TransmissionType" | translate}}</li>
+                        <li class="right_side_cont">{{item.transmissionType}}</li>
+                    </ul>
+                    <ul class="additional_ul" *ngIf="item.mechanicalCondition != null">
+                        <li class="left_side_cont">{{"MechanicalCondition" | translate}}</li>
+                        <li class="right_side_cont">{{item.mechanicalCondition}}</li>
+                    </ul>
+                    <ul class="additional_ul" *ngIf="item.capacity != null">
+                        <li class="left_side_cont">{{"CapacityWeight" | translate}}</li>
+                        <li class="right_side_cont">{{item.capacity}}</li>
+                    </ul>
+                    <ul class="additional_ul" *ngIf="item.leatherSeat != null && item.mainMotorCategoryId == 1">
+                        <li class="left_side_cont">{{"LeatherSeat" | translate}}</li>
+                        <li class="right_side_cont">
+                            <span *ngIf="item.leatherSeat == 1">{{"Yes" | translate}}</span>
+                            <span *ngIf="item.leatherSeat == 0">{{"No" | translate}}</span>
+                        </li>
+                    </ul>
+                    <ul class="additional_ul" *ngIf="item.parkingSensor != null && item.mainMotorCategoryId == 1">
+                        <li class="left_side_cont">{{"ParkingSensor" | translate}}</li>
+                        <li class="right_side_cont">
+                            <span *ngIf="item.parkingSensor == 1">{{"Yes" | translate}}</span>
+                            <span *ngIf="item.parkingSensor == 0">{{"No" | translate}}</span>
+                        </li>
+                    </ul>
+                    <ul class="additional_ul" *ngIf="item.rearViewCamera != null && item.mainMotorCategoryId == 1">
+                        <li class="left_side_cont">{{"RearViewCamera" | translate}}</li>
+                        <li class="right_side_cont">
+                            <span *ngIf="item.rearViewCamera == 1">{{"Yes" | translate}}</span>
+                            <span *ngIf="item.rearViewCamera == 0">{{"No" | translate}}</span>
+                        </li>
+                    </ul>
+                    <ul class="additional_ul" *ngIf="item.sunRoof != null && item.mainMotorCategoryId == 1">
+                        <li class="left_side_cont">{{"SunRoof" | translate}}</li>
+                        <li class="right_side_cont">
+                            <span *ngIf="item.sunRoof == 1">{{"Yes" | translate}}</span>
+                            <span *ngIf="item.sunRoof == 0">{{"No" | translate}}</span>
+                        </li>
+                    </ul>
+                    <ul class="additional_ul" *ngIf="item.accidentFree != null && item.mainMotorCategoryId == 1">
+                        <li class="left_side_cont">{{"AccidentFree" | translate}}</li>
+                        <li class="right_side_cont">
+                            <span *ngIf="item.accidentFree == 1">{{"Yes" | translate}}</span>
+                            <span *ngIf="item.accidentFree == 0">{{"No" | translate}}</span>
+                        </li>
+                    </ul>
+                    <ul class="additional_ul" *ngIf="item.fullyMaintained != null && item.mainMotorCategoryId == 1">
+                        <li class="left_side_cont">{{"FSH" | translate}}</li>
+                        <li class="right_side_cont">
+                            <span *ngIf="item.fullyMaintained == 1">{{"Yes" | translate}}</span>
+                            <span *ngIf="item.fullyMaintained == 0">{{"No" | translate}}</span>
+                        </li>
+                    </ul>
+                    <div class="desc_sec">
+                        <h3 class="mb-0">{{"Description" | translate}}</h3>
+                        <h6 *ngIf="item.description != null" class="mb-0" [innerHTML]="item.description"></h6>
+                    </div>
+                    <div class="location_sec">
+                        <h3 class="mb-0">{{"Location" | translate}}</h3>
+                        <p class="location_p"><img src="assets/images/location.svg" class="loc_img">
+                            <span>{{item.provinceName}}, {{item.cityName}}</span>
+                            <span *ngIf="item.latitude && item.longitude !== '0'"><a
+                                    href="https://www.google.com/maps?q={{item.latitude}},{{item.longitude}}"
+                                    target="_blank"><span class="map_btn"><button>{{"ShowMap" |
+                                            translate}}</button></span></a></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="price_sec">
+                <div class="price_title">
+                    <h2><img src="assets/images/saudi_riyal_logo_main_color.svg" class="riyal_logo_size"> {{item.price |
+                        currency:'':'':'3.0'}}</h2>
+                </div>
+                <div class="posted_sec" *ngFor="let item of userData">
+                    <div class="row mb-2">
+                        <div class="col-md-6 col-6">
+                            <p>{{"PostedBy" | translate}}</p>
+                        </div>
+                        <div class="col-md-6 col-6 end_class">
+                            <p class="uer_name">{{item.userName}}</p>
+                            <!-- <img *ngIf="item.image == null" src="../../assets/images/login/login_user.svg" class="img_file">
+                            <img class="photo" src="{{item.image}}" *ngIf="item.image !== null" class="img_file"/> -->
+                        </div>
+                    </div>
+                    <div class="btn_sec">
+                        <!-- <button class="chat_btn">Chat with Seller</button> -->
+                        <button class="num_btn" (click)="showPhone(content,item.userId)">{{"ShowPhoneNumber" |
+                            translate}}</button>
+                        <a href="https://api.whatsapp.com/send?phone={{item.countryCode}} {{item.mobileNumber}}&amp;text=Need%20to%20Talk%20About%20Ad!"
+                            target="_blank"> <button class="whatapp_btn">
+                                {{"WhatsApp" | translate}}</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" *ngIf="category == 'property'">
+    <div class="row" *ngFor="let item of postArray">
+        <div class="col-lg-12 col-md-12">
+            <div class="breadcrumb">
+                <p class="cate_head" *ngIf="category == 'motors'">
+                    <a>{{"Motors" | translate}}
+                        <img src="../../assets/images/header/right-arrow.png" width="8px" style="margin:0 5px;"></a>
+                    <a>{{mainCategoryName}}
+                        <img src="../../assets/images/header/right-arrow.png" width="8px" style="margin:0 5px;">
+                    </a>
+                    <a *ngIf="subCategoryName != null">{{subCategoryName}}
+                        <img src="../../assets/images/header/right-arrow.png" width="8px" style="margin:0 5px;">
+                    </a>
+                    <a *ngIf="subSubCategoryName != null">{{subSubCategoryName}}
+                        <img src="../../assets/images/header/right-arrow.png" width="8px" style="margin:0 5px;">
+                    </a>
+                    <a>{{makeName}}
+                        <img src="../../assets/images/header/right-arrow.png" width="8px" style="margin:0 5px;">
+                    </a>
+                    <a>{{modelName}}</a>
+                </p>
+                <p class="cate_head" *ngIf="category == 'property'">
+                    <a>{{"Property" | translate}}
+                        <img src="../../assets/images/header/right-arrow.png" width="8px" style="margin:0 5px;"></a>
+                    <a (click)="propClick()">{{propCategName}}</a>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="ad_title">
+                <h2>{{item.title}}</h2>
+                <p>{{"PostedAbout" | translate}} {{item.createdAt | dateAgo}}</p>
+            </div>
+            <div class="fav_sec">
+                <span *ngIf="propertyFavLength == 0"><button class="favor_btn" (click)="favPropertyClick(item.id)">
+                        <img src="assets/images/heart.svg">{{"Favorites" | translate}}</button></span>
+                <span *ngFor="let item of propertyFavArray">
+                    <button class="favor_btn" (click)="unFavPropertyClick(item.id)" *ngIf="item.isFavorites == 1">
+                        <img src="assets/images/heart_fill.svg">{{"Favorites" | translate}}</button>
+                </span>
+                <button class="share_btn">{{"Share" | translate}}</button>
+            </div>
+            <gallery gallerize id="basic-test" [items]="items" thumbPosition="bottom" class="gal_box"></gallery>
+            <div class="row mobile_price_section">
+                <div class="price_title">
+                    <h2><img src="assets/images/saudi_riyal_logo_main_color.svg" class="riyal_logo_size"> {{item.price |
+                        currency:'':'':'3.0'}}</h2>
+                </div>
+                <div class="posted_sec" *ngFor="let item of userData">
+                    <div class="row mb-2">
+                        <div class="col-md-6 col-6">
+                            <p>{{"PostedBy" | translate}}</p>
+                        </div>
+                        <div class="col-md-6 col-6 end_class">
+                            <p class="uer_name">{{item.userName}}</p>
+                        </div>
+                    </div>
+                    <div class="btn_sec">
+                        <button class="num_btn" (click)="showPhone(content,item.userId)">{{"ShowPhoneNumber" |
+                            translate}}</button>
+                        <a href="https://api.whatsapp.com/send?phone={{item.countryCode}}{{item.mobileNumber}}&amp;text=Need%20to%20Talk%20About%20Ad!"
+                            target="_blank">
+                            <button class="whatapp_btn">{{"WhatsApp" | translate}}</button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="item_sec">
+                    <div class="col-md-8 col-12">
+                        <span class="prop_value"><img src="assets/images/property/beds.svg" width="25px"
+                                class="prop_ico">{{item.noBedrooms}} {{"beds" | translate}}</span>
+                        <span class="prop_value"><img src="assets/images/property/bath_tub.svg" width="22px"
+                                class="prop_ico">{{item.noBathrooms}} {{"Baths" | translate}}</span>
+                        <span class="prop_value"><img src="assets/images/property/land.svg" width="20px"
+                                class="prop_ico">{{item.areaInSqmt}} {{"sqft" | translate}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="item_sec">
+                        <h3 class="mb-0">{{"Amenities" | translate}}</h3>
+                    </div>
+                    <ul class="additional_ul" *ngIf="item.noFloors != null">
+                        <li class="left_side_cont">{{"NumberOfFloors" | translate}}</li>
+                        <li class="right_side_cont">{{item.noFloors}}</li>
+                    </ul>
+                    <ul class="additional_ul" *ngIf="item.noLivingRooms != null">
+                        <li class="left_side_cont">{{"NumberOfLivingRooms" | translate}}</li>
+                        <li class="right_side_cont">{{item.noLivingRooms}}</li>
+                    </ul>
+                    <ul class="additional_ul" *ngIf="item.furnished != null">
+                        <li class="left_side_cont">{{"Furnished" | translate}}</li>
+                        <li class="right_side_cont">
+                            <span *ngIf="item.furnished == 1">{{"Yes" | translate}}</span>
+                            <span *ngIf="item.furnished == 0">{{"No" | translate}}</span>
+                        </li>
+                    </ul>
+                    <ul class="additional_ul" *ngIf="item.kitchen != null">
+                        <li class="left_side_cont">{{"Kitchen" | translate}}</li>
+                        <li class="right_side_cont">
+                            <span *ngIf="item.kitchen == 1">{{"Yes" | translate}}</span>
+                            <span *ngIf="item.kitchen == 0">{{"No" | translate}}</span>
+                        </li>
+                    </ul>
+                    <ul class="additional_ul" *ngIf="item.garage != null">
+                        <li class="left_side_cont">{{"Garage" | translate}}</li>
+                        <li class="right_side_cont">
+                            <span *ngIf="item.garage == 1">{{"Yes" | translate}}</span>
+                            <span *ngIf="item.garage == 0">{{"No" | translate}}</span>
+                        </li>
+                    </ul>
+                    <ul class="additional_ul" *ngIf="item.elevator != null">
+                        <li class="left_side_cont">{{"Elevator" | translate}}</li>
+                        <li class="right_side_cont">
+                            <span *ngIf="item.elevator == 1">{{"Yes" | translate}}</span>
+                            <span *ngIf="item.elevator == 0">{{"No" | translate}}</span>
+                        </li>
+                    </ul>
+                    <ul class="additional_ul" *ngIf="item.waterSupply != null">
+                        <li class="left_side_cont">{{"WaterSupply" | translate}}</li>
+                        <li class="right_side_cont">
+                            <span *ngIf="item.waterSupply == 1">{{"Yes" | translate}}</span>
+                            <span *ngIf="item.waterSupply == 0">{{"No" | translate}}</span>
+                        </li>
+                    </ul>
+                    <ul class="additional_ul" *ngIf="item.electricitySupply != null">
+                        <li class="left_side_cont">{{"ElectricitySupply" | translate}}</li>
+                        <li class="right_side_cont">
+                            <span *ngIf="item.electricitySupply == 1">{{"Yes" | translate}}</span>
+                            <span *ngIf="item.electricitySupply == 0">{{"No" | translate}}</span>
+                        </li>
+                    </ul>
+                    <div class="item_sec">
+                        <h3 class="mb-0">{{"PropertyInfo" | translate}}</h3>
+                    </div>
+                    <ul class="additional_ul" *ngIf="item.ownerType != null">
+                        <li class="left_side_cont">{{"OwnerType" | translate}}</li>
+                        <li class="right_side_cont">{{item.ownerType}}</li>
+                    </ul>
+                    <ul class="additional_ul" *ngIf="item.widthInMtr != null">
+                        <li class="left_side_cont">{{"WidthMeter" | translate}}</li>
+                        <li class="right_side_cont">{{item.widthInMtr}}</li>
+                    </ul>
+                    <ul class="additional_ul" *ngIf="item.lengthInMtr != null">
+                        <li class="left_side_cont">{{"LengthMeter" | translate}}</li>
+                        <li class="right_side_cont">{{item.lengthInMtr}}</li>
+                    </ul>
+                    <ul class="additional_ul" *ngIf="item.rentalTerm != null">
+                        <li class="left_side_cont">{{"RentalTerm" | translate}}</li>
+                        <li class="right_side_cont">{{item.rentalTerm}}</li>
+                    </ul>
+                    <ul class="additional_ul" *ngIf="item.streetLength != null">
+                        <li class="left_side_cont">{{"StreetLengthMeter" | translate}}</li>
+                        <li class="right_side_cont">{{item.streetLength}}</li>
+                    </ul>
+                    <ul class="additional_ul" *ngIf="item.propertyAge != null">
+                        <li class="left_side_cont">{{"PropertyAge" | translate}}</li>
+                        <li class="right_side_cont">{{item.propertyAge}}</li>
+                    </ul>
+                    <div class="desc_sec">
+                        <h3 class="mb-0">{{"Description" | translate}}</h3>
+                        <h6 *ngIf="item.description != null" class="mb-0" [innerHTML]="item.description"></h6>
+                    </div>
+                    <div class="prop_location_sec">
+                        <p class="location_p"><img src="assets/images/location.svg" class="loc_img">
+                            <span>{{item.provincesName}}, {{item.cityName}}</span>
+                            <span *ngIf="item.latitude && item.longitude !== '0'"><a
+                                    href="https://www.google.com/maps?q={{item.latitude}},{{item.longitude}}"
+                                    target="_blank"><span class="map_btn"><button>{{"ShowMap" |
+                                            translate}}</button></span></a></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="price_sec">
+                <div class="price_title">
+                    <h2><img src="assets/images/saudi_riyal_logo_main_color.svg" class="riyal_logo_size"> {{item.price |
+                        currency:'':'':'3.0'}}
+                        <span *ngIf="item.type == 'RENT'">/ </span>
+                        <span>{{ item.rentalTerm | translate}}</span>
+                    </h2>
+                </div>
+                <div class="posted_sec" *ngFor="let item of userData">
+                    <div class="row mb-2">
+                        <div class="col-md-6 col-6">
+                            <p>{{"PostedBy" | translate}}</p>
+                        </div>
+                        <div class="col-md-6 col-6 end_class">
+                            <p class="uer_name">{{item.userName}}</p>
+                            <!-- <img *ngIf="item.image == null" src="../../assets/images/login/login_user.svg" class="img_file">
+                            <img class="photo" src="{{item.image}}" *ngIf="item.image !== null" class="img_file"/> -->
+                        </div>
+                    </div>
+                    <div class="btn_sec">
+                        <!-- <button class="chat_btn">Chat with Seller</button> -->
+                        <button class="num_btn" (click)="showPhone(content,item.userId)">{{"ShowPhoneNumber" |
+                            translate}}</button>
+                        <a href="https://api.whatsapp.com/send?phone={{item.countryCode}} {{item.mobileNumber}}&amp;text=Need%20to%20Talk%20About%20Ad!"
+                            target="_blank"> <button class="whatapp_btn">
+                                {{"WhatsApp" | translate}}</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

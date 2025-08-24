@@ -1,0 +1,115 @@
+<section class="categ_sec">
+  <div class="container">
+    <div class="col-md-12">
+      <ul class="category_ul mb-0">
+        <li><a routerLink="/motors">{{"Motors" | translate}}</a></li>
+        <li><a routerLink="/property">{{"Property" | translate}}</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="subscription_list_sec">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10 col-12">
+        <div class="row mt-5">
+          <div class="col-md-4">
+            <h5 class="my_ad_head">{{"MyFavourites" | translate}}</h5>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header mb-0" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                    aria-expanded="true" aria-controls="collapseOne">
+                    {{"Motors" | translate}} ({{motorFavCount}})
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                  data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="row mb-4" *ngFor="let item of motorFavArray">
+                      <div class="col-md-2 col-3" *ngIf="!(item.image == null || item.image.length == 0)">
+                        <img src="{{sortImageArray(item.image)[0]?.url}}" class="img_class">
+                      </div>
+                      <div class="col-md-2 col-3" *ngIf="item.image == null || item.image.length == 0">
+                        <img src="../../assets/images/image_placeholder.svg" class="img_class"
+                          style="background: var(--border-color);">
+                      </div>
+                      <div class="col-md-6 col-9 mt-2">
+                        <h6 class="post_heading">
+                          <a routerLink="/ad-details/motors/{{item.id}}">{{item.title}}</a>
+                        </h6>
+                        <p class="post_amt">{{item.make}} {{item.model}}</p>
+                        <p class="post_amt"><img src="assets/images/saudi_riyal_logo.svg" class="riyal_logo_size">
+                          {{item.price | currency:'':'':'3.0'}}</p>
+                      </div>
+                      <div class="col-md-4 col-12 mt-3">
+                        <div class="cont_btn">
+                          <ul class="btn_ul">
+                            <li>
+                              <button class="edit_btn" (click)="unfavMotorClick(item.id)">{{"Delete" |
+                                translate}}</button>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header mb-0" id="headingTwo">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    {{"Property" | translate}} ({{propFavCount}})
+                  </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                  data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div class="row mb-4" *ngFor="let item of propertyFavArray">
+                      <div class="col-md-3 col-3">
+                        <span *ngIf="!(item.image == null || item.image.length == 0)">
+                          <img src="{{sortImageArray(item.image)[0]?.url}}" class="img_class">
+                        </span>
+                        <span *ngIf="item.image == null || item.image.length == 0">
+                          <p class="text-center"><img src="../../assets/images/category/category_rent.svg"
+                              width="100px"></p>
+                        </span>
+                      </div>
+                      <div class="col-md-5 col-6 mt-2">
+                        <h6 class="post_heading">
+                          <a routerLink="/ad-details/property/{{item.id}}">{{item.title}}</a>
+                        </h6>
+                        <p class="post_amt">{{item.type}}</p>
+                        <p class="post_amt"><img src="assets/images/saudi_riyal_logo.svg" class="riyal_logo_size">
+                          {{item.price | currency:'':'':'3.0'}}</p>
+                      </div>
+                      <div class="col-md-4 col-12 mt-3">
+                        <div class="cont_btn">
+                          <ul class="btn_ul">
+                            <li>
+                              <button class="edit_btn" (click)="unFavPropertyClick(item.id)">{{"Delete" |
+                                translate}}</button>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+  </div>
+</section>

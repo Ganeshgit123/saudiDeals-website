@@ -1,0 +1,28 @@
+.common_hei_div{
+    height: 100vh;
+}
+
+.logo_sec {
+    padding: 15px 0;
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--border-color);
+}
+.mob_back{
+    position: absolute;
+    top: 1.7rem;
+}
+.mob_back:lang(ar){
+    transform: rotate(180deg);
+}
+.mob_back img{
+    width: 30px;
+}
+@media only screen and (min-width: 320px) and (max-width: 1024px) { 
+    .mob_back{
+        position: absolute;
+        top: 1.5rem;
+    }
+    .mob_back img{
+        width: 40px;
+    }
+}

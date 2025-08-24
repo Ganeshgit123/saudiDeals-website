@@ -1,0 +1,271 @@
+<section class="categ_sec">
+    <div class="container">
+        <div class="col-md-12">
+            <ul class="category_ul mb-0">
+                <li><a routerLink="/motors" class="active">{{"Motors" | translate}}</a></li>
+                <li><a routerLink="/property">{{"Property" | translate}}</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section class="search_sec">
+    <div class="container-fluid">
+        <!-- <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h2 class="search_head">{{"TheSaudiLeadingMarketplace" | translate}}</h2>
+            </div>
+            <div class="col-md-3"></div>
+        </div> -->
+        <!-- <div class="row">
+            <div class="col-md-12">
+                <div class="search_box">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <form>
+                                <input type="search" class="form-control search_type_box" placeholder="Enter keywords">
+                            </form>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="search_btn">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="motor_categ_filter_ul mb-0">
+                    <li [ngClass]="categActive == item.id ? 'active' : ''" *ngFor="let item of categArray"
+                        (click)="motorFirstCateg(item.id)"><a>
+                            <span *ngIf="dir == 'ltr'">{{item.name}}</span>
+                            <span *ngIf="dir == 'rtl'">{{item.arName}}</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="motorFilter">
+                    <ul class="motor_subCateg_ul">
+                        <li *ngIf="categActive !== 1">
+                            <p class="text-center">{{"SelectCategory" | translate}}</p>
+                            <div class="form-group">
+                                <select class="form-control" #second (change)="motorSecondCateg(second.value)">
+                                    <option selected disabled>{{"SelectCategory" | translate}}</option>
+                                    <option *ngFor="let item of subCategArray" [value]="item.id">
+                                        <span *ngIf="dir == 'ltr'">{{item.motorCategoriesName}}</span>
+                                        <span *ngIf="dir == 'rtl'">{{item.arMotorCategoriesName}}</span>
+                                    </option>
+                                </select>
+                            </div>
+                        </li>
+                        <li *ngIf="categActive !== 1 && subSubActive">
+                            <p class="text-center">{{"SelectSubCategory" | translate}}</p>
+                            <div class="form-group">
+                                <select class="form-control" #third (change)="motorThirdCateg(third.value)">
+                                    <option selected disabled>{{"SelectSubCategory" | translate}}</option>
+                                    <option *ngFor="let item of subSubCategArray" [value]="item.id">
+                                        <span *ngIf="dir == 'ltr'">{{item.motorSubCategoriesName}}</span>
+                                        <span *ngIf="dir == 'rtl'">{{item.arMotorSubCategoriesName}}</span>
+                                    </option>
+                                </select>
+                            </div>
+                        </li>
+                        <li *ngIf="categActive == 1 || categActive == 2">
+                            <p class="text-center">{{"Make" | translate}}</p>
+                            <div class="form-group">
+                                <select class="form-control" #carmake (change)="makeClick(carmake.value)">
+                                    <option selected disabled>{{"SelectMake" | translate}}</option>
+                                    <option *ngFor="let item of makesCarList" [value]="item.id">{{item.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </li>
+                        <li *ngIf="(categActive == 1 || categActive == 2) && modelActive">
+                            <p class="text-center">{{"Model" | translate}}</p>
+                            <div class="form-group">
+                                <select class="form-control" #carmodel (change)="modelClick(carmodel.value)">
+                                    <option selected disabled>{{"SelectModel" | translate}}</option>
+                                    <option *ngFor="let item of modelCarList" [value]="item.id">
+                                        {{item.modelName}}</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li *ngIf="trimActive && categActive == 1">
+                            <p class="text-center">{{"Trim" | translate}}</p>
+                            <div class="form-group">
+                                <select class="form-control" #trim (change)="trimClick(trim.value)">
+                                    <option selected disabled>{{"SelectTrim" | translate}}</option>
+                                    <option *ngFor="let item of trimList" [value]="item.enName">
+                                        <span *ngIf="dir == 'ltr'">{{item.enName}}</span>
+                                        <span *ngIf="dir == 'rtl'">{{item.arName}}</span>
+                                    </option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <p class="text-center">{{"Year" | translate}}</p>
+                            <div class="form-group">
+                                <select class="form-control" #year (change)="yearClick(year.value)">
+                                    <option selected disabled>{{"SelectYear" | translate}}</option>
+                                    <option *ngFor="let item of yearArray" [value]="item">{{item}}</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <p class="text-center">{{"Province" | translate}}</p>
+                            <div class="form-group">
+                                <select class="form-control" #province (change)="provinceClick(province.value)">
+                                    <option selected disabled>{{"SelectProvince" | translate}}</option>
+                                    <option *ngFor="let item of provinceList" [value]="item.id">
+                                        <span *ngIf="dir == 'ltr'">{{item.name}}</span>
+                                        <span *ngIf="dir == 'rtl'">{{item.arName}}</span>
+                                    </option>
+                                </select>
+                            </div>
+                        </li>
+                        <li *ngIf="cityActive">
+                            <p class="text-center">{{"City" | translate}}</p>
+                            <div class="form-group">
+                                <select class="form-control" #city (change)="cityClick(city.value)">
+                                    <option selected disabled>{{"SelectCity" | translate}}</option>
+                                    <option *ngFor="let item of cityList" [value]="item.id">
+                                        <span *ngIf="dir == 'ltr'">{{item.city}}</span>
+                                        <span *ngIf="dir == 'rtl'">{{item.arCity}}</span>
+                                    </option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <button class="search_btn" (click)="searchValues()">{{"Search" |
+                                translate}}</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="data_show_sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-6" *ngFor="let item of motorCategory;let i = index;">
+                <div class="data_show_box" *ngIf="i == 0">
+                    <a (click)="boxClick(item.id)">
+                        <h6>{{"Cars" | translate}}</h6>
+                        <p *ngIf="countValue?.usedCarCount == null">0</p>
+                        <p *ngIf="countValue?.usedCarCount != null">{{countValue?.usedCarCount}}</p>
+                    </a>
+                </div>
+                <div class="data_show_box" *ngIf="i == 1">
+                    <a (click)="boxClick(item.id)">
+                        <h6>{{"Motorcycle" | translate}}</h6>
+                        <p *ngIf="countValue?.motorCycleCount == null">0</p>
+                        <p *ngIf="countValue?.motorCycleCount != null">{{countValue?.motorCycleCount}}</p>
+                    </a>
+                </div>
+                <div class="data_show_box" *ngIf="i == 2">
+                    <a (click)="boxClick(item.id)">
+                        <h6>{{"HeavyEquipment" | translate}}</h6>
+                        <p *ngIf="countValue?.heavyEquipmentCount == null">0</p>
+                        <p *ngIf="countValue?.heavyEquipmentCount != null">{{countValue?.heavyEquipmentCount}}</p>
+                    </a>
+                </div>
+                <div class="data_show_box" *ngIf="i == 3">
+                    <a (click)="boxClick(item.id)">
+                        <h6>{{"Boats" | translate}}</h6>
+                        <p *ngIf="countValue?.boatCount == null">0</p>
+                        <p *ngIf="countValue?.boatCount != null">{{countValue?.boatCount}}</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="recent_sec" *ngIf="recentMotorLength != 0">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <h4 class="head">{{"RecentListings" | translate}}</h4>
+            </div>
+            <div class="col-md-2 prod_box_col" *ngFor="let prod of recentMotors">
+                <a routerLink="/ad-details/motors/{{prod.id}}">
+                    <div class="prod_box">
+                        <span *ngIf="!(prod.image == null || prod.image.length == 0)">
+                            <img src="{{sortImageArray(prod.image)[0]?.url}}" class="home_prod_img">
+                        </span>
+                        <span *ngIf="prod.image == null || prod.image.length == 0">
+                            <p class="text-center"><img src="../../assets/images/home/recent1.png"></p>
+                        </span>
+                        <div class="price_det">
+                            <h6 class="price_tag"><img src="assets/images/saudi_riyal_logo.svg" class="riyal_logo_size">
+                                {{prod.price | currency:'':'':'3.0'}}</h6>
+                            <p class="features" *ngIf="prod.mainMotorCategoryId == 1 || prod.mainMotorCategoryId == 2">
+                                {{prod.make}} • {{prod.model}}</p>
+                            <p class="features" *ngIf="prod.mainMotorCategoryId == 3 || prod.mainMotorCategoryId == 4">
+                                {{prod.motorCategoryName}} <span *ngIf="prod.motorSubCategoryName != null">•</span>
+                                {{prod.motorSubCategoryName}}</p>
+                            <p class="locat"
+                                *ngIf="prod.mainMotorCategoryId == 1 || prod.mainMotorCategoryId == 2 ||  prod.mainMotorCategoryId == 3">
+                                {{prod.year}} • {{prod.kilometer}} {{"km" | translate}}</p>
+                            <p class="locat" *ngIf="prod.mainMotorCategoryId == 4">
+                                {{prod.age}} • {{prod.length}}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- <section class="testi_sec">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <h4 class="head">Testimonials</h4>
+            </div>
+            <div class="col-md-4">
+                <div class="testi_box">
+                    <p class="testi_para">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                        incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+                    <div class="row">
+                        <div class="col-md-2 col-2">
+                            <p class="img_box"></p>
+                        </div>
+                        <div class="col-md-10 col-10">
+                            <p class="testi_para_p">lorem ipsum</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testi_box">
+                    <p class="testi_para">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                        incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+                    <div class="row">
+                        <div class="col-md-2 col-2">
+                            <p class="img_box"></p>
+                        </div>
+                        <div class="col-md-10 col-10">
+                            <p class="testi_para_p">lorem ipsum</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testi_box">
+                    <p class="testi_para">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                        incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+                    <div class="row">
+                        <div class="col-md-2 col-2">
+                            <p class="img_box"></p>
+                        </div>
+                        <div class="col-md-10 col-10">
+                            <p class="testi_para_p">lorem ipsum</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->

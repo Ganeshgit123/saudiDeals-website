@@ -1,0 +1,184 @@
+<section class="porgress_sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="progress_ul">
+                    <li class="active">{{"Description" | translate}}
+                        <p class="progress_path active"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                    <li class="active">{{"Specifications" | translate}}
+                        <p class="progress_path active"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                    <li class="active">{{"ImagesLocation" | translate}}
+                        <p class="progress_path active"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                    <li>{{"Extras" | translate}}
+                        <p class="progress_path active"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                    <li>{{"Summary" | translate}}
+                        <p class="progress_path"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-1"></div>
+            <div class="col-lg-8 col-md-10">
+                <div class="breadcrumb">
+                    <p class="cate_head">
+                        <span *ngIf="category == 'rent'">{{"PropertyForRent" | translate}}</span>
+                        <span *ngIf="category == 'sale'">{{"PropertyForSale" | translate}}</span>
+                        <img src="../../assets/images/header/right-arrow.png" width="15px">
+                        <span>{{cateeName}}</span>
+                        <img src="../../assets/images/header/right-arrow.png" width="15px" style="margin:0 5px;">
+                        <a>{{"Extras" | translate}}</a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-1 col-lg-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-2"></div>
+            <div class="col-lg-5 col-md-8">
+                <div class="ques_sec" *ngIf="!(cateIDd == 7 || cateIDd == 9 || cateIDd == 16 || cateIDd == 17)">
+                    <form class="example-form" [formGroup]="specForm">
+                        <div class="form-group">
+                            <angular-editor class="form-control ques_field desc_fie" formControlName="description"
+                            [config]="editorConfig"
+                            [ngClass]="{ 'is-invalid': submitted && specF['description'].errors}"></angular-editor>
+                            <!-- <textarea class="form-control ques_field desc_fie"
+                                placeholder="{{'Description' | translate}}" rows="4" formControlName="description"
+                                [ngClass]="{ 'is-invalid': submitted && specF['description'].errors}"></textarea> -->
+                            <div *ngIf="submitted && specF['description'].errors" class="invalid-feedback">
+                                <div *ngIf="specF['description'].errors['maxlength']">{{"max1500Chars" | translate}}
+                                </div>
+                                <div *ngIf="specF['description'].errors['required']">{{"DescriptionRequired" |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="body_fie">{{"Features" | translate}}</label>
+                            <div class="row">
+                                <div class="col-6 col-md-6">
+                                    <mat-slide-toggle formControlName="furnished">{{"Furnished" |
+                                        translate}}</mat-slide-toggle>
+                                </div>
+                                <div class="col-6 col-md-6">
+                                    <mat-slide-toggle formControlName="kitchen">{{"Kitchen" |
+                                        translate}}</mat-slide-toggle>
+                                </div>
+                                <div class="col-6 col-md-6">
+                                    <mat-slide-toggle formControlName="garage">{{"Garage" |
+                                        translate}}</mat-slide-toggle>
+                                </div>
+                                <div class="col-6 col-md-6">
+                                    <mat-slide-toggle formControlName="elevator">{{"Elevator" |
+                                        translate}}</mat-slide-toggle>
+                                </div>
+                                <div class="col-6 col-md-6">
+                                    <mat-slide-toggle formControlName="waterSupply">{{"WaterSupply" |
+                                        translate}}</mat-slide-toggle>
+                                </div>
+                                <div class="col-6 col-md-6">
+                                    <mat-slide-toggle formControlName="electricitySupply">{{"ElectricitySupply" |
+                                        translate}}</mat-slide-toggle>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-6">
+                                    <p class="text-left"><button class="next_btn" (click)="prevPage()">
+                                            <span *ngIf="dir == 'ltr'">
+                                                <img src="../../assets/images/forms/left-arrow.svg" width="10px">
+                                                <img src="../../assets/images/forms/left-arrow.svg" width="10px">
+                                            </span>
+                                            <span *ngIf="dir == 'rtl'">
+                                                <img src="../../assets/images/forms/right-arrow.svg" width="15px">
+                                                <img src="../../assets/images/forms/right-arrow.svg" width="15px">
+                                            </span> &nbsp;{{"Prev" | translate}}
+                                        </button></p>
+                                </div>
+                                <div class="col-md-6 col-6">
+                                    <p class="nex_btnp"><button class="next_btn" (click)="postproduct()">{{"Next" |
+                                            translate}}
+                                            &nbsp;
+                                            <span *ngIf="dir == 'ltr'">
+                                                <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                                <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                            </span>
+                                            <span *ngIf="dir == 'rtl'">
+                                                <img src="../../assets/images/forms/left-arrow.svg" width="15px">
+                                                <img src="../../assets/images/forms/left-arrow.svg" width="15px">
+                                            </span>
+                                        </button></p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="ques_sec" *ngIf="cateIDd == 7 || cateIDd == 9 || cateIDd == 16 || cateIDd == 17">
+                    <form class="example-form" [formGroup]="specFormLand">
+                        <div class="form-group">
+                            <angular-editor class="form-control ques_field desc_fie" formControlName="description"
+                            [config]="editorConfig"
+                            [ngClass]="{ 'is-invalid': submitted && specLandF['description'].errors}"></angular-editor>
+                            <!-- <textarea class="form-control ques_field desc_fie"
+                                placeholder="{{'Description' | translate}}" rows="4" formControlName="description"
+                                [ngClass]="{ 'is-invalid': submitted && specLandF['description'].errors}"></textarea> -->
+                            <div *ngIf="submitted && specLandF['description'].errors" class="invalid-feedback">
+                                <div *ngIf="specLandF['description'].errors['maxlength']">{{"max1500Chars" | translate}}
+                                </div>
+                                <div *ngIf="specLandF['description'].errors['required']">{{"DescriptionRequired" |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="body_fie">{{"Features" | translate}}</label>
+                            <div class="row">
+                                <div class="col-6 col-md-6">
+                                    <mat-slide-toggle formControlName="waterSupply">{{"WaterSupply" |
+                                        translate}}</mat-slide-toggle>
+                                </div>
+                                <div class="col-6 col-md-6">
+                                    <mat-slide-toggle formControlName="electricitySupply">{{"ElectricitySupply" |
+                                        translate}}</mat-slide-toggle>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-6">
+                                    <p class="text-left"><button class="next_btn" (click)="prevPage()">
+                                        <span *ngIf="dir == 'ltr'">
+                                            <img src="../../assets/images/forms/left-arrow.svg" width="10px">
+                                            <img src="../../assets/images/forms/left-arrow.svg" width="10px">
+                                        </span>
+                                        <span *ngIf="dir == 'rtl'">
+                                            <img src="../../assets/images/forms/right-arrow.svg" width="15px">
+                                            <img src="../../assets/images/forms/right-arrow.svg" width="15px">
+                                        </span> &nbsp;{{"Prev" | translate}}
+                                        </button></p>
+                                </div>
+                                <div class="col-md-6 col-6">
+                                    <p class="nex_btnp"><button class="next_btn" (click)="postproduct()">{{"Next" |
+                                            translate}}
+                                            &nbsp;
+                                            <span *ngIf="dir == 'ltr'">
+                                                <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                                <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                            </span>
+                                            <span *ngIf="dir == 'rtl'">
+                                                <img src="../../assets/images/forms/left-arrow.svg" width="15px">
+                                                <img src="../../assets/images/forms/left-arrow.svg" width="15px">
+                                            </span>
+                                        </button></p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,167 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">{{"Uploading" | translate}}...</p>
+</ngx-spinner>
+<section class="porgress_sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="progress_ul">
+                    <li class="active">{{"Description" | translate}}
+                        <p class="progress_path active"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                    <li>{{"ImagesLocation" | translate}}
+                        <p class="progress_path active"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                    <li>{{"SpecificationsExtras" | translate}}
+                        <p class="progress_path"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                    <li>{{"Summary" | translate}}
+                        <p class="progress_path"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-1"></div>
+            <div class="col-lg-8 col-md-10">
+                <div class="breadcrumb">
+                    <p class="cate_head">
+                        <a>{{"Motors" | translate}}
+                            <img src="../../assets/images/header/right-arrow.png" width="15px"
+                                style="margin:0 5px;"></a>
+                        <a>{{cateeName}}
+                            <img src="../../assets/images/header/right-arrow.png" width="15px" style="margin:0 5px;">
+                        </a>
+                        <a *ngIf="subCateeName != undefined">{{subCateeName}}
+                            <img src="../../assets/images/header/right-arrow.png" width="15px" style="margin:0 5px;">
+                        </a>
+                        <a class="normal_link" *ngIf="subSubcateeName != undefined">{{subSubcateeName}}
+                            <img src="../../assets/images/header/right-arrow.png" width="15px" style="margin:0 5px;">
+                        </a>
+                        <a class="normal_link">{{"ImagesLocation" | translate}}</a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-1 col-lg-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-2"></div>
+            <div class="col-lg-6 col-md-8">
+                <form [formGroup]="locationImageForm">
+                    <div class="form-group">
+                        <mat-form-field>
+                            <mat-label class="make_fie">{{"Province" | translate}}</mat-label>
+                            <mat-select formControlName="provinceId" (selectionChange)='onModelChange($event.value)'>
+                                <mat-option *ngFor="let item of provinceList" [value]="item.id">
+                                    <span *ngIf="dir == 'ltr'">{{item.name}}</span>
+                                    <span *ngIf="dir == 'rtl'">{{item.arName}}</span>
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="locationImageForm.controls['provinceId'].hasError('required')">
+                                {{"ProvinceRequired" | translate}}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                        <mat-form-field>
+                            <mat-label class="model_fie">{{"City" | translate}}</mat-label>
+                            <mat-select formControlName="cityId" (selectionChange)="cityName($event.value)">
+                                <mat-option *ngFor="let item of cityList" [value]="item.id">
+                                    <span *ngIf="dir == 'ltr'">{{item.city}}</span>
+                                    <span *ngIf="dir == 'rtl'">{{item.arCity}}</span>
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="locationImageForm.controls['cityId'].hasError('required')">
+                                {{"CityRequired" | translate}}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                        <p class="text-end cur_word" *ngIf="dir == 'ltr'">{{"UseCurrentLocation" | translate}} <span
+                                class="locc" (click)="getPosition()"><mat-icon> my_location</mat-icon>
+                            </span></p>
+                        <p class="text-end cur_word" *ngIf="dir == 'rtl'">
+                            <span class="locc" (click)="getPosition()"><mat-icon> my_location</mat-icon>
+                            </span>{{"UseCurrentLocation" | translate}}
+                        </p>
+                        <div id="map" style="height: 400px;"></div>
+                    </div>
+                    <div class="form-group">
+                        <!-- <div cdkDropList (cdkDropListDropped)="drop($event)"> -->
+                        <div>
+                            <div class="row margin_top">
+                                <div class="col-6 col-md-3 ml-none" *ngFor='let url of previews; let i = index'>
+                                    <button *ngIf="i == 0" class="main_head">1</button>
+                                    <button *ngIf="i == 1" class="main_head">2</button>
+                                    <button *ngIf="i == 2" class="main_head">3</button>
+                                    <button *ngIf="i == 3" class="main_head">4</button>
+                                    <button *ngIf="i == 4" class="main_head">5</button>
+                                    <button *ngIf="i == 5" class="main_head">6</button>
+                                    <button *ngIf="i == 6" class="main_head">7</button>
+                                    <button *ngIf="i == 7" class="main_head">8</button>
+                                    <!-- <div class="box_area" cdkDrag *ngIf="i <= 7"> -->
+                                    <div class="box_area" *ngIf="i <= 7">
+                                        <a (click)="removeImage(i)" class="remove">x</a>
+                                        <span *ngIf="url?.url"><img class="upload-img" [src]="url.url"></span>
+                                        <span *ngIf="url?.url == undefined"><img class="upload-img" [src]="url"></span>
+                                    </div>
+                                </div>
+                                <p *ngIf="imageLimt" class="errr_msg">{{"Max8allowed" | translate}}</p>
+                                <p *ngIf="previews?.length > 8" class="errr_msg">{{"MaxReached" | translate}}</p>
+                                <p *ngIf="imageNeed == true" class="errr_msg">{{"ImageRequired" | translate}}</p>
+                            </div>
+                            <br>
+                            <div class="upload-btn-wrapper">
+                                <button class="pic_btn">
+                                    <span *ngIf="dir == 'ltr'">
+                                        <img src="../../assets/images/header/right-arrow.png" width="15px" style="margin:0 5px;">
+                                        {{"AddPictures" | translate}}
+                                    </span>
+                                    <span *ngIf="dir == 'rtl'">
+                                        {{"AddPictures" | translate}}
+                                        <img src="../../assets/images/header/right-arrow.png" width="15px" style="margin:0 5px;" class="rtl_icon">
+                                    </span>
+                                    <input type="file" formControlName="image" (change)="changeProductImages($event)"
+                                        accept="image/*" multiple />
+                                </button>
+                                <p class="note_class">{{"Note" | translate}} : {{"Max8allowed" | translate}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6 col-6">
+                                <p class="text-left"><button class="next_btn" (click)="prePost()"
+                                        [routerLink]="['../description']">
+                                        <span *ngIf="dir == 'ltr'">
+                                            <img src="../../assets/images/forms/left-arrow.svg" width="10px">
+                                            <img src="../../assets/images/forms/left-arrow.svg" width="10px">
+                                        </span>
+                                        <span *ngIf="dir == 'rtl'">
+                                            <img src="../../assets/images/forms/right-arrow.svg" width="15px">
+                                            <img src="../../assets/images/forms/right-arrow.svg" width="15px">
+                                        </span> &nbsp;{{"Prev" | translate}}
+                                    </button></p>
+                            </div>
+                            <div class="col-md-6 col-6">
+                                <p class="nex_btnp"><button class="next_btn" (click)="postproduct()">{{"Next" |
+                                        translate}}
+                                        &nbsp;
+                                        <span *ngIf="dir == 'ltr'">
+                                            <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                            <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                        </span>
+                                        <span *ngIf="dir == 'rtl'">
+                                            <img src="../../assets/images/forms/left-arrow.svg" width="15px">
+                                            <img src="../../assets/images/forms/left-arrow.svg" width="15px">
+                                        </span>
+                                    </button></p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-3 col-md-2"></div>
+        </div>
+    </div>
+</section>

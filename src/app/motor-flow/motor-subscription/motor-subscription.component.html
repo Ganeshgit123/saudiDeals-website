@@ -1,0 +1,38 @@
+<section class="model_sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h4>{{"Subscription" | translate}} <span>{{"Model" | translate}}</span></h4>
+            </div>
+        </div>
+    </div>
+</section>
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">{{"Uploading" | translate}}...</p>
+</ngx-spinner>
+<section class="package_sec">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4" *ngFor="let item of subsList">
+                <div class="package_box">
+                    <div class="package_dot">
+                        <h5 class="package_type">{{item.name}}</h5>
+                        <p class="price" *ngIf="item.price !== 0">
+                            <!-- <span *ngIf="item.price == 0" style="padding-right: 5px;">{{"Free" | translate}}</span> -->
+                            <span *ngIf="item.price !== 0" style="padding-right: 5px;"><img
+                                    src="assets/images/saudi_riyal_logo.svg" class="riyal_logo_size">
+                                {{item.price}}</span>
+                            <span class="light_color" style="padding-right: 5px;">{{"for" | translate}}</span>
+                            <span style="padding-right: 5px;">{{item.totalPost}}</span> {{"post" | translate}}
+                        </p>
+                    </div>
+                    <div class="desc_sec">
+                        <p [innerHTML]="item.description"></p>
+                    </div>
+                    <a><button class="proced_btn" (click)="buyPackage(item)">{{"Proceed" | translate}}</button></a>
+                </div>
+            </div>
+            <!-- <a routerLink="/motor_category"><button class="proced_btn">Skip</button></a> -->
+        </div>
+    </div>
+</section>

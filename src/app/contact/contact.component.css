@@ -1,0 +1,117 @@
+/* .cont_section{
+    background: url(../../assets/images/contact_banner.png);
+    height: 350px;
+    background-size: cover;
+    background-repeat: no-repeat;
+} */
+.contact_heading{
+    text-align: center;
+    color: var(--white-color);
+    font-size: 40px;
+    font-weight: 600;
+    margin-top: 14%;
+}
+.msg_section{
+    padding: 40px 0;
+}
+.left_content{
+    margin-left: 30%;
+    margin-right: 30%;
+}
+.cont_form_head{
+    font-size: var(--heading-h3);
+    font-weight: 500;
+    color: var(--text-light-color);
+    padding-bottom: 10px;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+
+.signup_form_field {
+    border: 2px solid #f1f1f1;
+    height: 45px;
+    font-size: var(--para-size);
+    color: var(--text-light-color);
+}
+textarea.signup_form_field{
+    height: 120px;
+}
+.col_set{
+    padding-left: 1px;
+}
+.col_set:lang(ar){
+    padding-right: 1px;
+    padding-left: 12px;
+}
+.proced_btn {
+    background: var(--main-color);
+    color: var(--white-color);
+    text-align: center;
+    font-size: var(--para-size);
+    font-weight: 500;
+    padding: 10px 0;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    margin-top: 1rem;
+}
+
+.proced_btn:hover {
+    background: white;
+    border: 2px solid var(--main-color);
+    color: var(--main-color);
+    transition: 0.5s;
+}
+.detail_section{
+    padding: 20px 10rem 40px 10rem;
+}
+.det_data{
+    background: #8cb6414d;
+    padding: 30px;
+    border-radius: 10px;
+}
+.loc_img{
+    width: 25px;
+}
+.det_cont{
+    font-size: var(--para-size);
+    font-weight: 500;
+    text-align: center;
+}
+.upload_img {
+    background: #F4F4F4;
+    border-radius: 0px;
+    border: none;
+    text-align: center;
+    padding: 20px 30px;
+    margin-top: 10px;
+  }
+  
+  .custom-file-input {
+    display: none;
+  }
+@media only screen and (min-width: 320px) and (max-width: 1024px) {
+    .cont_section {
+        height: 300px;
+    }
+    .contact_heading{
+        margin-top: 35%;
+    }
+    .left_content{
+        margin: 0 20px;
+    }
+    .detail_section{
+        padding: 20px;
+    }
+    .det_data{
+        margin-bottom: 30px;
+    }
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .contact_heading{
+        margin-top: 20%;
+    }
+}
+
+

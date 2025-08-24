@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="198.9" height="198.196" viewBox="0 0 198.9 198.196">
+  <defs>
+    <filter id="Ellipse_213" x="37.332" y="38.697" width="125.686" height="126.343" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Ellipse_214" x="37.332" y="32.697" width="125.686" height="126.343" filterUnits="userSpaceOnUse">
+      <feOffset dy="-3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.082"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_48797" data-name="Group 48797" transform="translate(-817.475 -302.505)">
+    <g transform="matrix(1, 0, 0, 1, 817.47, 302.5)" filter="url(#Ellipse_213)">
+      <ellipse id="Ellipse_213-2" data-name="Ellipse 213" cx="53.843" cy="54.171" rx="53.843" ry="54.171" transform="translate(46.33 44.7)" fill="#fff" opacity="0.7"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 817.47, 302.5)" filter="url(#Ellipse_214)">
+      <ellipse id="Ellipse_214-2" data-name="Ellipse 214" cx="53.843" cy="54.171" rx="53.843" ry="54.171" transform="translate(46.33 44.7)" fill="#fff" opacity="0.7"/>
+    </g>
+    <g id="Ellipse_215" data-name="Ellipse 215" transform="translate(834.778 318.943)" fill="none" stroke="#8fb641" stroke-width="1" opacity="0.54">
+      <ellipse cx="82.523" cy="82.523" rx="82.523" ry="82.523" stroke="none"/>
+      <ellipse cx="82.523" cy="82.523" rx="82.023" ry="82.023" fill="none"/>
+    </g>
+    <g id="Ellipse_507" data-name="Ellipse 507" transform="translate(851.216 335.381)" fill="none" stroke="#316c3b" stroke-width="1" opacity="0.7">
+      <ellipse cx="66.085" cy="66.085" rx="66.085" ry="66.085" stroke="none"/>
+      <ellipse cx="66.085" cy="66.085" rx="65.585" ry="65.585" fill="none"/>
+    </g>
+    <g id="Ellipse_216" data-name="Ellipse 216" transform="translate(817.475 302.505)" fill="none" stroke="#316c3b" stroke-width="1" opacity="0.19">
+      <ellipse cx="99.45" cy="99.098" rx="99.45" ry="99.098" stroke="none"/>
+      <ellipse cx="99.45" cy="99.098" rx="98.95" ry="98.598" fill="none"/>
+    </g>
+    <g id="Icon_feather-user" data-name="Icon feather-user" transform="translate(894.414 375.392)" opacity="0.7">
+      <path id="Path_18599" data-name="Path 18599" d="M52.558,39.959v-5.82A11.639,11.639,0,0,0,40.918,22.5H17.639A11.639,11.639,0,0,0,6,34.139v5.82" transform="translate(-6 12.418)" fill="none" stroke="#14100d" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+      <path id="Path_18600" data-name="Path 18600" d="M35.279,16.139A11.639,11.639,0,1,1,23.639,4.5,11.639,11.639,0,0,1,35.279,16.139Z" transform="translate(-0.361 -4.5)" fill="none" stroke="#14100d" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,28 @@
+<section class="categ_click">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="breadcrumb">
+                    <p class="cate_head">
+                        <a>...
+                            <img src="../../assets/images/header/right-arrow.png" width="15px"></a>
+                        <a routerLink="/motor_category" class="sec_link">{{"Motors" | translate}}
+                        <img src="../../assets/images/header/right-arrow.png" width="15px" style="margin:0 5px;"></a>
+                        <a routerLink="/motor_category/{{params}}" class="sec_link">{{cateeName}}
+                        <img src="../../assets/images/header/right-arrow.png" width="15px" style="margin:0 5px;">
+                        </a>
+                        <a routerLink="/motor_category/{{params}}">{{subCateeName}}</a>
+                    </p>
+                </div>
+                <ul class="categ_ul" *ngFor="let cate of subSubCategArray">
+                    <a (click)="subSubCateg(cate)"><li>
+                        <span *ngIf="dir == 'ltr'">{{cate.motorSubCategoriesName}}</span>
+                        <span *ngIf="dir == 'rtl'">{{cate.arMotorSubCategoriesName}}</span>
+                    </li></a>
+                </ul>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+</section>

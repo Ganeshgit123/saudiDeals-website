@@ -1,0 +1,43 @@
+<section class="footer_sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="../../assets/images/logo.png" width="150px">
+            </div>
+            <div class="col-md-3 col-6">
+                <h6 class="foot_head"><a routerLink="/about-us">{{"AboutUs" | translate}}</a></h6>
+                <ul class="foot_ul mb-0">
+                    <li><a routerLink="/contact-us">{{"ContactUs" | translate}}</a></li>
+                    <li><a routerLink="/terms-of-use">{{"TermsofUse" | translate}}</a></li>
+                    <!-- <li>Privacy Policy</li> -->
+                </ul>
+            </div>
+            <div class="col-md-3 col-6">
+                <h6 class="foot_head">{{"GetSocial" | translate}}</h6>
+                <ul class="foot_ul mb-0">
+                    <li class="social"><img src="../../assets/images/footer/facebook.svg">{{"Facebook" | translate}}</li>
+                    <li class="social"><img src="../../assets/images/footer/twitter.svg">{{"Twitter" | translate}}</li>
+                    <li class="social"><img src="../../assets/images/footer/instagram.svg">{{"Instagram" | translate}}</li>
+                    <li class="social"><img src="../../assets/images/footer/youtube.svg">{{"Youtube" | translate}}</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h6 class="foot_head">{{"Languages" | translate}}</h6>
+                <ul class="foot_ul mb-0">
+                    <li class="switch_btn" *ngIf="lang == 'ar'" (click)="switchLang('en')">English</li>
+                    <li class="switch_btn" *ngIf="lang == 'en'" (click)="switchLang('ar')">العربية</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="copyright_sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p>{{"Copyright" | translate}} © {{year}} <a target="_blank">{{"SaudiDeal" | translate}}</a>.
+                    {{"AllRightsReserved" | translate}}</p>
+            </div>
+        </div>
+    </div>
+</section>

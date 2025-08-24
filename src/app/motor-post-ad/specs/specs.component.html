@@ -1,0 +1,583 @@
+<section class="porgress_sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="progress_ul">
+                    <li class="active">{{"Description" | translate}}
+                        <p class="progress_path active"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                    <li class="active">{{"ImagesLocation" | translate}}
+                        <p class="progress_path active"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                    <li>{{"SpecificationsExtras" | translate}}
+                        <p class="progress_path active"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                    <li>{{"Summary" | translate}}
+                        <p class="progress_path"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-1"></div>
+            <div class="col-lg-8 col-md-10">
+                <div class="breadcrumb">
+                    <p class="cate_head">
+                        <a>{{"Motors" | translate}}
+                            <img src="../../assets/images/header/right-arrow.png" width="15px"
+                                style="margin:0 5px;"></a>
+                        <a>{{cateeName}}
+                            <img src="../../assets/images/header/right-arrow.png" width="15px" style="margin:0 5px;">
+                        </a>
+                        <a *ngIf="subCateeName != undefined">{{subCateeName}}
+                            <img src="../../assets/images/header/right-arrow.png" width="15px" style="margin:0 5px;">
+                        </a>
+                        <a class="normal_link" *ngIf="subSubcateeName != undefined">{{subSubcateeName}}
+                            <img src="../../assets/images/header/right-arrow.png" width="15px" style="margin:0 5px;">
+                        </a>
+                        <a class="normal_link">{{"SpecificationsExtras" | translate}}</a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-1 col-lg-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-2"></div>
+            <div class="col-lg-5 col-md-8">
+                <div class="ques_sec" *ngIf="cateId == 1">
+                    <form [formGroup]="usedCarsForm">
+                        <div class="form-group">
+                            <div class="bord_line"
+                                [ngClass]="{ 'is-invalid': submitted && usedCarsf['bodyType'].errors}">
+                                <mat-label class="body_fie">{{"BodyType" | translate}}</mat-label>
+                                <br><br>
+                                <div class="radio"
+                                    [ngClass]="{ 'is-invalid': submitted && usedCarsf['bodyType'].errors}">
+                                    <input id="hatch" type="radio" name="bodyType" value="{{'Sedan' | translate}}"
+                                        formControlName="bodyType">
+                                    <label for="hatch" class="tag">{{"Sedan" | translate}}</label>
+
+                                    <input id="sv" type="radio" name="bodyType" value="{{'SUV' | translate}}"
+                                        formControlName="bodyType">
+                                    <label for="sv" class="tag">{{"SUV" | translate}}</label>
+
+                                    <input id="cope" type="radio" name="bodyType" value='{{"Coupe" | translate}}'
+                                        formControlName="bodyType">
+                                    <label for="cope" class="tag">{{"Coupe" | translate}}</label>
+
+                                    <input id="hard" type="radio" name="bodyType" value='{{"HardSoftTop" | translate}}'
+                                        formControlName="bodyType">
+                                    <label for="hard" class="tag">{{"HardSoftTop" | translate}}</label>
+
+                                    <input id="convert" type="radio" name="bodyType"
+                                        value='{{"Convertible" | translate}}' formControlName="bodyType">
+                                    <label for="convert" class="tag">{{"Convertible" | translate}}</label>
+
+                                </div>
+                                <div *ngIf="submitted && usedCarsf['bodyType'].errors" class="invalid-feedback">
+                                    <div *ngIf="usedCarsf['bodyType'].errors['required']">{{"BodyRequired" | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="bord_line"
+                                [ngClass]="{ 'is-invalid': submitted && usedCarsf['transmissionType'].errors}">
+                                <mat-label class="trans_fie">{{"TransmissionType" | translate}}</mat-label>
+                                <br><br>
+                                <div class="radio"
+                                    [ngClass]="{ 'is-invalid': submitted && usedCarsf['transmissionType'].errors}">
+
+                                    <input id="auto" type="radio" name="transmissionType"
+                                        value='{{"Automatic" | translate}}' formControlName="transmissionType">
+                                    <label for="auto" class="tag">{{"Automatic" | translate}}</label>
+
+                                    <input id="manu" type="radio" name="transmissionType"
+                                        value='{{"Manual" | translate}}' formControlName="transmissionType">
+                                    <label for="manu" class="tag">{{"Manual" | translate}}</label>
+
+                                </div>
+                                <div *ngIf="submitted && usedCarsf['transmissionType'].errors" class="invalid-feedback">
+                                    <div *ngIf="usedCarsf['transmissionType'].errors['required']">
+                                        {{"TransmissionRequired" | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field>
+                                <mat-label class="cylind_fie">{{"NoCylinders" | translate}}</mat-label>
+                                <mat-select formControlName="cylinders">
+                                    <mat-option value="3">3</mat-option>
+                                    <mat-option value="4">4</mat-option>
+                                    <mat-option value="5">5</mat-option>
+                                    <mat-option value="6">6</mat-option>
+                                    <mat-option value="8">8</mat-option>
+                                    <mat-option value="10">10</mat-option>
+                                    <mat-option value="12">12</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="usedCarsForm.controls['cylinders'].hasError('required')">
+                                    {{"CylinderRequired" | translate}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field>
+                                <mat-label class="cylind_fie">{{"ExteriorColor" | translate}}</mat-label>
+                                <mat-select formControlName="exteriorColor">
+                                    <mat-option value='{{"Black" | translate}}'>{{"Black" | translate}}</mat-option>
+                                    <mat-option value='{{"Blue" | translate}}'>{{"Blue" | translate}}</mat-option>
+                                    <mat-option value='{{"Brown" | translate}}'>{{"Brown" | translate}}</mat-option>
+                                    <mat-option value='{{"Burgundy" | translate}}'>{{"Burgundy" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"Gold" | translate}}'>{{"Gold" | translate}}</mat-option>
+                                    <mat-option value='{{"Grey" | translate}}'>{{"Grey" | translate}}</mat-option>
+                                    <mat-option value='{{"Orange" | translate}}'>{{"Orange" | translate}}</mat-option>
+                                    <mat-option value='{{"Green" | translate}}'>{{"Green" | translate}}</mat-option>
+                                    <mat-option value='{{"Purple" | translate}}'>{{"Purple" | translate}}</mat-option>
+                                    <mat-option value='{{"Red" | translate}}'>{{"Red" | translate}}</mat-option>
+                                    <mat-option value='{{"Silver" | translate}}'>{{"Silver" | translate}}</mat-option>
+                                    <mat-option value='{{"Beige" | translate}}'>{{"Beige" | translate}}</mat-option>
+                                    <mat-option value='{{"White" | translate}}'>{{"White" | translate}}</mat-option>
+                                    <mat-option value='{{"Yellow" | translate}}'>{{"Yellow" | translate}}</mat-option>
+                                    <mat-option value='{{"OtherColor" | translate}}'>{{"OtherColor" |
+                                        translate}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="usedCarsForm.controls['exteriorColor'].hasError('required')">
+                                    {{"ExteriorColorRequired" | translate}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field>
+                                <mat-label class="cylind_fie">{{'InteriorColor' | translate}}</mat-label>
+                                <mat-select formControlName="interiorColor">
+                                    <mat-option value='{{"Beige" | translate}}'>{{"Beige" | translate}}</mat-option>
+                                    <mat-option value='{{"Black" | translate}}'>{{"Black" | translate}}</mat-option>
+                                    <mat-option value='{{"Blue" | translate}}'>{{"Blue" | translate}}</mat-option>
+                                    <mat-option value='{{"Brown" | translate}}'>{{"Brown" | translate}}</mat-option>
+                                    <mat-option value='{{"Green" | translate}}'>{{"Green" | translate}}</mat-option>
+                                    <mat-option value='{{"Grey" | translate}}'>{{"Grey" | translate}}</mat-option>
+                                    <mat-option value='{{"Orange" | translate}}'>{{"Orange" | translate}}</mat-option>
+                                    <mat-option value='{{"Red" | translate}}'>{{"Red" | translate}}</mat-option>
+                                    <mat-option value='{{"Tan" | translate}}'>{{"Tan" | translate}}</mat-option>
+                                    <mat-option value='{{"White" | translate}}'>{{"White" | translate}}</mat-option>
+                                    <mat-option value='{{"Yellow" | translate}}'>{{"Yellow" | translate}}</mat-option>
+                                    <mat-option value='{{"OtherColor" | translate}}'>{{"OtherColor" |
+                                        translate}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="usedCarsForm.controls['interiorColor'].hasError('required')">
+                                    {{"InteriorColorRequired" | translate}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                            <angular-editor class="form-control ques_field desc_fie" formControlName="description"
+                                [config]="editorConfig"
+                                [ngClass]="{ 'is-invalid': submitted && usedCarsf['description'].errors}"></angular-editor>
+                            <!-- <textarea class="form-control ques_field desc_fie"
+                                placeholder="{{'Description' | translate}}" rows="4" formControlName="description"
+                                [ngClass]="{ 'is-invalid': submitted && usedCarsf['description'].errors}"></textarea> -->
+                            <div *ngIf="submitted && usedCarsf['description'].errors" class="invalid-feedback">
+                                <div *ngIf="usedCarsf['description'].errors['maxlength']">{{"max1500Chars" | translate}}
+                                </div>
+                                <div *ngIf="usedCarsf['description'].errors['required']">{{"DescriptionRequired" |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="extra_fie">{{"Extras" | translate}}</label>
+                            <div class="row">
+                                <div class="col-6 col-md-6">
+                                    <mat-slide-toggle formControlName="leatherSeat">{{"LeatherSeat" |
+                                        translate}}</mat-slide-toggle>
+                                </div>
+                                <div class="col-6 col-md-6">
+                                    <mat-slide-toggle formControlName="parkingSensor">{{"ParkingSensor" |
+                                        translate}}</mat-slide-toggle>
+                                </div>
+                                <div class="col-6 col-md-6">
+                                    <mat-slide-toggle formControlName="rearViewCamera">{{"RearViewCamera" |
+                                        translate}}</mat-slide-toggle>
+                                </div>
+                                <div class="col-6 col-md-6">
+                                    <mat-slide-toggle formControlName="sunRoof">{{"SunRoof" |
+                                        translate}}</mat-slide-toggle>
+                                </div>
+                                <div class="col-6 col-md-6">
+                                    <mat-slide-toggle formControlName="accidentFree">{{"AccidentFree" |
+                                        translate}}</mat-slide-toggle>
+                                </div>
+                                <div class="col-6 col-md-6">
+                                    <mat-slide-toggle formControlName="warranty">{{"Warranty" |
+                                        translate}}</mat-slide-toggle>
+                                </div>
+                                <div class="col-6 col-md-6">
+                                    <mat-slide-toggle formControlName="fullyMaintained">{{"FSH" |
+                                        translate}}</mat-slide-toggle>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-6">
+                                    <p class="text-left"><button class="next_btn" (click)="prevPost()">
+                                            <span *ngIf="dir == 'ltr'">
+                                                <img src="../../assets/images/forms/left-arrow.svg" width="10px">
+                                                <img src="../../assets/images/forms/left-arrow.svg" width="10px">
+                                            </span>
+                                            <span *ngIf="dir == 'rtl'">
+                                                <img src="../../assets/images/forms/right-arrow.svg" width="15px">
+                                                <img src="../../assets/images/forms/right-arrow.svg" width="15px">
+                                            </span> &nbsp;{{"Prev" | translate}}
+                                        </button></p>
+                                </div>
+                                <div class="col-md-6 col-6">
+                                    <p class="nex_btnp"><button class="next_btn" (click)="onSubmitSpecs()">{{"Next" |
+                                            translate}}
+                                            &nbsp;
+                                            <span *ngIf="dir == 'ltr'">
+                                                <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                                <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                            </span>
+                                            <span *ngIf="dir == 'rtl'">
+                                                <img src="../../assets/images/forms/left-arrow.svg" width="15px">
+                                                <img src="../../assets/images/forms/left-arrow.svg" width="15px">
+                                            </span>
+                                        </button></p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ques_sec" *ngIf="cateId == 2">
+                    <form [formGroup]="motorsForm">
+                        <div class="form-group">
+                            <div class="bord_line"
+                                [ngClass]="{ 'is-invalid': submitted && motorsf['finalDriveSystem'].errors}">
+                                <mat-label class="body_fie">{{"FinalDriveSystem" | translate}}</mat-label>
+                                <br><br>
+                                <div class="radio"
+                                    [ngClass]="{ 'is-invalid': submitted && motorsf['finalDriveSystem'].errors}">
+
+                                    <input id="bel" type="radio" name="finalDriveSystem" value='{{"Belt" | translate}}'
+                                        formControlName="finalDriveSystem">
+                                    <label for="bel" class="tag">{{"Belt" | translate}}</label>
+
+                                    <input id="cha" type="radio" name="finalDriveSystem" value='{{"Chain" | translate}}'
+                                        formControlName="finalDriveSystem">
+                                    <label for="cha" class="tag">{{"Chain" | translate}}</label>
+
+                                    <input id="sha" type="radio" name="finalDriveSystem" value='{{"Shaft" | translate}}'
+                                        formControlName="finalDriveSystem">
+                                    <label for="sha" class="tag">{{"Shaft" | translate}}</label>
+
+                                    <input id="doNotApply" type="radio" name="finalDriveSystem"
+                                        value='{{"doesNotApply" | translate}}' formControlName="finalDriveSystem">
+                                    <label for="doNotApply" class="tag">{{"doesNotApply" | translate}}</label>
+                                </div>
+                                <div *ngIf="submitted && motorsf['finalDriveSystem'].errors" class="invalid-feedback">
+                                    <div *ngIf="motorsf['finalDriveSystem'].errors['required']">
+                                        {{"FinalDriveSystemRequired" | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="bord_line" [ngClass]="{ 'is-invalid': submitted && motorsf['wheels'].errors}">
+                                <mat-label class="whee_fie">{{"Wheels" | translate}}</mat-label>
+                                <br><br>
+                                <div class="radio" [ngClass]="{ 'is-invalid': submitted && motorsf['wheels'].errors}">
+
+                                    <input id="2Whe" type="radio" name="wheels" value='{{"2 Wheels" | translate}}'
+                                        formControlName="wheels">
+                                    <label for="2Whe" class="tag">{{"2 Wheels" | translate}}</label>
+
+                                    <input id="3Whe" type="radio" name="wheels" value='{{"3 Wheels" | translate}}'
+                                        formControlName="wheels">
+                                    <label for="3Whe" class="tag">{{"3 Wheels" | translate}}</label>
+
+                                    <input id="4Whe" type="radio" name="wheels" value='{{"4 Wheels" | translate}}'
+                                        formControlName="wheels">
+                                    <label for="4Whe" class="tag">{{"4 Wheels" | translate}}</label>
+                                </div>
+                                <div *ngIf="submitted && motorsf['wheels'].errors" class="invalid-feedback">
+                                    <div *ngIf="motorsf['wheels'].errors['required']">{{"WheelsRequired" | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field>
+                                <mat-label class="engine_fie">{{"EngineSize" | translate}}</mat-label>
+                                <mat-select formControlName="engineSize">
+                                    <mat-option value='{{"LessThan250cc" | translate}}'>{{"LessThan250cc" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"250cc499cc" | translate}}'>{{"250cc499cc" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"500cc599cc" | translate}}'>{{"500cc599cc" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"600cc749cc" | translate}}'>{{"600cc749cc" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"950cc999cv" | translate}}'>{{"950cc999cv" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"1000ccMore" | translate}}'>{{"1000ccMore" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"doesNotApply" | translate}}'>{{"doesNotApply" |
+                                        translate}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="motorsForm.controls['engineSize'].hasError('required')">
+                                    {{"EngineSizeRequired" | translate}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="form-group">
+                            <div class="bord_line">
+                                <mat-label class="extra_fie">Extras</mat-label>
+                                <br>
+                                <div class="row" style="margin-top: 10px;">
+                                    <div class="col-md-6" *ngFor="let item of extraList">
+                                        <mat-checkbox class="example-margin" formArrayName="extra" (change)="extraMotorChange($event,item)"
+                                        [value]="item.value">{{item.label}}</mat-checkbox>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="form-group">
+                            <angular-editor class="form-control ques_field desc_fie" formControlName="description"
+                                [config]="editorConfig"
+                                [ngClass]="{ 'is-invalid': submitted && motorsf['description'].errors}"></angular-editor>
+                            <!-- <textarea class="form-control ques_field desc_fie"
+                                placeholder="{{'Description' | translate}}" rows="4" formControlName="description"
+                                [ngClass]="{ 'is-invalid': submitted && motorsf['description'].errors}"></textarea> -->
+                            <div *ngIf="submitted && motorsf['description'].errors" class="invalid-feedback">
+                                <div *ngIf="motorsf['description'].errors['maxlength']">{{"max1500Chars" | translate}}
+                                </div>
+                                <div *ngIf="motorsf['description'].errors['required']">{{"DescriptionRequired" |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-6">
+                                    <p class="text-left"><button class="next_btn" (click)="prevPost()">
+                                            <span *ngIf="dir == 'ltr'">
+                                                <img src="../../assets/images/forms/left-arrow.svg" width="10px">
+                                                <img src="../../assets/images/forms/left-arrow.svg" width="10px">
+                                            </span>
+                                            <span *ngIf="dir == 'rtl'">
+                                                <img src="../../assets/images/forms/right-arrow.svg" width="15px">
+                                                <img src="../../assets/images/forms/right-arrow.svg" width="15px">
+                                            </span> &nbsp;{{"Prev" | translate}}
+                                        </button></p>
+                                </div>
+                                <div class="col-md-6 col-6">
+                                    <p class="nex_btnp"><button class="next_btn" (click)="onSubmitSpecs()">{{"Next" |
+                                            translate}}
+                                            &nbsp;
+                                            <span *ngIf="dir == 'ltr'">
+                                                <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                                <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                            </span>
+                                            <span *ngIf="dir == 'rtl'">
+                                                <img src="../../assets/images/forms/left-arrow.svg" width="15px">
+                                                <img src="../../assets/images/forms/left-arrow.svg" width="15px">
+                                            </span>
+                                        </button></p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ques_sec" *ngIf="cateId == 3">
+                    <form [formGroup]="heavyEquipForm">
+                        <div class="form-group">
+                            <mat-form-field>
+                                <mat-label class="body_con_fie">{{"BodyCondition" | translate}}</mat-label>
+                                <mat-select formControlName="bodyCondition">
+                                    <mat-option value='{{"BrandNew" | translate}}'>{{"BrandNew" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"PerfectInsideAndOut" | translate}}'>{{"PerfectInsideAndOut" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"AlmostNoNoticeableProblemOrFlaws" | translate}}'>\
+                                        {{"AlmostNoNoticeableProblemOrFlaws" | translate}}</mat-option>
+                                    <mat-option value='{{"ABitWearAndTearthere" | translate}}'>
+                                        {{"ABitWearAndTearthere" | translate}}</mat-option>
+                                    <mat-option value='{{"AboveAverageWearAndTearproperly" | translate}}'>
+                                        {{"AboveAverageWearAndTearproperly" | translate}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="heavyEquipForm.controls['bodyCondition'].hasError('required')">
+                                    {{"BodyConditionRequired" | translate}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field>
+                                <mat-label class="mech_con_fie">{{"MechanicalCondition" | translate}}</mat-label>
+                                <mat-select formControlName="mechanicalCondition">
+                                    <mat-option value='{{"BrandNew" | translate}}'>{{"BrandNew" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"PerfectInsideAndOut" | translate}}'>{{"PerfectInsideAndOut" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"AlmostNoNoticeableProblemOrFlaws" | translate}}'>
+                                        {{"AlmostNoNoticeableProblemOrFlaws" | translate}}</mat-option>
+                                    <mat-option value='{{"ABitWearAndTearthere" | translate}}'>
+                                        {{"ABitWearAndTearthere" | translate}}</mat-option>
+                                    <mat-option value='{{"AboveAverageWearAndTearproperly" | translate}}'>
+                                        {{"AboveAverageWearAndTearproperly"| translate}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="heavyEquipForm.controls['mechanicalCondition'].hasError('required')">
+                                    {{"MechanicalConditionRequired" | translate}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field>
+                                <mat-label class="cylind_fie">{{"NoCylinders" | translate}}</mat-label>
+                                <mat-select formControlName="cylinders">
+                                    <mat-option value="3">3</mat-option>
+                                    <mat-option value="4">4</mat-option>
+                                    <mat-option value="5">5</mat-option>
+                                    <mat-option value="6">6</mat-option>
+                                    <mat-option value="8">8</mat-option>
+                                    <mat-option value="10">10</mat-option>
+                                    <mat-option value="12">12</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="heavyEquipForm.controls['cylinders'].hasError('required')">
+                                    {{"CylinderRequired" | translate}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field>
+                                <mat-label class="engine_fie">{{"Horsepower" | translate}}</mat-label>
+                                <mat-select formControlName="horsePower">
+                                    <mat-option value='{{"LessThan150HP" | translate}}'>{{"LessThan150HP" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"150200HP" | translate}}'>{{"150200HP" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"200300HP" | translate}}'>{{"200300HP" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"300400HP" | translate}}'>{{"300400HP" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"400HP" | translate}}'>{{"400HP" | translate}}</mat-option>
+                                    <mat-option value='{{"Unknown" | translate}}'>{{"Unknown" | translate}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="heavyEquipForm.controls['horsePower'].hasError('required')">
+                                    {{"HorsePowerRequired" | translate}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="{{'CapacityWeightOption' | translate}}"
+                                class="form-control text_field capa_file" formControlName="capacity">
+                        </div>
+                        <div class="form-group">
+                            <angular-editor class="form-control ques_field desc_fie" formControlName="description"
+                                [config]="editorConfig"
+                                [ngClass]="{ 'is-invalid': submitted && heavyf['description'].errors}"></angular-editor>
+                            <!-- <textarea class="form-control ques_field desc_fie"
+                                placeholder="{{'Description' | translate}}" rows="4" formControlName="description"
+                                [ngClass]="{ 'is-invalid': submitted && heavyf['description'].errors}"></textarea> -->
+                            <div *ngIf="submitted && heavyf['description'].errors" class="invalid-feedback">
+                                <div *ngIf="heavyf['description'].errors['maxlength']">{{"max1500Chars" | translate}}
+                                </div>
+                                <div *ngIf="heavyf['description'].errors['required']">{{"DescriptionRequired" |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-6">
+                                    <p class="text-left"><button class="next_btn" (click)="prevPost()">
+                                            <span *ngIf="dir == 'ltr'">
+                                                <img src="../../assets/images/forms/left-arrow.svg" width="10px">
+                                                <img src="../../assets/images/forms/left-arrow.svg" width="10px">
+                                            </span>
+                                            <span *ngIf="dir == 'rtl'">
+                                                <img src="../../assets/images/forms/right-arrow.svg" width="15px">
+                                                <img src="../../assets/images/forms/right-arrow.svg" width="15px">
+                                            </span> &nbsp;{{"Prev" | translate}}
+                                        </button></p>
+                                </div>
+                                <div class="col-md-6 col-6">
+                                    <p class="nex_btnp"><button class="next_btn" (click)="onSubmitSpecs()">{{"Next" |
+                                            translate}}
+                                            &nbsp;
+                                            <span *ngIf="dir == 'ltr'">
+                                                <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                                <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                            </span>
+                                            <span *ngIf="dir == 'rtl'">
+                                                <img src="../../assets/images/forms/left-arrow.svg" width="15px">
+                                                <img src="../../assets/images/forms/left-arrow.svg" width="15px">
+                                            </span>
+                                        </button></p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ques_sec" *ngIf="cateId == 4">
+                    <form [formGroup]="boatsForm">
+                        <div class="form-group">
+                            <mat-form-field>
+                                <mat-label class="body_con_fie">{{"BodyCondition" | translate}}</mat-label>
+                                <mat-select formControlName="bodyCondition">
+                                    <mat-option value='{{"BrandNew" | translate}}'>{{"BrandNew" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"PerfectInsideAndOut" | translate}}'>
+                                        {{"PerfectInsideAndOut" | translate}}</mat-option>
+                                    <mat-option value='{{"AlmostNoNoticeableProblemOrFlaws" | translate}}'>
+                                        {{"AlmostNoNoticeableProblemOrFlaws" | translate}}</mat-option>
+                                    <mat-option value='{{"ABitWearAndTearthere" | translate}}'>
+                                        {{"ABitWearAndTearthere" | translate}}</mat-option>
+                                    <mat-option value='{{"AboveAverageWearAndTearproperly" | translate}}'>
+                                        {{"AboveAverageWearAndTearproperly" | translate}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="heavyEquipForm.controls['bodyCondition'].hasError('required')">
+                                    {{"BodyConditionRequired" | translate}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                            <angular-editor class="form-control ques_field desc_fie" formControlName="description"
+                                [config]="editorConfig"
+                                [ngClass]="{ 'is-invalid': submitted && boatf['description'].errors}"></angular-editor>
+                            <!-- <textarea class="form-control ques_field desc_fie"
+                                placeholder="{{'Description' | translate}}" rows="4" formControlName="description"
+                                [ngClass]="{ 'is-invalid': submitted && boatf['description'].errors}"></textarea> -->
+                            <div *ngIf="submitted && boatf['description'].errors" class="invalid-feedback">
+                                <div *ngIf="boatf['description'].errors['maxlength']">{{"max1500Chars" | translate}}
+                                </div>
+                                <div *ngIf="boatf['description'].errors['required']">{{"DescriptionRequired" |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-6">
+                                    <p class="text-left"><button class="next_btn" (click)="prevPost()">
+                                            <img src="../../assets/images/forms/left-arrow.svg" width="10px">
+                                            <img src="../../assets/images/forms/left-arrow.svg"
+                                                width="10px">&nbsp;{{"Prev" | translate}}
+                                        </button></p>
+                                </div>
+                                <div class="col-md-6 col-6">
+                                    <p class="nex_btnp"><button class="next_btn" (click)="onSubmitSpecs()">{{"Next" |
+                                            translate}}
+                                            &nbsp;
+                                            <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                            <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                        </button></p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-2"></div>
+        </div>
+    </div>
+</section>

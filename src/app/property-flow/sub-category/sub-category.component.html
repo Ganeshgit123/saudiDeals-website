@@ -1,0 +1,28 @@
+<section class="categ_click" >
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="breadcrumb">
+                    <p class="cate_head" *ngIf="dir == 'ltr'">
+                        <img src="../../assets/images/header/right-arrow.png" width="15px">
+                        <span *ngIf="categ == 'rent'">{{"PropertyForRent" | translate}}</span>
+                        <span *ngIf="categ == 'sale'">{{"PropertyForSale" | translate}}</span>
+                   </p>
+                   <p class="cate_head" *ngIf="dir == 'rtl'">
+                    <span *ngIf="categ == 'rent'">{{"PropertyForRent" | translate}}</span>
+                    <span *ngIf="categ == 'sale'">{{"PropertyForSale" | translate}}</span>
+                    <img src="../../assets/images/header/right-arrow.png" width="15px">
+               </p>
+                </div>
+                <ul class="categ_ul" *ngFor="let cate of categArray">
+                    <a (click)="categSelect(cate.id)"><li>
+                        <span *ngIf="dir == 'ltr'">{{cate.name}}</span>
+                        <span *ngIf="dir == 'rtl'">{{cate.ar_name}}</span>
+                    </li></a>
+                </ul>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,25 @@
+.selct_box{
+    text-align: center;
+    background: #F3F3F3;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 8rem 10px;
+    transition: transform .2s;
+}
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+    .selct_box{
+        margin: 2rem 10px 2rem 10px;
+    } 
+}
+.selct_box:hover{
+    transform: scale(1.05);
+}
+.selct_box img{
+    width: 80px;
+}
+.selct_box h6{
+    font-size: var(--heading-h6);
+    font-weight: 600;
+    color: var(--text-dark-color);
+    padding-top: 15px;
+}

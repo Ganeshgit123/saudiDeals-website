@@ -1,0 +1,165 @@
+<div class="header_section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2 col-md-12 col-sm-12 col-12">
+                <p class="text-center mb-0">
+                    <a (click)="homepage()"><img src="../../assets/images/logo.png" width="180px"></a>
+                </p>
+            </div>
+            <div class="col-md-8">
+                <div class="menu">
+                    <ul class="header_ul mb-0">
+                        <li>
+                            <img src="../../assets/images/header/notification_icon.svg">
+                            <span *ngIf="popNoti && newNotifNum != 0" class="notiNumDesign">
+                                {{newNotifNum}}</span>
+                            <p class="mb-0" [ngClass]="{'active': notifify == true}">
+                                <a (click)="myNotification()">{{"Notifications" | translate}}</a>
+                            </p>
+                        </li>
+                        <li><img src="../../assets/images/header/favorite_icon.svg">
+                            <p class="mb-0" [ngClass]="{'active': myFav == true}">
+                                <a (click)="myFavorite()">{{"Favorites" | translate}}</a>
+                            </p>
+                        </li>
+                        <li><img src="../../assets/images/header/my_adds_icon.svg">
+                            <p class="mb-0" [ngClass]="{'active': myAdActive == true}">
+                                <a (click)="myAd()">{{"My Ads" | translate}}</a>
+                            </p>
+                        </li>
+                        <!-- <li><img src="../../assets/images/header/chat_icon.svg">
+                            <p class="mb-0">{{"Chat" | translate}}</p>
+                        </li> -->
+                        <li *ngIf="loggedUser != 'true'"><a routerLink="login"><img
+                                    src="../../assets/images/header/user_icon.svg">
+                                <p class="mb-0">{{"LogInSignUp" | translate}}</p>
+                            </a>
+                        </li>
+                        <li *ngIf="loggedUser == 'true'" class="prof_active">
+                            <p *ngIf="!profImage" class="mb-0"><img src="../../assets/images/header/user_icon.svg"></p>
+                            <p *ngIf="profImage" class="mb-0"><img src="{{profImage}}" class="prof_upload_img"></p>
+                            <p class="mb-0"></p>
+                            <p class="mb-0" *ngIf="!userName">{{"Profile" | translate}}</p>
+                            <p class="mb-0" *ngIf="userName">{{userName}}</p>
+                            <div class="dropdown-content">
+                                <a routerLink="/profile">{{"AccountSetting" | translate}}</a>
+                                <a (click)="logOut()">{{"Logout" | translate}}</a>
+                            </div>
+                        </li>
+                        <li>
+                            <button type="button" class="arabic_switch_btn" *ngIf="lang == 'en'"
+                                (click)="switchLang('ar')">العربية</button>
+                            <button type="button" class="arabic_switch_btn" *ngIf="lang == 'ar'"
+                                (click)="switchLang('en')">English</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <ul class="login_ul mb-0">
+                    <li>
+                        <a class="place_ad_btn" (click)="adBtnClick()">{{"PlaceYourAd" | translate}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mobile_menu_sec">
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="mb-0">
+                    <li><a routerLink="/" (click)="closeCateg()"><img src="../../assets/images/header/home.svg">
+                            <p class="mb-0">{{"Home" | translate}}</p>
+                        </a>
+                    </li>
+                    <li><a (click)="categClick()"><img src="../../assets/images/header/favorite_icon.svg">
+                            <p class="mb-0">{{"Favorites" | translate}}</p>
+                        </a>
+                    </li>
+                    <li><a (click)="adBtnClick()"><img src="../../assets/images/header/add_post.svg">
+                            <p class="mb-0">{{"PlaceYourAd" | translate}}</p>
+                        </a>
+                    </li>
+                    <li><a (click)="myAd()"><img src="../../assets/images/header/my_adds_icon.svg">
+                            <p class="mb-0">{{"My Ads" | translate}}</p>
+                        </a>
+                    </li>
+                    <li><a (click)="proffClick()"><img src="../../assets/images/header/user_icon.svg">
+                            <p class="mb-0">{{"Profile" | translate}}</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="categ_layer" [class.layerClass]="categActive" *ngIf="categActive">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-3">
+            <p class="text-left" (click)="closeCateg()"><img src="../../assets/images/header/nav-bar-close.png"></p>
+        </div>
+        <div class="col-8">
+            <h6 class="categ_head">{{"SelectCategory" | translate}}</h6>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="mob_categ_ul">
+                <li><a routerLink="/motors" (click)="closeCateg()">{{"Motors" | translate}}</a></li>
+                <li><a routerLink="/property_sale" (click)="closeCateg()">{{"Property" | translate}}</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="categ_layer" [class.layerClass]="profActive" *ngIf="profActive">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="login_div">
+                <p class="text-center"><img *ngIf="profImage == null" src="../../assets/images/login/login_user.svg"
+                        class="prof_img_sec">
+                    <img class="photo" src="{{profImage}}" *ngIf="profImage !== null" class="prof_img_sec img_file" />
+                </p>
+                <p class="text-center">{{userName}}</p>
+            </div>
+            <ul class="mob_categ_ul">
+                <a *ngIf="loggedUser != 'true'" routerLink="/login">
+                    <li>{{"LogInSignUp" | translate}}</li>
+                </a>
+                <a [ngClass]="{'active': myAdActive == true}" (click)="myAd()">
+                    <li>{{"My Ads" | translate}}</li>
+                </a>
+                <a [ngClass]="{'active': myFav == true}" (click)="myFavorite()">
+                    <li>{{"Favorites" | translate}}</li>
+                </a>
+                <!-- <a routerLink="/" (click)="closeCateg()"><li>{{"Chat" | translate}}</li></a> -->
+                <a [ngClass]="{'active': notifify == true}" (click)="myNotification()">
+                    <li>{{"Notifications" | translate}}</li>
+                </a>
+                <a routerLink="/profile" *ngIf="loggedUser == 'true'">
+                    <li>{{"AccountSetting" | translate}}</li>
+                </a>
+                <a (click)="closeCateg()">
+                    <li><button class="arabic_switch_btn" *ngIf="lang == 'en'"
+                            (click)="switchLang('ar')">العربية</button>
+                        <button class="arabic_switch_btn" *ngIf="lang == 'ar'"
+                            (click)="switchLang('en')">English</button>
+                    </li>
+                </a>
+                <a routerLink="/contact-us" (click)="closeCateg()">
+                    <li>{{"ContactUs" | translate}}</li>
+                </a>
+                <a>
+                    <li>{{"TermsofUse" | translate}}</li>
+                </a>
+                <a (click)="logOut()" *ngIf="loggedUser == 'true'">
+                    <li>{{"Logout" | translate}}</li>
+                </a>
+            </ul>
+        </div>
+    </div>
+</div>

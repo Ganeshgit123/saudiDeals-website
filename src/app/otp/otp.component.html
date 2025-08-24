@@ -1,0 +1,21 @@
+<section class="user_img_sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-center"><img src="../../assets/images/login/login_user.svg" width="150px"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-2"></div>
+            <div class="col-lg-4 col-md-8 col-12">
+                <h6 class="otp_head">{{"EnterOTP" | translate}}</h6>
+                <div class="inputs d-flex flex-row justify-content-center otp_box">
+                    <ng-otp-input (onInputChange)="onOtpChange($event)" [config]="config"
+                    (keyup.enter)="submit()" class="ltr"></ng-otp-input>
+                </div>
+               <button class="proced_btn" (click)="submit()">{{"Proceed" | translate}}</button>
+            </div>
+            <div class="col-lg-4 col-md-10"></div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,995 @@
+<section class="porgress_sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="progress_ul">
+                    <li class="active">{{"Description" | translate}}
+                        <p class="progress_path active"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                    <li>{{"Specifications" | translate}}
+                        <p class="progress_path active"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                    <li>{{"ImagesLocation" | translate}}
+                        <p class="progress_path"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                    <li>{{"Extras" | translate}}
+                        <p class="progress_path"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                    <li>{{"Summary" | translate}}
+                        <p class="progress_path"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-1"></div>
+            <div class="col-lg-8 col-md-10">
+                <div class="breadcrumb">
+                    <p class="cate_head">
+                        <span *ngIf="category == 'rent'">{{"PropertyForRent" | translate}}</span>
+                        <span *ngIf="category == 'sale'">{{"PropertyForSale" | translate}}</span>
+                        <img src="../../assets/images/header/right-arrow.png" width="15px">
+                        <span>{{cateeName}}</span>
+                        <img src="../../assets/images/header/right-arrow.png" width="15px" style="margin:0 5px;">
+                        <a>{{"Specifications" | translate}}</a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-1 col-lg-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-2"></div>
+            <div class="col-lg-5 col-md-8">
+                <div class="ques_sec" *ngIf="category == 'rent'">
+                    <form [formGroup]="specsFormRent"
+                        *ngIf="!(categIDd == 5 || categIDd == 6 || categIDd == 7 || categIDd == 9)">
+                        <div class="row" [ngClass]="{ 'is-invalid': submitted && specsRentF['rentalTerm'].errors}">
+                            <div class="col-4 col-md-4">
+                                <input type="radio" name="rentalTerm" id="daily" value='{{"Daily" | translate}}'
+                                    formControlName="rentalTerm" class="user_radio">
+                                <label for="daily">
+                                    <div class="owner_box">
+                                        <h6>{{"Daily" | translate}}</h6>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-4 col-md-4">
+                                <input type="radio" name="rentalTerm" id="monthly" value='{{"Monthly" | translate}}'
+                                    formControlName="rentalTerm" class="user_radio">
+                                <label for="monthly">
+                                    <div class="owner_box">
+                                        <h6>{{"Monthly" | translate}}</h6>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-4 col-md-4">
+                                <input type="radio" name="rentalTerm" id="yearly" value='{{"Yearly" | translate}}'
+                                    formControlName="rentalTerm" class="user_radio">
+                                <label for="yearly">
+                                    <div class="owner_box">
+                                        <h6>{{"Yearly" | translate}}</h6>
+                                    </div>
+                                </label>
+                            </div>
+                            <div *ngIf="submitted && specsRentF['rentalTerm'].errors" class="invalid-feedback">
+                                <div *ngIf="specsRentF['rentalTerm'].errors['required']">{{"RentalTermRequired" |
+                                    translate}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="example-label-container">
+                                <label id="example-name-label" class="example-name-label">{{"NumberOfBedrooms" |
+                                    translate}}</label>
+                            </div>
+                            <br>
+                            <div class="row" [ngClass]="{ 'is-invalid': submitted && specsRentF['noBedrooms'].errors}">
+                                <div class="col-2 col-md-2 pad_right">
+                                    <input type="radio" name="noBedrooms" id="oneBed" value="1"
+                                        formControlName="noBedrooms" class="user_radio">
+                                    <label for="oneBed">
+                                        <div class="cont_box first">
+                                            <h6>1</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noBedrooms" id="twoBed" value="2"
+                                        formControlName="noBedrooms" class="user_radio">
+                                    <label for="twoBed">
+                                        <div class="cont_box">
+                                            <h6>2</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noBedrooms" id="threeBed" value="3"
+                                        formControlName="noBedrooms" class="user_radio">
+                                    <label for="threeBed">
+                                        <div class="cont_box">
+                                            <h6>3</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noBedrooms" id="fourBed" value="4"
+                                        formControlName="noBedrooms" class="user_radio">
+                                    <label for="fourBed">
+                                        <div class="cont_box">
+                                            <h6>4</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noBedrooms" id="fiveBed" value="5"
+                                        formControlName="noBedrooms" class="user_radio">
+                                    <label for="fiveBed">
+                                        <div class="cont_box">
+                                            <h6>5</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right_mobile">
+                                    <input type="radio" name="noBedrooms" id="moreBed" class="user_radio">
+                                    <label for="moreBed">
+                                        <div class="cont_box last">
+                                            <mat-form-field>
+                                                <mat-label>{{"More" | translate}}</mat-label>
+                                                <mat-select disableRipple formControlName="noBedrooms">
+                                                    <mat-option value="6">6</mat-option>
+                                                    <mat-option value="7">7</mat-option>
+                                                    <mat-option value="8">8</mat-option>
+                                                    <mat-option value="9">9</mat-option>
+                                                    <mat-option value="10">10</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div *ngIf="submitted && specsRentF['noBedrooms'].errors" class="invalid-feedback">
+                                    <div *ngIf="specsRentF['noBedrooms'].errors['required']">{{"NoOfBedroomsRequired" |
+                                        translate}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="example-label-container">
+                                <label id="example-name-label" class="example-name-label">{{"NumberOfBathrooms" |
+                                    translate}}</label>
+                            </div>
+                            <br>
+                            <div class="row" [ngClass]="{ 'is-invalid': submitted && specsRentF['noBathrooms'].errors}">
+                                <div class="col-2 col-md-2 pad_right">
+                                    <input type="radio" name="noBathrooms" id="oneBath" value="1"
+                                        formControlName="noBathrooms" class="user_radio">
+                                    <label for="oneBath">
+                                        <div class="cont_box first">
+                                            <h6>1</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noBathrooms" id="twoBath" value="2"
+                                        formControlName="noBathrooms" class="user_radio">
+                                    <label for="twoBath">
+                                        <div class="cont_box">
+                                            <h6>2</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noBathrooms" id="threeBath" value="3"
+                                        formControlName="noBathrooms" class="user_radio">
+                                    <label for="threeBath">
+                                        <div class="cont_box">
+                                            <h6>3</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noBathrooms" id="fourBath" value="4"
+                                        formControlName="noBathrooms" class="user_radio">
+                                    <label for="fourBath">
+                                        <div class="cont_box">
+                                            <h6>4</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noBathrooms" id="fiveBath" value="5"
+                                        formControlName="noBathrooms" class="user_radio">
+                                    <label for="fiveBath">
+                                        <div class="cont_box">
+                                            <h6>5</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right_mobile">
+                                    <input type="radio" name="noBathrooms" id="moreBath" class="user_radio">
+                                    <label for="moreBath">
+                                        <div class="cont_box last">
+                                            <mat-form-field>
+                                                <mat-label>{{"More" | translate}}</mat-label>
+                                                <mat-select disableRipple formControlName="noBathrooms">
+                                                    <mat-option value="6">6</mat-option>
+                                                    <mat-option value="7">7</mat-option>
+                                                    <mat-option value="8">8</mat-option>
+                                                    <mat-option value="9">9</mat-option>
+                                                    <mat-option value="10">10</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div *ngIf="submitted && specsRentF['noBathrooms'].errors" class="invalid-feedback">
+                                    <div *ngIf="specsRentF['noBathrooms'].errors['required']">{{"NoOfBathroomsRequired"
+                                        | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="example-label-container">
+                                <label id="example-name-label" class="example-name-label">{{"NumberOfFloors" |
+                                    translate}}</label>
+                            </div>
+                            <br>
+                            <div class="row" [ngClass]="{ 'is-invalid': submitted && specsRentF['noFloors'].errors}">
+                                <div class="col-2 col-md-2 pad_right">
+                                    <input type="radio" name="noFloors" id="oneFloor" value="1"
+                                        formControlName="noFloors" class="user_radio">
+                                    <label for="oneFloor">
+                                        <div class="cont_box first">
+                                            <h6>1</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noFloors" id="twoFloor" value="2"
+                                        formControlName="noFloors" class="user_radio">
+                                    <label for="twoFloor">
+                                        <div class="cont_box">
+                                            <h6>2</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noFloors" id="threeFloor" value="3"
+                                        formControlName="noFloors" class="user_radio">
+                                    <label for="threeFloor">
+                                        <div class="cont_box">
+                                            <h6>3</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noFloors" id="fourFloor" value="4"
+                                        formControlName="noFloors" class="user_radio">
+                                    <label for="fourFloor">
+                                        <div class="cont_box">
+                                            <h6>4</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noFloors" id="fiveFloor" value="5"
+                                        formControlName="noFloors" class="user_radio">
+                                    <label for="fiveFloor">
+                                        <div class="cont_box">
+                                            <h6>5</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right_mobile">
+                                    <input type="radio" name="noFloors" id="moreFloor" class="user_radio">
+                                    <label for="moreFloor">
+                                        <div class="cont_box last">
+                                            <mat-form-field>
+                                                <mat-label>{{"More" | translate}}</mat-label>
+                                                <mat-select disableRipple formControlName="noFloors">
+                                                    <mat-option value="6">6</mat-option>
+                                                    <mat-option value="7">7</mat-option>
+                                                    <mat-option value="8">8</mat-option>
+                                                    <mat-option value="9">9</mat-option>
+                                                    <mat-option value="10">10</mat-option>
+                                                    <mat-option value="10+">10+</mat-option>
+                                                    <mat-option value="15+">15+</mat-option>
+                                                    <mat-option value="20+">20+</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div *ngIf="submitted && specsRentF['noFloors'].errors" class="invalid-feedback">
+                                    <div *ngIf="specsRentF['noFloors'].errors['required']">{{"NoOfFloorsRequired" |
+                                        translate}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="example-label-container">
+                                <label id="example-name-label" class="example-name-label">{{"NumberOfLivingRooms" |
+                                    translate}}</label>
+                            </div>
+                            <br>
+                            <div class="row"
+                                [ngClass]="{ 'is-invalid': submitted && specsRentF['noLivingRooms'].errors}">
+                                <div class="col-2 col-md-2 pad_right">
+                                    <input type="radio" name="noLivingRooms" id="oneliving" value="1"
+                                        formControlName="noLivingRooms" class="user_radio">
+                                    <label for="oneliving">
+                                        <div class="cont_box first">
+                                            <h6>1</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noLivingRooms" id="twoliving" value="2"
+                                        formControlName="noLivingRooms" class="user_radio">
+                                    <label for="twoliving">
+                                        <div class="cont_box">
+                                            <h6>2</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noLivingRooms" id="threeliving" value="3"
+                                        formControlName="noLivingRooms" class="user_radio">
+                                    <label for="threeliving">
+                                        <div class="cont_box">
+                                            <h6>3</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noLivingRooms" id="fourliving" value="4"
+                                        formControlName="noLivingRooms" class="user_radio">
+                                    <label for="fourliving">
+                                        <div class="cont_box">
+                                            <h6>4</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noLivingRooms" id="fiveliving" value="5"
+                                        formControlName="noLivingRooms" class="user_radio">
+                                    <label for="fiveliving">
+                                        <div class="cont_box">
+                                            <h6>5</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right_mobile">
+                                    <input type="radio" name="noLivingRooms" id="moreliving" class="user_radio">
+                                    <label for="moreliving">
+                                        <div class="cont_box last">
+                                            <mat-form-field>
+                                                <mat-label>{{"More" | translate}}</mat-label>
+                                                <mat-select disableRipple formControlName="noLivingRooms">
+                                                    <mat-option value="6">6</mat-option>
+                                                    <mat-option value="7">7</mat-option>
+                                                    <mat-option value="8">8</mat-option>
+                                                    <mat-option value="9">9</mat-option>
+                                                    <mat-option value="10">10</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div *ngIf="submitted && specsRentF['noLivingRooms'].errors" class="invalid-feedback">
+                                    <div *ngIf="specsRentF['noLivingRooms'].errors['required']">
+                                        {{"NoOfLivingRoomsRequired" | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 pad_right">
+                                <div class="form-group">
+                                    <mat-form-field>
+                                        <mat-label class="specs_fie">{{"PropertyAge" | translate}}</mat-label>
+                                        <mat-select formControlName="propertyAge">
+                                            <mat-option value='{{"below12Years" | translate}}'>
+                                                {{"below12Years" | translate}}</mat-option>
+                                            <mat-option value='{{"35Years" | translate}}'>{{"35Years" |
+                                                translate}}</mat-option>
+                                            <mat-option value='{{"610Years" | translate}}'>{{"610Years" |
+                                                translate}}</mat-option>
+                                            <mat-option value='{{"10Years" | translate}}'>{{"10Years" |
+                                                translate}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="specsFormRent.controls['propertyAge'].hasError('required')">
+                                            {{"PropertyAgeRequired" | translate}}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-6">
+                                    <p class="text-left"><button class="next_btn" (click)="prevPage()">
+                                            <img src="../../assets/images/forms/left-arrow.svg" width="10px">
+                                            <img src="../../assets/images/forms/left-arrow.svg"
+                                                width="10px">&nbsp;{{"Prev" | translate}}
+                                        </button></p>
+                                </div>
+                                <div class="col-md-6 col-6">
+                                    <p class="nex_btnp"><button class="next_btn" (click)="onSubmitDescrip()">{{"Next" |
+                                            translate}}
+                                            &nbsp;
+                                            <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                            <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                        </button></p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ques_sec" *ngIf="category == 'sale'">
+                    <form [formGroup]="specsFormSale"
+                        *ngIf="!(categIDd == 14 || categIDd == 15 || categIDd == 16 || categIDd == 17)">
+                        <div class="form-group">
+                            <div class="example-label-container">
+                                <label id="example-name-label" class="example-name-label">{{"NumberOfBedrooms" |
+                                    translate}}</label>
+                            </div>
+                            <br>
+                            <div class="row" [ngClass]="{ 'is-invalid': submitted && specsSaleF['noBedrooms'].errors}">
+                                <div class="col-2 col-md-2 pad_right">
+                                    <input type="radio" name="noBedrooms" id="oneSaleBed" value="1"
+                                        formControlName="noBedrooms" class="user_radio">
+                                    <label for="oneSaleBed">
+                                        <div class="cont_box first">
+                                            <h6>1</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noBedrooms" id="twoSaleBed" value="2"
+                                        formControlName="noBedrooms" class="user_radio">
+                                    <label for="twoSaleBed">
+                                        <div class="cont_box">
+                                            <h6>2</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noBedrooms" id="threeSaleBed" value="3"
+                                        formControlName="noBedrooms" class="user_radio">
+                                    <label for="threeSaleBed">
+                                        <div class="cont_box">
+                                            <h6>3</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noBedrooms" id="fourSaleBed" value="4"
+                                        formControlName="noBedrooms" class="user_radio">
+                                    <label for="fourSaleBed">
+                                        <div class="cont_box">
+                                            <h6>4</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noBedrooms" id="fiveSaleBed" value="5"
+                                        formControlName="noBedrooms" class="user_radio">
+                                    <label for="fiveSaleBed">
+                                        <div class="cont_box">
+                                            <h6>5</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noBedrooms" id="moreSaleBed" class="user_radio">
+                                    <label for="moreSaleBed">
+                                        <div class="cont_box last">
+                                            <mat-form-field>
+                                                <mat-label>{{"More" | translate}}</mat-label>
+                                                <mat-select disableRipple formControlName="noBedrooms">
+                                                    <mat-option value="6">6</mat-option>
+                                                    <mat-option value="7">7</mat-option>
+                                                    <mat-option value="8">8</mat-option>
+                                                    <mat-option value="9">9</mat-option>
+                                                    <mat-option value="10">10</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div *ngIf="submitted && specsSaleF['noBedrooms'].errors" class="invalid-feedback">
+                                    <div *ngIf="specsSaleF['noBedrooms'].errors['required']">{{"NoOfBedroomsRequired" |
+                                        translate}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="example-label-container">
+                                <label id="example-name-label" class="example-name-label">{{"NumberOfBathrooms" |
+                                    translate}}</label>
+                            </div>
+                            <br>
+                            <div class="row" [ngClass]="{ 'is-invalid': submitted && specsSaleF['noBathrooms'].errors}">
+                                <div class="col-2 col-md-2 pad_right">
+                                    <input type="radio" name="noBathrooms" id="oneSaleBath" value="1"
+                                        formControlName="noBathrooms" class="user_radio">
+                                    <label for="oneSaleBath">
+                                        <div class="cont_box first">
+                                            <h6>1</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noBathrooms" id="twoSaleBath" value="2"
+                                        formControlName="noBathrooms" class="user_radio">
+                                    <label for="twoSaleBath">
+                                        <div class="cont_box">
+                                            <h6>2</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noBathrooms" id="threeSaleBath" value="3"
+                                        formControlName="noBathrooms" class="user_radio">
+                                    <label for="threeSaleBath">
+                                        <div class="cont_box">
+                                            <h6>3</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noBathrooms" id="fourSaleBath" value="4"
+                                        formControlName="noBathrooms" class="user_radio">
+                                    <label for="fourSaleBath">
+                                        <div class="cont_box">
+                                            <h6>4</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noBathrooms" id="fiveSaleBath" value="5"
+                                        formControlName="noBathrooms" class="user_radio">
+                                    <label for="fiveSaleBath">
+                                        <div class="cont_box">
+                                            <h6>5</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noBathrooms" id="moreSaleBath" class="user_radio">
+                                    <label for="moreSaleBath">
+                                        <div class="cont_box last">
+                                            <mat-form-field>
+                                                <mat-label>{{"More" | translate}}</mat-label>
+                                                <mat-select disableRipple formControlName="noBathrooms">
+                                                    <mat-option value="6">6</mat-option>
+                                                    <mat-option value="7">7</mat-option>
+                                                    <mat-option value="8">8</mat-option>
+                                                    <mat-option value="9">9</mat-option>
+                                                    <mat-option value="10">10</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div *ngIf="submitted && specsSaleF['noBathrooms'].errors" class="invalid-feedback">
+                                    <div *ngIf="specsSaleF['noBathrooms'].errors['required']">N{{"NoOfBathroomsRequired"
+                                        | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="example-label-container">
+                                <label id="example-name-label" class="example-name-label">{{"NumberOfFloors" |
+                                    translate}}</label>
+                            </div>
+                            <br>
+                            <div class="row" [ngClass]="{ 'is-invalid': submitted && specsSaleF['noFloors'].errors}">
+                                <div class="col-2 col-md-2 pad_right">
+                                    <input type="radio" name="noFloors" id="oneSaleFloor" value="1"
+                                        formControlName="noFloors" class="user_radio">
+                                    <label for="oneSaleFloor">
+                                        <div class="cont_box first">
+                                            <h6>1</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noFloors" id="twoSaleFloor" value="2"
+                                        formControlName="noFloors" class="user_radio">
+                                    <label for="twoSaleFloor">
+                                        <div class="cont_box">
+                                            <h6>2</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noFloors" id="threeSaleFloor" value="3"
+                                        formControlName="noFloors" class="user_radio">
+                                    <label for="threeSaleFloor">
+                                        <div class="cont_box">
+                                            <h6>3</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noFloors" id="fourSaleFloor" value="4"
+                                        formControlName="noFloors" class="user_radio">
+                                    <label for="fourSaleFloor">
+                                        <div class="cont_box">
+                                            <h6>4</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noFloors" id="fiveSaleFloor" value="5"
+                                        formControlName="noFloors" class="user_radio">
+                                    <label for="fiveSaleFloor">
+                                        <div class="cont_box">
+                                            <h6>5</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noFloors" id="moreSaleFloor" class="user_radio">
+                                    <label for="moreSaleFloor">
+                                        <div class="cont_box last">
+                                            <mat-form-field>
+                                                <mat-label>{{"More" | translate}}</mat-label>
+                                                <mat-select disableRipple formControlName="noFloors">
+                                                    <mat-option value="6">6</mat-option>
+                                                    <mat-option value="7">7</mat-option>
+                                                    <mat-option value="8">8</mat-option>
+                                                    <mat-option value="9">9</mat-option>
+                                                    <mat-option value="10">10</mat-option>
+                                                    <mat-option value="10+">10+</mat-option>
+                                                    <mat-option value="15+">15+</mat-option>
+                                                    <mat-option value="20+">20+</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div *ngIf="submitted && specsSaleF['noFloors'].errors" class="invalid-feedback">
+                                    <div *ngIf="specsSaleF['noFloors'].errors['required']">{{"NoOfFloorsRequired" |
+                                        translate}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="example-label-container">
+                                <label id="example-name-label" class="example-name-label">{{"NumberOfLivingRooms" |
+                                    translate}}</label>
+                            </div>
+                            <br>
+                            <div class="row"
+                                [ngClass]="{ 'is-invalid': submitted && specsSaleF['noLivingRooms'].errors}">
+                                <div class="col-2 col-md-2 pad_right">
+                                    <input type="radio" name="noLivingRooms" id="oneSaleLiving" value="1"
+                                        formControlName="noLivingRooms" class="user_radio">
+                                    <label for="oneSaleLiving">
+                                        <div class="cont_box first">
+                                            <h6>1</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noLivingRooms" id="twoSaleLiving" value="2"
+                                        formControlName="noLivingRooms" class="user_radio">
+                                    <label for="twoSaleLiving">
+                                        <div class="cont_box">
+                                            <h6>2</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noLivingRooms" id="threeSaleLiving" value="3"
+                                        formControlName="noLivingRooms" class="user_radio">
+                                    <label for="threeSaleLiving">
+                                        <div class="cont_box">
+                                            <h6>3</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noLivingRooms" id="fourSaleLiving" value="4"
+                                        formControlName="noLivingRooms" class="user_radio">
+                                    <label for="fourSaleLiving">
+                                        <div class="cont_box">
+                                            <h6>4</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noLivingRooms" id="fiveSaleLiving" value="5"
+                                        formControlName="noLivingRooms" class="user_radio">
+                                    <label for="fiveSaleLiving">
+                                        <div class="cont_box">
+                                            <h6>5</h6>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="col-2 col-md-2 pad_left pad_right">
+                                    <input type="radio" name="noLivingRooms" id="moreSaleLiving" class="user_radio">
+                                    <label for="moreSaleLiving">
+                                        <div class="cont_box last">
+                                            <mat-form-field>
+                                                <mat-label>{{"More" | translate}}</mat-label>
+                                                <mat-select disableRipple formControlName="noLivingRooms">
+                                                    <mat-option value="6">6</mat-option>
+                                                    <mat-option value="7">7</mat-option>
+                                                    <mat-option value="8">8</mat-option>
+                                                    <mat-option value="9">9</mat-option>
+                                                    <mat-option value="10">10</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div *ngIf="submitted && specsSaleF['noLivingRooms'].errors" class="invalid-feedback">
+                                    <div *ngIf="specsSaleF['noLivingRooms'].errors['required']">
+                                        {{"NoOfLivingRoomsRequired" | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 pad_right">
+                                <div class="form-group">
+                                    <mat-form-field>
+                                        <mat-label class="specs_fie">{{"PropertyAge" | translate}}</mat-label>
+                                        <mat-select formControlName="propertyAge">
+                                            <mat-option value='{{"below12Years" | translate}}'>
+                                                {{"below12Years" | translate}}</mat-option>
+                                            <mat-option value='{{"35Years" | translate}}'>{{"35Years" |
+                                                translate}}</mat-option>
+                                            <mat-option value='{{"610Years" | translate}}'>{{"610Years" |
+                                                translate}}</mat-option>
+                                            <mat-option value='{{"10Years" | translate}}'>{{"10Years" |
+                                                translate}}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="specsFormSale.controls['propertyAge'].hasError('required')">
+                                            {{"PropertyAgeRequired" | translate}}
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-6">
+                                    <p class="text-left"><button class="next_btn" (click)="prevPage()">
+                                            <img src="../../assets/images/forms/left-arrow.svg" width="10px">
+                                            <img src="../../assets/images/forms/left-arrow.svg"
+                                                width="10px">&nbsp;{{"Prev" | translate}}
+                                        </button></p>
+                                </div>
+                                <div class="col-md-6 col-6">
+                                    <p class="nex_btnp"><button class="next_btn" (click)="onSubmitDescrip()">{{"Next" |
+                                            translate}}
+                                            &nbsp;
+                                            <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                            <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                        </button></p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ques_sec" *ngIf="category == 'rent'">
+                    <form [formGroup]="specsFormLandRent"
+                        *ngIf="categIDd == 5 || categIDd == 6 || categIDd == 7 || categIDd == 9">
+                        <div class="row" [ngClass]="{ 'is-invalid': submitted && specsLandRentF['rentalTerm'].errors}">
+                            <div class="col-4 col-md-4">
+                                <input type="radio" name="rentalTerm" id="daily" value='{{"Daily" | translate}}'
+                                    formControlName="rentalTerm" class="user_radio">
+                                <label for="daily">
+                                    <div class="owner_box">
+                                        <h6>{{"Daily" | translate}}</h6>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-4 col-md-4">
+                                <input type="radio" name="rentalTerm" id="month" value='{{"Monthly" | translate}}'
+                                    formControlName="rentalTerm" class="user_radio">
+                                <label for="month">
+                                    <div class="owner_box">
+                                        <h6>{{"Monthly" | translate}}</h6>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-4 col-md-4">
+                                <input type="radio" name="rentalTerm" id="year" value='{{"Yearly" | translate}}'
+                                    formControlName="rentalTerm" class="user_radio">
+                                <label for="year">
+                                    <div class="owner_box">
+                                        <h6>{{"Yearly" | translate}}</h6>
+                                    </div>
+                                </label>
+                            </div>
+                            <div *ngIf="submitted && specsLandRentF['rentalTerm'].errors" class="invalid-feedback">
+                                <div *ngIf="specsLandRentF['rentalTerm'].errors['required']">{{"RentalTermRequired" |
+                                    translate}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" [ngClass]="{ 'is-invalid': submitted && specsLandRentF['propetyType'].errors}">
+                            <div class="col-6 col-md-6">
+                                <input type="radio" name="propetyType" id="residential"
+                                    value='{{"Residential" | translate}}' formControlName="propetyType"
+                                    class="user_radio">
+                                <label for="residential">
+                                    <div class="owner_box">
+                                        <h6>{{"Residential" | translate}}</h6>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-6 col-md-6">
+                                <input type="radio" name="propetyType" id="commercial"
+                                    value='{{"Commercial" | translate}}' formControlName="propetyType"
+                                    class="user_radio">
+                                <label for="commercial">
+                                    <div class="owner_box">
+                                        <h6>{{"Commercial" | translate}}</h6>
+                                    </div>
+                                </label>
+                            </div>
+                            <div *ngIf="submitted && specsLandRentF['propetyType'].errors" class="invalid-feedback">
+                                <div *ngIf="specsLandRentF['propetyType'].errors['required']">{{"PropertyTypeRequired" |
+                                    translate}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-6">
+                                    <p class="text-left"><button class="next_btn" (click)="prevPage()">
+                                            <img src="../../assets/images/forms/left-arrow.svg" width="10px">
+                                            <img src="../../assets/images/forms/left-arrow.svg"
+                                                width="10px">&nbsp;{{"Prev" | translate}}
+                                        </button></p>
+                                </div>
+                                <div class="col-md-6 col-6">
+                                    <p class="nex_btnp"><button class="next_btn" (click)="onSubmitDescrip()">{{"Next" |
+                                            translate}}
+                                            &nbsp;
+                                            <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                            <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                        </button></p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- <div class="ques_sec" *ngIf="category == 'rent'">
+                    <form [formGroup]="specsFormRentWare" *ngIf="categIDd == 9">
+                        <div class="row" [ngClass]="{ 'is-invalid': submitted && specsWareRentF['rentalTerm'].errors}">
+                            <div class="col-4 col-md-4">
+                                <input type="radio" name="rentalTerm" id="daily" value="daily"
+                                    formControlName="rentalTerm" class="user_radio">
+                                <label for="daily">
+                                    <div class="owner_box">
+                                        <h6>{{"Daily" | translate}}</h6>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-4 col-md-4">
+                                <input type="radio" name="rentalTerm" id="month" value="month"
+                                    formControlName="rentalTerm" class="user_radio">
+                                <label for="month">
+                                    <div class="owner_box">
+                                        <h6>{{"Monthly" | translate}}</h6>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-4 col-md-4">
+                                <input type="radio" name="rentalTerm" id="year" value="year"
+                                    formControlName="rentalTerm" class="user_radio">
+                                <label for="year">
+                                    <div class="owner_box">
+                                        <h6>{{"Yearly" | translate}}</h6>
+                                    </div>
+                                </label>
+                            </div>
+                            <div *ngIf="submitted && specsWareRentF['rentalTerm'].errors" class="invalid-feedback">
+                                <div *ngIf="specsWareRentF['rentalTerm'].errors['required']">{{"RentalTermRequired" | translate}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-6">
+                                    <p class="text-left"><button class="next_btn" (click)="prevPage()">
+                                            <img src="../../assets/images/forms/left-arrow.svg" width="10px">
+                                            <img src="../../assets/images/forms/left-arrow.svg" width="10px">&nbsp;{{"Prev" | translate}}
+                                        </button></p>
+                                </div>
+                                <div class="col-md-6 col-6">
+                                    <p class="nex_btnp"><button class="next_btn" (click)="onSubmitDescrip()">{{"Next" | translate}}
+                                            &nbsp;
+                                            <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                            <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                        </button></p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div> -->
+
+                <div class="ques_sec" *ngIf="category == 'sale'">
+                    <form [formGroup]="specsFormLandSale"
+                        *ngIf="(categIDd == 14 || categIDd == 15 || categIDd == 16 || categIDd == 17)">
+                        <div class="row" [ngClass]="{ 'is-invalid': submitted && specsLandSaleF['propetyType'].errors}">
+                            <div class="col-6 col-md-6">
+                                <input type="radio" name="propetyType" id="residential"
+                                    value='{{"Residential" | translate}}' formControlName="propetyType"
+                                    class="user_radio">
+                                <label for="residential">
+                                    <div class="owner_box">
+                                        <h6>{{"Residential" | translate}}</h6>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-6 col-md-6">
+                                <input type="radio" name="propetyType" id="commercial"
+                                    value='{{"Commercial" | translate}}' formControlName="propetyType"
+                                    class="user_radio">
+                                <label for="commercial">
+                                    <div class="owner_box">
+                                        <h6>{{"Commercial" | translate}}</h6>
+                                    </div>
+                                </label>
+                            </div>
+                            <div *ngIf="submitted && specsLandSaleF['propetyType'].errors" class="invalid-feedback">
+                                <div *ngIf="specsLandSaleF['propetyType'].errors['required']">{{"PropertyTypeRequired" |
+                                    translate}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-6">
+                                    <p class="text-left"><button class="next_btn" (click)="prevPage()">
+                                            <span *ngIf="dir == 'ltr'">
+                                                <img src="../../assets/images/forms/left-arrow.svg" width="10px">
+                                                <img src="../../assets/images/forms/left-arrow.svg" width="10px">
+                                            </span>
+                                            <span *ngIf="dir == 'rtl'">
+                                                <img src="../../assets/images/forms/right-arrow.svg" width="15px">
+                                                <img src="../../assets/images/forms/right-arrow.svg" width="15px">
+                                            </span> &nbsp;{{"Prev" | translate}}
+                                        </button></p>
+                                </div>
+                                <div class="col-md-6 col-6">
+                                    <p class="nex_btnp"><button class="next_btn" (click)="onSubmitDescrip()">{{"Next" |
+                                            translate}}
+                                            &nbsp;
+                                            <span *ngIf="dir == 'ltr'">
+                                                <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                                <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                            </span>
+                                            <span *ngIf="dir == 'rtl'">
+                                                <img src="../../assets/images/forms/left-arrow.svg" width="15px">
+                                                <img src="../../assets/images/forms/left-arrow.svg" width="15px">
+                                            </span>
+                                        </button></p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,124 @@
+.user_img_sec {
+    padding: 2rem 0 3rem 0;
+    direction: ltr;
+}
+
+.otp_head {
+    font-size: var(--heading-h6);
+    font-weight: 600;
+    color: var(--text-dark-color);
+    text-align: center;
+    margin: 10px 0 20px 0;
+}
+
+.proced_btn {
+    background: var(--main-color);
+    color: var(--white-color);
+    text-align: center;
+    font-size: var(--para-size);
+    font-weight: 600;
+    padding: 15px 0;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    margin-top: 1rem;
+}
+
+.proced_btn:hover {
+    background: white;
+    border: 2px solid var(--main-color);
+    color: var(--main-color);
+    transition: 0.5s;
+}
+
+.agree_btn {
+    font-size: var(--small-size);
+    font-weight: 500;
+    color: var(--text-light-color);
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.agree_btn a {
+    color: var(--main-color);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.signup_form_field {
+    border: 2px solid #f1f1f1;
+    height: 45px;
+    font-size: var(--para-size);
+    color: var(--text-light-color);
+}
+
+::placeholder {
+    color: var(--border-color) !important;
+}
+
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    display: none;
+}
+
+[type="radio"]:checked~label .owner_box {
+    border: 2px solid var(--main-color);
+}
+
+label {
+    display: inline;
+}
+
+.owner_box {
+    text-align: center;
+    background: #F3F3F3;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px 0px;
+}
+.owner_box:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+}
+.owner_box img {
+    width: 50px;
+}
+
+.owner_box h6 {
+    font-size: var(--heading-h6);
+    font-weight: 600;
+    color: var(--text-dark-color);
+    padding-top: 15px;
+}
+
+
+.is-invalid .owner_box,
+.is-invalid .agent_box {
+    border: 1px solid red;
+}
+
+.is-invalid .invalid-feedback {
+    display: block;
+    text-align: center;
+    font-weight: 500;
+}
+
+.col_set{
+    padding-left: 1px;
+}
+.col_set:lang(ar){
+    padding-right: 1px;
+    padding-left: 12px;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+    .selct_box {
+        margin: 2rem 0px;
+    }
+}
+
+/* .selct_box:hover{
+    transform: scale(1.05);
+} */

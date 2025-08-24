@@ -1,0 +1,234 @@
+.porgress_sec {
+    padding: 40px 0;
+}
+
+.progress_ul {
+    padding-left: 0;
+    text-align: center;
+}
+
+.progress_ul li {
+    list-style-type: none;
+    text-align: center;
+    display: inline-block;
+    width: 25%;
+    font-size: var(--heading-h6);
+    color: var(--text-light-color);
+}
+
+.progress_ul li.active {
+    color: var(--text-dark-color);
+}
+
+.progress_ul li:after {
+    position: absolute;
+    width: 17.5%;
+    margin-top: -2.1rem;
+    margin-left: 1.3rem;
+    background-color: var(--border-color);
+    content: "";
+    display: inline-block;
+    height: 3px;
+    vertical-align: middle;
+}
+
+.progress_ul li.active:after {
+    position: absolute;
+    width: 17.5%;
+    margin-top: -2.1rem;
+    margin-left: 1.3rem;
+    background-color: var(--main-color);
+    content: "";
+    display: inline-block;
+    height: 3px;
+    vertical-align: middle;
+}
+
+.progress_ul li:lang(ar):after {
+    margin-right: 1.2rem;
+    margin-left: auto;
+    width: 17%;
+}
+
+.progress_ul li:last-child:after {
+    display: none;
+}
+
+.progress_path {
+    margin-top: 10px;
+}
+
+.progress_path img {
+    width: 40px;
+    border-radius: 50%;
+    padding: 6px;
+    border: 2px solid var(--border-color);
+}
+
+.progress_path.active img {
+    border: none;
+    padding: 8px;
+    background: var(--main-color);
+}
+
+.breadcrumb {
+    padding-top: 2rem;
+}
+
+.cate_head {
+    text-align: center;
+}
+
+.cate_head a {
+    font-size: var(--heading-h6);
+    font-weight: 500;
+    color: var(--main-dark-color);
+    padding-bottom: 10px;
+}
+
+.sec_link {
+    color: var(--main-color) !important;
+    text-decoration: underline !important;
+}
+
+.back_ul {
+    background: #8fb64124;
+    padding: 30px 40px;
+    border-radius: 6px;
+}
+
+.summary_ul {
+    padding-left: 0;
+}
+
+.summary_ul li {
+    display: inline-block;
+    list-style-type: none;
+}
+
+.summary_ul li.left_side_cont {
+    color: var(--text-light-color);
+    font-size: var(--heading-h6);
+    font-weight: 500;
+    width: 50%;
+    vertical-align: top;
+}
+
+.summary_ul li.right_side_cont {
+    color: var(--text-dark-color);
+    font-size: var(--heading-h6);
+    font-weight: 500;
+    width: 50%;
+    direction: ltr;
+    display: inline-block;
+}
+
+.summary_ul li.tit_left_content {
+    color: var(--text-light-color);
+    font-size: var(--heading-h6);
+    font-weight: 500;
+    width: 25%;
+    vertical-align: top;
+}
+
+.summary_ul li.tit_right_content {
+    color: var(--text-dark-color);
+    font-size: var(--heading-h6);
+    font-weight: 500;
+    width: 75%;
+}
+
+.btn_sec {
+    margin: 20px 0 3rem 0;
+}
+
+.edit_btn {
+    border: none;
+    background: var(--main-dark-color);
+    color: var(--white-color);
+    font-size: var(--para-size);
+    padding: 10px 30px;
+    border-radius: 6px;
+    font-weight: 500;
+    width: 100%;
+}
+
+.edit_btn:hover {
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+    background: var(--white-color);
+    transition: 1s;
+}
+
+.submit_btn {
+    border: none;
+    background: var(--main-color);
+    color: var(--white-color);
+    font-size: var(--para-size);
+    padding: 10px 30px;
+    border-radius: 6px;
+    font-weight: 500;
+    width: 100%;
+}
+
+.submit_btn:hover {
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+    background: var(--white-color);
+    transition: 0.5s;
+}
+
+.imgss {
+    width: fit-content;
+    height: 180px;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+    .porgress_sec {
+        padding: 20px 0 40px 0;
+    }
+
+    .progress_ul li {
+        font-size: var(--small-size);
+    }
+
+    .progress_ul li:after {
+        width: 12.7%;
+        margin-left: 1.2rem;
+    }
+
+    .progress_ul li.active:after {
+        width: 12.7%;
+        margin-left: 1.2rem;
+    }
+
+    .progress_ul li:lang(ar):after {
+        margin-right: 1.2rem;
+        margin-left: auto;
+        width: 11%;
+    }
+
+    .breadcrumb {
+        padding-top: 0;
+    }
+
+    .cate_head a {
+        font-size: var(--para-size);
+    }
+
+    .selct_box {
+        margin: 2rem 0px;
+    }
+
+    .back_ul {
+        padding: 30px 20px;
+    }
+
+    .summary_ul li.tit_left_content {
+        width: 35%;
+    }
+
+    .summary_ul li.tit_right_content {
+        width: 65%;
+    }
+}

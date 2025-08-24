@@ -1,0 +1,582 @@
+<section class="porgress_sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="progress_ul">
+                    <li class="active">{{"Description" | translate}}
+                        <p class="progress_path active"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                    <li>{{"ImagesLocation" | translate}}
+                        <p class="progress_path"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                    <li>{{"SpecificationsExtras" | translate}}
+                        <p class="progress_path"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                    <li>{{"Summary" | translate}}
+                        <p class="progress_path"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-1"></div>
+            <div class="col-lg-8 col-md-10">
+                <div class="breadcrumb">
+                    <p class="cate_head">
+                        <a>{{"Motors" | translate}}
+                            <img src="../../assets/images/header/right-arrow.png" width="15px"
+                                style="margin:0 5px;"></a>
+                        <a>{{cateeName}}
+                            <img src="../../assets/images/header/right-arrow.png" width="15px" style="margin:0 5px;">
+                        </a>
+                        <a *ngIf="subCateeName != undefined">{{subCateeName}}
+                            <img src="../../assets/images/header/right-arrow.png" width="15px" style="margin:0 5px;">
+                        </a>
+                        <a class="normal_link" *ngIf="subSubcateeName != undefined">{{subSubcateeName}}
+                            <img src="../../assets/images/header/right-arrow.png" width="15px" style="margin:0 5px;">
+                        </a>
+                        <a class="normal_link">{{"Description" | translate}}</a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-1 col-lg-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-2"></div>
+            <div class="col-lg-5 col-md-8">
+                <div class="ques_sec" *ngIf="cateId == 1">
+                    <form [formGroup]="usedCarsForm">
+                        <div class="form-group">
+                            <input type="text" placeholder="{{'Title' | translate}}*"
+                                class="form-control ques_field title_fie" formControlName="title"
+                                [ngClass]="{ 'is-invalid': submitted && usedCarsf['title'].errors}">
+                            <div *ngIf="submitted && usedCarsf['title'].errors" class="invalid-feedback">
+                                <div *ngIf="usedCarsf['title'].errors['maxlength']">{{"max50Chars" | translate}}</div>
+                                <div *ngIf="usedCarsf['title'].errors['required']">{{"TitleRequired" | translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field *ngIf="!adminApprove">
+                                <mat-label class="make_fie">{{"Make" | translate}}</mat-label>
+                                <mat-select formControlName="make"
+                                    (selectionChange)='onModelChange($event.value,"CAR")'>
+                                    <mat-option *ngFor="let item of makesCarList" [value]="item.name">
+                                        {{item.name}}
+                                        <!-- <span *ngIf="dir == 'ltr'">{{item.name}}</span> -->
+                                        <!-- <span *ngIf="dir == 'rtl'">{{item.arName}}</span> -->
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="usedCarsForm.controls['make'].hasError('required')">
+                                    {{"MakeRequired" | translate}}
+                                </mat-error>
+                            </mat-form-field>
+                            <div *ngIf="adminApprove">
+                                <input type="text" placeholder="{{'Make' | translate}}*"
+                                    class="form-control ques_field make_read" formControlName="make" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field *ngIf="!adminApprove">
+                                <mat-label class="model_fie">{{"Model" | translate}}</mat-label>
+                                <mat-select formControlName="model" (selectionChange)='onTrimChange($event.value)'>
+                                    <mat-option *ngFor="let item of modelCarList" [value]="item.modelName">
+                                        {{item.modelName}}
+                                        <!-- <span *ngIf="dir == 'ltr'">{{item.modelName}}</span>
+                                        <span *ngIf="dir == 'rtl'">{{item.arModelName}}</span> -->
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="usedCarsForm.controls['model'].hasError('required')">
+                                    {{"ModelRequired" | translate}}
+                                </mat-error>
+                            </mat-form-field>
+                            <div *ngIf="adminApprove">
+                                <input type="text" placeholder="{{'Model' | translate}}*"
+                                    class="form-control ques_field model_read" formControlName="model" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field *ngIf="!adminApprove">
+                                <mat-label class="trim_fie">{{"Trim" | translate}}</mat-label>
+                                <mat-select formControlName="trim">
+                                    <mat-option *ngFor="let item of trimList" [value]="item.enName">
+                                        {{item.enName}}
+                                        <!-- <span *ngIf="dir == 'ltr'">{{item.enName}}</span>
+                                        <span *ngIf="dir == 'rtl'">{{item.arName}}</span> -->
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="usedCarsForm.controls['trim'].hasError('required')">
+                                    {{'TrimRequired' | translate}}
+                                </mat-error>
+                            </mat-form-field>
+                            <div *ngIf="adminApprove">
+                                <input type="text" placeholder="{{'Trim' | translate}}*"
+                                    class="form-control ques_field trim_read" formControlName="trim" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field>
+                                <mat-label class="year_fie">{{"Year" | translate}}</mat-label>
+                                <mat-select formControlName="year">
+                                    <mat-option value="2025">2025</mat-option>
+                                    <mat-option value="2024">2024</mat-option>
+                                    <mat-option value="2023">2023</mat-option>
+                                    <mat-option value="2022">2022</mat-option>
+                                    <mat-option value="2021">2021</mat-option>
+                                    <mat-option value="2020">2020</mat-option>
+                                    <mat-option value="2019">2019</mat-option>
+                                    <mat-option value="2018">2018</mat-option>
+                                    <mat-option value="2017">2017</mat-option>
+                                    <mat-option value="2016">2016</mat-option>
+                                    <mat-option value="2015">2015</mat-option>
+                                    <mat-option value="2014">2014</mat-option>
+                                    <mat-option value="2013">2013</mat-option>
+                                    <mat-option value="2012">2012</mat-option>
+                                    <mat-option value="2011">2011</mat-option>
+                                    <mat-option value="2010">2010</mat-option>
+                                    <mat-option value="2009">2009</mat-option>
+                                    <mat-option value="2008">2008</mat-option>
+                                    <mat-option value="2007">2007</mat-option>
+                                    <mat-option value="2006">2006</mat-option>
+                                    <mat-option value="2005">2005</mat-option>
+                                    <mat-option value="2004">2004</mat-option>
+                                    <mat-option value="2003">2003</mat-option>
+                                    <mat-option value="2002">2002</mat-option>
+                                    <mat-option value="2001">2001</mat-option>
+                                    <mat-option value="2000">2000</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="usedCarsForm.controls['year'].hasError('required')">
+                                    {{"YearRequired" | translate}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" placeholder="{{'Kilometers' | translate}}*"
+                                class="form-control ques_field kilo_fie" formControlName="kilometer"
+                                [ngClass]="{ 'is-invalid': submitted && usedCarsf['kilometer'].errors}">
+                            <div *ngIf="submitted && usedCarsf['kilometer'].errors" class="invalid-feedback">
+                                <div *ngIf="usedCarsf['kilometer'].errors['required']">{{'KilometerRequired' |
+                                    translate}}</div>
+                                <div *ngIf="usedCarsf['kilometer'].errors['pattern']">{{'MaximumSixDigitsAllowed' |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field>
+                                <mat-label class="specs_fie">{{"RegionalSpecs" | translate}}</mat-label>
+                                <mat-select formControlName="regionalSpecs">
+                                    <mat-option value="{{'SaudiSpecs' | translate}}">{{'SaudiSpecs' |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"GCCSpecs" | translate}}'>{{"GCCSpecs" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"AmericanSpecs" | translate}}'>{{"AmericanSpecs" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"CanadianSpecs" | translate}}'>{{"CanadianSpecs" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"EuropeanSpecs" | translate}}'>{{"EuropeanSpecs" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"JapaneseSpecs" | translate}}'>{{"JapaneseSpecs" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"Others" | translate}}'>{{"Others" | translate}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="usedCarsForm.controls['regionalSpecs'].hasError('required')">
+                                    {{"RegionalSpecsRequired" | translate}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" placeholder="{{'Price' | translate}}*"
+                                class="form-control ques_field price_fie" formControlName="price"
+                                [ngClass]="{ 'is-invalid': submitted && usedCarsf['price'].errors}"
+                                oninput="if(!this.value.match('^[1-9][0-9]*$'))this.value='';">
+                            <div *ngIf="submitted && usedCarsf['price'].errors" class="invalid-feedback">
+                                <div *ngIf="usedCarsf['price'].errors['required']">{{'PriceRequired' | translate}}</div>
+                                <div *ngIf="usedCarsf['price'].errors['pattern']">{{'minimumFourDigitReq' |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" placeholder="{{'PhoneNumber' | translate}}*"
+                                class="form-control ques_field phone_number_fie" formControlName="phoneNumber"
+                                [ngClass]="{ 'is-invalid': submitted && usedCarsf['phoneNumber'].errors}" readonly>
+                            <div *ngIf="submitted && usedCarsf['phoneNumber'].errors" class="invalid-feedback">
+                                <div *ngIf="usedCarsf['phoneNumber'].errors['required']">{{"PhoneNumberRequired" |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="!adminApprove">
+                            <p class="nex_btnp"><button class="next_btn" (click)="onSubmitDescrip()">{{"Next" |
+                                    translate}} &nbsp;
+                                    <span *ngIf="dir == 'ltr'">
+                                        <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                        <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                    </span>
+                                    <span *ngIf="dir == 'rtl'">
+                                        <img src="../../assets/images/forms/left-arrow.svg" width="15px">
+                                        <img src="../../assets/images/forms/left-arrow.svg" width="15px">
+                                    </span>
+                                </button></p>
+                        </div>
+                        <div class="form-group" *ngIf="adminApprove">
+                            <p class="nex_btnp"><button class="next_btn" (click)="onSubmitDescrip()">{{"updateExit" |
+                                    translate}} &nbsp;
+                                </button></p>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ques_sec" *ngIf="cateId == 2">
+                    <form [formGroup]="motorsForm">
+                        <div class="form-group">
+                            <input type="text" placeholder="{{'Title' | translate}}*"
+                                class="form-control ques_field title_fie" formControlName="title"
+                                [ngClass]="{ 'is-invalid': submitted && motorsf['title'].errors}">
+                            <div *ngIf="submitted && motorsf['title'].errors" class="invalid-feedback">
+                                <div *ngIf="motorsf['title'].errors['maxlength']">{{"max50Chars" | translate}}</div>
+                                <div *ngIf="motorsf['title'].errors['required']">{{"TitleRequired" | translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field *ngIf="!adminApprove">
+                                <mat-label class="make_fie">{{"Make" | translate}}</mat-label>
+                                <mat-select formControlName="make"
+                                    (selectionChange)='onModelChange($event.value,"BIKE")'>
+                                    <mat-option *ngFor="let item of makeBikeList" [value]="item.name">
+                                        {{item.name}}
+                                        <!-- <span *ngIf="dir == 'ltr'">{{item.name}}</span>
+                                        <span *ngIf="dir == 'rtl'">{{item.arName}}</span> -->
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="motorsForm.controls['make'].hasError('required')">
+                                    {{"MakeRequired" | translate}}
+                                </mat-error>
+                            </mat-form-field>
+                            <div *ngIf="adminApprove">
+                                <input type="text" placeholder="{{'Make' | translate}}*"
+                                    class="form-control ques_field make_read" formControlName="make" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field *ngIf="!adminApprove">
+                                <mat-label class="model_fie">{{"Model" | translate}}</mat-label>
+                                <mat-select formControlName="model">
+                                    <mat-option *ngFor="let item of modelBikeList" [value]="item.modelName">
+                                        {{item.modelName}}
+                                        <!-- <span *ngIf="dir == 'ltr'">{{item.modelName}}</span>
+                                        <span *ngIf="dir == 'rtl'">{{item.arModelName}}</span> -->
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="motorsForm.controls['model'].hasError('required')">
+                                    {{"ModelRequired" | translate}}
+                                </mat-error>
+                            </mat-form-field>
+                            <div *ngIf="adminApprove">
+                                <input type="text" placeholder="{{'Model' | translate}}*"
+                                    class="form-control ques_field model_read" formControlName="model" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field>
+                                <mat-label class="year_fie">{{"Year" | translate}}</mat-label>
+                                <mat-select formControlName="year">
+                                    <mat-option value="2025">2025</mat-option>
+                                    <mat-option value="2024">2024</mat-option>
+                                    <mat-option value="2023">2023</mat-option>
+                                    <mat-option value="2022">2022</mat-option>
+                                    <mat-option value="2021">2021</mat-option>
+                                    <mat-option value="2020">2020</mat-option>
+                                    <mat-option value="2019">2019</mat-option>
+                                    <mat-option value="2018">2018</mat-option>
+                                    <mat-option value="2017">2017</mat-option>
+                                    <mat-option value="2016">2016</mat-option>
+                                    <mat-option value="2015">2015</mat-option>
+                                    <mat-option value="2014">2014</mat-option>
+                                    <mat-option value="2013">2013</mat-option>
+                                    <mat-option value="2012">2012</mat-option>
+                                    <mat-option value="2011">2011</mat-option>
+                                    <mat-option value="2010">2010</mat-option>
+                                    <mat-option value="2009">2009</mat-option>
+                                    <mat-option value="2008">2008</mat-option>
+                                    <mat-option value="2007">2007</mat-option>
+                                    <mat-option value="2006">2006</mat-option>
+                                    <mat-option value="2005">2005</mat-option>
+                                    <mat-option value="2004">2004</mat-option>
+                                    <mat-option value="2003">2003</mat-option>
+                                    <mat-option value="2002">2002</mat-option>
+                                    <mat-option value="2001">2001</mat-option>
+                                    <mat-option value="2000">2000</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="motorsForm.controls['year'].hasError('required')">
+                                    {{"YearRequired" | translate}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" placeholder="{{'Kilometers' | translate}}*"
+                                class="form-control ques_field kilo_fie" formControlName="kilometer"
+                                [ngClass]="{ 'is-invalid': submitted && motorsf['kilometer'].errors}">
+                            <div *ngIf="submitted && motorsf['kilometer'].errors" class="invalid-feedback">
+                                <div *ngIf="motorsf['kilometer'].errors['required']">{{'KilometerRequired' | translate}}
+                                </div>
+                                <div *ngIf="motorsf['kilometer'].errors['pattern']">{{'MaximumSixDigitsAllowed' |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field>
+                                <mat-label class="specs_fie">{{"RegionalSpecs" | translate}}</mat-label>
+                                <mat-select formControlName="regionalSpecs">
+                                    <mat-option value="{{'SaudiSpecs' | translate}}">{{'SaudiSpecs' |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"GCCSpecs" | translate}}'>{{"GCCSpecs" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"AmericanSpecs" | translate}}'>{{"AmericanSpecs" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"CanadianSpecs" | translate}}'>{{"CanadianSpecs" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"EuropeanSpecs" | translate}}'>{{"EuropeanSpecs" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"JapaneseSpecs" | translate}}'>{{"JapaneseSpecs" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"Others" | translate}}'>{{"Others" | translate}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="motorsForm.controls['regionalSpecs'].hasError('required')">
+                                    {{"RegionalSpecsRequired" | translate}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" placeholder="{{'Price' | translate}}*"
+                                class="form-control ques_field price_fie" formControlName="price"
+                                [ngClass]="{ 'is-invalid': submitted && motorsf['price'].errors}"
+                                oninput="if(!this.value.match('^[1-9][0-9]*$'))this.value='';">
+                            <div *ngIf="submitted && motorsf['price'].errors" class="invalid-feedback">
+                                <div *ngIf="motorsf['price'].errors['required']">{{'PriceRequired' | translate}}</div>
+                                <div *ngIf="motorsf['price'].errors['pattern']">{{'minimumFourDigitReq' |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" placeholder="{{'PhoneNumber' | translate}}*"
+                                class="form-control ques_field phone_number_fie" formControlName="phoneNumber"
+                                [ngClass]="{ 'is-invalid': submitted && motorsf['phoneNumber'].errors}" readonly>
+                            <div *ngIf="submitted && motorsf['phoneNumber'].errors" class="invalid-feedback">
+                                <div *ngIf="motorsf['phoneNumber'].errors['required']">{{"PhoneNumberRequired" |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="!adminApprove">
+                            <p class="nex_btnp"><button class="next_btn" (click)="onSubmitDescrip()">{{"Next" |
+                                    translate}} &nbsp;
+                                    <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                    <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                </button></p>
+                        </div>
+                        <div class="form-group" *ngIf="adminApprove">
+                            <p class="nex_btnp"><button class="next_btn" (click)="onSubmitDescrip()">{{"updateExit" |
+                                    translate}} &nbsp;
+                                </button></p>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ques_sec" *ngIf="cateId == 3">
+                    <form [formGroup]="heavyEquipForm">
+                        <div class="form-group">
+                            <input type="text" placeholder="{{'Title' | translate}}*"
+                                class="form-control ques_field title_fie" formControlName="title"
+                                [ngClass]="{ 'is-invalid': submitted && heavyf['title'].errors}">
+                            <div *ngIf="submitted && heavyf['title'].errors" class="invalid-feedback">
+                                <div *ngIf="heavyf['title'].errors['maxlength']">{{"max50Chars" | translate}}</div>
+                                <div *ngIf="heavyf['title'].errors['required']">{{"TitleRequired" | translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field>
+                                <mat-label class="year_fie">{{"Year" | translate}}</mat-label>
+                                <mat-select formControlName="year">
+                                    <mat-option value="2025">2025</mat-option>
+                                    <mat-option value="2024">2024</mat-option>
+                                    <mat-option value="2023">2023</mat-option>
+                                    <mat-option value="2022">2022</mat-option>
+                                    <mat-option value="2021">2021</mat-option>
+                                    <mat-option value="2020">2020</mat-option>
+                                    <mat-option value="2019">2019</mat-option>
+                                    <mat-option value="2018">2018</mat-option>
+                                    <mat-option value="2017">2017</mat-option>
+                                    <mat-option value="2016">2016</mat-option>
+                                    <mat-option value="2015">2015</mat-option>
+                                    <mat-option value="2014">2014</mat-option>
+                                    <mat-option value="2013">2013</mat-option>
+                                    <mat-option value="2012">2012</mat-option>
+                                    <mat-option value="2011">2011</mat-option>
+                                    <mat-option value="2010">2010</mat-option>
+                                    <mat-option value="2009">2009</mat-option>
+                                    <mat-option value="2008">2008</mat-option>
+                                    <mat-option value="2007">2007</mat-option>
+                                    <mat-option value="2006">2006</mat-option>
+                                    <mat-option value="2005">2005</mat-option>
+                                    <mat-option value="2004">2004</mat-option>
+                                    <mat-option value="2003">2003</mat-option>
+                                    <mat-option value="2002">2002</mat-option>
+                                    <mat-option value="2001">2001</mat-option>
+                                    <mat-option value="2000">2000</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="heavyEquipForm.controls['year'].hasError('required')">
+                                    {{"YearRequired" | translate}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" placeholder="{{'Kilometers' | translate}}*"
+                                class="form-control ques_field kilo_fie" formControlName="kilometer"
+                                [ngClass]="{ 'is-invalid': submitted && heavyf['kilometer'].errors}">
+                            <div *ngIf="submitted && heavyf['kilometer'].errors" class="invalid-feedback">
+                                <div *ngIf="heavyf['kilometer'].errors['required']">{{'KilometerRequired' | translate}}
+                                </div>
+                                <div *ngIf="heavyf['kilometer'].errors['pattern']">{{'MaximumSixDigitsAllowed' |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" placeholder="{{'Price' | translate}}*"
+                                class="form-control ques_field price_fie" formControlName="price"
+                                [ngClass]="{ 'is-invalid': submitted && heavyf['price'].errors}"
+                                oninput="if(!this.value.match('^[1-9][0-9]*$'))this.value='';">
+                            <div *ngIf="submitted && heavyf['price'].errors" class="invalid-feedback">
+                                <div *ngIf="heavyf['price'].errors['required']">{{'PriceRequired' | translate}}</div>
+                                <div *ngIf="heavyf['price'].errors['pattern']">{{'minimumFourDigitReq' |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" placeholder="{{'PhoneNumber' | translate}}*"
+                                class="form-control ques_field phone_number_fie" formControlName="phoneNumber"
+                                [ngClass]="{ 'is-invalid': submitted && heavyf['phoneNumber'].errors}" readonly>
+                            <div *ngIf="submitted && heavyf['phoneNumber'].errors" class="invalid-feedback">
+                                <div *ngIf="heavyf['phoneNumber'].errors['required']">{{"PhoneNumberRequired" |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="!adminApprove">
+                            <p class="text-end"><button class="next_btn" (click)="onSubmitDescrip()">{{"Next" |
+                                    translate}} &nbsp;
+                                    <span *ngIf="dir == 'ltr'">
+                                        <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                        <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                    </span>
+                                    <span *ngIf="dir == 'rtl'">
+                                        <img src="../../assets/images/forms/left-arrow.svg" width="15px">
+                                        <img src="../../assets/images/forms/left-arrow.svg" width="15px">
+                                    </span>
+                                </button></p>
+                        </div>
+                        <div class="form-group" *ngIf="adminApprove">
+                            <p class="nex_btnp"><button class="next_btn" (click)="onSubmitDescrip()">{{"updateExit" |
+                                    translate}} &nbsp;
+                                </button></p>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ques_sec" *ngIf="cateId == 4">
+                    <form [formGroup]="boatsForm">
+                        <div class="form-group">
+                            <input type="text" placeholder="{{'Title' | translate}}*"
+                                class="form-control ques_field title_fie" formControlName="title"
+                                [ngClass]="{ 'is-invalid': submitted && boatf['title'].errors}">
+                            <div *ngIf="submitted && boatf['title'].errors" class="invalid-feedback">
+                                <div *ngIf="boatf['title'].errors['maxlength']">{{"max50Chars" | translate}}</div>
+                                <div *ngIf="boatf['title'].errors['required']">{{"TitleRequired" | translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field>
+                                <mat-label class="age_fie">{{"Age" | translate}}</mat-label>
+                                <mat-select formControlName="age">
+                                    <mat-option value='{{"BrandNew" | translate}}'>{{"BrandNew" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"0-1Month" | translate}}'>{{"0-1Month" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"1-6Months" | translate}}'>{{"1-6Months" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"6-12Months" | translate}}'>{{"6-12Months" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"1-2Years" | translate}}'>{{"1-2Years" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"2-5Years" | translate}}'>{{"2-5Years" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"5-10Years" | translate}}'>{{"5-10Years" |
+                                        translate}}</mat-option>
+                                    <mat-option value='{{"10+Years" | translate}}'>{{"10+Years" |
+                                        translate}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="boatsForm.controls['age'].hasError('required')">
+                                    {{"AgeRequired" | translate}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                            <mat-form-field>
+                                <mat-label class="length_fie">{{"Length" | translate}}</mat-label>
+                                <mat-select formControlName="length">
+                                    <mat-option value='{{"UnderFt" | translate}}'>{{"UnderFt" | translate}}</mat-option>
+                                    <mat-option value='{{"1014Ft" | translate}}'>{{"1014Ft" | translate}}</mat-option>
+                                    <mat-option value='{{"1519Ft" | translate}}'>{{"1519Ft" | translate}}</mat-option>
+                                    <mat-option value='{{"2024Ft" | translate}}'>{{"2024Ft" | translate}}</mat-option>
+                                    <mat-option value='{{"2529Ft" | translate}}'>{{"2529Ft" | translate}}</mat-option>
+                                    <mat-option value='{{"3039Ft" | translate}}'>{{"3039Ft" | translate}}</mat-option>
+                                    <mat-option value='{{"4049Ft" | translate}}'>{{"4049Ft" | translate}}</mat-option>
+                                    <mat-option value='{{"5069Ft" | translate}}'>{{"5069Ft" | translate}}</mat-option>
+                                    <mat-option value='{{"70100Ft" | translate}}'>{{"70100Ft" | translate}}</mat-option>
+                                    <mat-option value='{{"100Ft" | translate}}'>{{"100Ft" | translate}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="boatsForm.controls['length'].hasError('required')">
+                                    {{"LengthRequired" | translate}}
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" placeholder="{{'Price' | translate}}*"
+                                class="form-control ques_field price_fie" formControlName="price"
+                                [ngClass]="{ 'is-invalid': submitted && boatf['price'].errors}"
+                                oninput="if(!this.value.match('^[1-9][0-9]*$'))this.value='';">
+                            <div *ngIf="submitted && boatf['price'].errors" class="invalid-feedback">
+                                <div *ngIf="boatf['price'].errors['required']">{{'PriceRequired' | translate}}</div>
+                                <div *ngIf="boatf['price'].errors['pattern']">{{'minimumFourDigitReq' |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" placeholder="{{'PhoneNumber' | translate}}*"
+                                class="form-control ques_field phone_number_fie" formControlName="phoneNumber"
+                                [ngClass]="{ 'is-invalid': submitted && boatf['phoneNumber'].errors}" readonly>
+                            <div *ngIf="submitted && boatf['phoneNumber'].errors" class="invalid-feedback">
+                                <div *ngIf="boatf['phoneNumber'].errors['required']">{{"PhoneNumberRequired" |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="!adminApprove">
+                            <p class="nex_btnp"><button class="next_btn" (click)="onSubmitDescrip()">{{"Next" |
+                                    translate}} &nbsp;
+                                    <span *ngIf="dir == 'ltr'">
+                                        <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                        <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                    </span>
+                                    <span *ngIf="dir == 'rtl'">
+                                        <img src="../../assets/images/forms/left-arrow.svg" width="15px">
+                                        <img src="../../assets/images/forms/left-arrow.svg" width="15px">
+                                    </span>
+                                </button></p>
+                        </div>
+                        <div class="form-group" *ngIf="adminApprove">
+                            <p class="nex_btnp"><button class="next_btn" (click)="onSubmitDescrip()">{{"updateExit" |
+                                    translate}} &nbsp;
+                                </button></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-2"></div>
+        </div>
+    </div>
+</section>

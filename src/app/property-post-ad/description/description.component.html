@@ -1,0 +1,431 @@
+<section class="porgress_sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="progress_ul">
+                    <li class="active">{{"Description" | translate}}
+                        <p class="progress_path active"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                    <li>{{"Specifications" | translate}}
+                        <p class="progress_path"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                    <li>{{"ImagesLocation" | translate}}
+                        <p class="progress_path"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                    <li>{{"Extras" | translate}}
+                        <p class="progress_path"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                    <li>{{"Summary" | translate}}
+                        <p class="progress_path"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-1"></div>
+            <div class="col-lg-8 col-md-10">
+                <div class="breadcrumb">
+                    <p class="cate_head">
+                        <span *ngIf="category == 'rent'">{{"PropertyForRent" | translate}}</span>
+                        <span *ngIf="category == 'sale'">{{"PropertyForSale" | translate}}</span>
+                        <img src="../../assets/images/header/right-arrow.png" width="15px">
+                        <span>{{cateeName}}</span>
+                        <img src="../../assets/images/header/right-arrow.png" width="15px" style="margin:0 5px;">
+                        <a>{{"Description" | translate}}</a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-1 col-lg-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-2"></div>
+            <div class="col-lg-5 col-md-8">
+                <div class="ques_sec" *ngIf="cateIDd != 1">
+                    <form [formGroup]="descriptionForm" *ngIf="cateIDd != 10">
+                        <div class="form-group">
+                            <input type="text" placeholder="{{'Title' | translate}}*"
+                                class="form-control ques_field title_fie" formControlName="title"
+                                [ngClass]="{ 'is-invalid': submitted && descF['title'].errors}">
+                            <div *ngIf="submitted && descF['title'].errors" class="invalid-feedback">
+                                <div *ngIf="descF['title'].errors['maxlength']">{{"max50Chars" | translate}}</div>
+                                <div *ngIf="descF['title'].errors['required']">{{"TitleRequired" | translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group"
+                            *ngIf="cateIDd == 2 || cateIDd == 3 || cateIDd == 4 || cateIDd == 11 || cateIDd == 12 || cateIDd == 13">
+                            <!-- <div class="example-label-container">
+                                <label id="example-name-label" class="example-name-label">{{"AreaSquareMeter" |
+                                    translate}}</label>
+                                <label class="example-value-label flot_cond">{{areaValue.value}} {{"m2" |
+                                    translate}}</label>
+                            </div>
+                            <mat-slider min="0" max="2000" step="10" class="slider">
+                                <input matSliderThumb formControlName="areaInSqmt" #areaValue
+                                    [ngClass]="{ 'is-invalid': submitted && descF['areaInSqmt'].errors}">
+                                <div *ngIf="submitted && descF['areaInSqmt'].errors" class="invalid-feedback">
+                                    <div *ngIf="descF['areaInSqmt'].errors['required']">{{"AreaRequired" | translate}}
+                                    </div>
+                                </div>
+                            </mat-slider> -->
+                            <input type="number" placeholder="{{'AreaSquareMeter' | translate}}*"
+                                class="form-control ques_field price_fie" formControlName="areaInSqmt"
+                                [ngClass]="{ 'is-invalid': submitted && descF['areaInSqmt'].errors}"
+                                oninput="if(!this.value.match('^[1-9][0-9]*$'))this.value='';">
+                            <div *ngIf="submitted && descF['areaInSqmt'].errors" class="invalid-feedback">
+                                <div *ngIf="descF['areaInSqmt'].errors['required']">{{"AreaRequired" | translate}}
+                                </div>
+                                <div *ngIf="descF['areaInSqmt'].errors['pattern']">{{'MaximumEightDigitsAllowed' |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="cateIDd == 5 || cateIDd == 8 || cateIDd == 14">
+                            <!-- <div class="example-label-container">
+                                <label id="example-name-label" class="example-name-label">{{"AreaSquareMeter" |
+                                    translate}}</label>
+                                <label class="example-value-label flot_cond">{{areaValue.value}} {{"m2" |
+                                    translate}}</label>
+                            </div>
+                            <mat-slider min="0" max="1000" step="5" class="slider">
+                                <input matSliderThumb formControlName="areaInSqmt" #areaValue
+                                    [ngClass]="{ 'is-invalid': submitted && descF['areaInSqmt'].errors}">
+                                <div *ngIf="submitted && descF['areaInSqmt'].errors" class="invalid-feedback">
+                                    <div *ngIf="descF['areaInSqmt'].errors['required']">{{"AreaRequired" | translate}}
+                                    </div>
+                                </div>
+                            </mat-slider> -->
+                            <input type="number" placeholder="{{'AreaSquareMeter' | translate}}*"
+                                class="form-control ques_field price_fie" formControlName="areaInSqmt"
+                                [ngClass]="{ 'is-invalid': submitted && descF['areaInSqmt'].errors}"
+                                oninput="if(!this.value.match('^[1-9][0-9]*$'))this.value='';">
+                            <div *ngIf="submitted && descF['areaInSqmt'].errors" class="invalid-feedback">
+                                <div *ngIf="descF['areaInSqmt'].errors['required']">{{"AreaRequired" | translate}}
+                                </div>
+                                <div *ngIf="descF['areaInSqmt'].errors['pattern']">{{'MaximumEightDigitsAllowed' |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="cateIDd == 6 || cateIDd == 15">
+                            <!-- <div class="example-label-container">
+                                <label id="example-name-label" class="example-name-label">{{"AreaSquareMeter" |
+                                    translate}}</label>
+                                <label class="example-value-label flot_cond">{{areaValue.value}} {{"m2" |
+                                    translate}}</label>
+                            </div>
+                            <mat-slider min="0" max="3000" step="10" class="slider">
+                                <input matSliderThumb formControlName="areaInSqmt" #areaValue
+                                    [ngClass]="{ 'is-invalid': submitted && descF['areaInSqmt'].errors}">
+                                <div *ngIf="submitted && descF['areaInSqmt'].errors" class="invalid-feedback">
+                                    <div *ngIf="descF['areaInSqmt'].errors['required']">{{"AreaRequired" | translate}}
+                                    </div>
+                                </div>
+                            </mat-slider> -->
+                            <input type="number" placeholder="{{'AreaSquareMeter' | translate}}*"
+                                class="form-control ques_field price_fie" formControlName="areaInSqmt"
+                                [ngClass]="{ 'is-invalid': submitted && descF['areaInSqmt'].errors}"
+                                oninput="if(!this.value.match('^[1-9][0-9]*$'))this.value='';">
+                            <div *ngIf="submitted && descF['areaInSqmt'].errors" class="invalid-feedback">
+                                <div *ngIf="descF['areaInSqmt'].errors['required']">{{"AreaRequired" | translate}}
+                                </div>
+                                <div *ngIf="descF['areaInSqmt'].errors['pattern']">{{'MaximumEightDigitsAllowed' |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="cateIDd == 7 || cateIDd == 9 || cateIDd == 16 || cateIDd == 17">
+                            <!-- <div class="example-label-container">
+                                <label id="example-name-label" class="example-name-label">{{"AreaSquareMeter" |
+                                    translate}}</label>
+                                <label class="example-value-label flot_cond">{{areaValue.value}} {{"m2" |
+                                    translate}}</label>
+                            </div>
+                            <mat-slider min="0" max="10000" step="20" class="slider">
+                                <input matSliderThumb formControlName="areaInSqmt" #areaValue
+                                    [ngClass]="{ 'is-invalid': submitted && descF['areaInSqmt'].errors}">
+                                <div *ngIf="submitted && descF['areaInSqmt'].errors" class="invalid-feedback">
+                                    <div *ngIf="descF['areaInSqmt'].errors['required']">{{"AreaRequired" | translate}}
+                                    </div>
+                                </div>
+                            </mat-slider> -->
+                            <input type="number" placeholder="{{'AreaSquareMeter' | translate}}*"
+                                class="form-control ques_field price_fie" formControlName="areaInSqmt"
+                                [ngClass]="{ 'is-invalid': submitted && descF['areaInSqmt'].errors}"
+                                oninput="if(!this.value.match('^[1-9][0-9]*$'))this.value='';">
+                            <div *ngIf="submitted && descF['areaInSqmt'].errors" class="invalid-feedback">
+                                <div *ngIf="descF['areaInSqmt'].errors['required']">{{"AreaRequired" | translate}}
+                                </div>
+                                <div *ngIf="descF['areaInSqmt'].errors['pattern']">{{'MaximumEightDigitsAllowed' |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!-- <div class="example-label-container">
+                                <label id="example-name-label" class="example-name-label">{{"WidthMeter" |
+                                    translate}}</label>
+                                <label class="example-value-label flot_cond">{{widthValue.value}} {{"m" |
+                                    translate}}</label>
+                            </div>
+                            <mat-slider min="0" max="10000" step="10" class="slider">
+                                <input matSliderThumb formControlName="widthInMtr" #widthValue
+                                    [ngClass]="{ 'is-invalid': submitted && descF['widthInMtr'].errors}">
+                                <div *ngIf="submitted && descF['widthInMtr'].errors" class="invalid-feedback">
+                                    <div *ngIf="descF['widthInMtr'].errors['required']">{{"WidthRequired" | translate}}
+                                    </div>
+                                </div>
+                            </mat-slider> -->
+                            <input type="number" placeholder="{{'WidthMeter' | translate}}*"
+                                class="form-control ques_field price_fie" formControlName="widthInMtr"
+                                [ngClass]="{ 'is-invalid': submitted && descF['widthInMtr'].errors}"
+                                oninput="if(!this.value.match('^[1-9][0-9]*$'))this.value='';">
+                            <div *ngIf="submitted && descF['widthInMtr'].errors" class="invalid-feedback">
+                                <div *ngIf="descF['widthInMtr'].errors['required']">{{"WidthRequired" | translate}}
+                                </div>
+                                <div *ngIf="descF['widthInMtr'].errors['pattern']">{{'MaximumEightDigitsAllowed' |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!-- <div class="example-label-container">
+                                <label id="example-name-label" class="example-name-label">{{"LengthMeter" |
+                                    translate}}</label>
+                                <label class="example-value-label flot_cond">{{lengthValue.value}} m</label>
+                            </div>
+                            <mat-slider min="0" max="10000" step="10" class="slider">
+                                <input matSliderThumb formControlName="lengthInMtr" #lengthValue
+                                    [ngClass]="{ 'is-invalid': submitted && descF['lengthInMtr'].errors}">
+                                <div *ngIf="submitted && descF['lengthInMtr'].errors" class="invalid-feedback">
+                                    <div *ngIf="descF['lengthInMtr'].errors['required']">{{"LengthRequired" |
+                                        translate}}</div>
+                                </div>
+                            </mat-slider> -->
+                            <input type="number" placeholder="{{'LengthMeter' | translate}}*"
+                                class="form-control ques_field price_fie" formControlName="lengthInMtr"
+                                [ngClass]="{ 'is-invalid': submitted && descF['lengthInMtr'].errors}"
+                                oninput="if(!this.value.match('^[1-9][0-9]*$'))this.value='';">
+                            <div *ngIf="submitted && descF['lengthInMtr'].errors" class="invalid-feedback">
+                                <div *ngIf="descF['lengthInMtr'].errors['required']">{{"LengthRequired" | translate}}
+                                </div>
+                                <div *ngIf="descF['lengthInMtr'].errors['pattern']">{{'MaximumEightDigitsAllowed' |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!-- <div class="example-label-container">
+                                <label id="example-name-label" class="example-name-label">{{"StreetLengthMeter" |
+                                    translate}}</label>
+                                <label class="example-value-label flot_cond">{{streetLeng.value}} m</label>
+                            </div>
+                            <mat-slider min="0" max="100" step="1" class="slider">
+                                <input matSliderThumb formControlName="streetLength" #streetLeng
+                                    [ngClass]="{ 'is-invalid': submitted && descF['streetLength'].errors}">
+                                <div *ngIf="submitted && descF['streetLength'].errors" class="invalid-feedback">
+                                    <div *ngIf="descF['streetLength'].errors['required']">{{"StreetLengthRequired" |
+                                        translate}}</div>
+                                </div>
+                            </mat-slider> -->
+                            <input type="number" placeholder="{{'StreetLengthMeter' | translate}}*"
+                                class="form-control ques_field price_fie" formControlName="streetLength"
+                                [ngClass]="{ 'is-invalid': submitted && descF['streetLength'].errors}"
+                                oninput="if(!this.value.match('^[1-9][0-9]*$'))this.value='';">
+                            <div *ngIf="submitted && descF['streetLength'].errors" class="invalid-feedback">
+                                <div *ngIf="descF['streetLength'].errors['required']">{{"StreetLengthRequired" |
+                                    translate}}
+                                </div>
+                                <div *ngIf="descF['streetLength'].errors['pattern']">{{'MaximumEightDigitsAllowed' |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" placeholder="{{'PhoneNumber' | translate}}*"
+                                class="form-control ques_field price_fie" formControlName="phoneNumber"
+                                [ngClass]="{ 'is-invalid': submitted && descF['phoneNumber'].errors}" readonly>
+                            <div *ngIf="submitted && descF['phoneNumber'].errors" class="invalid-feedback">
+                                <div *ngIf="descF['phoneNumber'].errors['required']">{{"PhoneNumberRequired" |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" placeholder="{{'Price' | translate}}*"
+                                class="form-control ques_field price_fie" formControlName="price"
+                                [ngClass]="{ 'is-invalid': submitted && descF['price'].errors}"
+                                oninput="if(!this.value.match('^[1-9][0-9]*$'))this.value='';">
+                            <div *ngIf="submitted && descF['price'].errors" class="invalid-feedback">
+                                <div *ngIf="descF['price'].errors['required']">{{"PriceRequired" | translate}}</div>
+                                <div *ngIf="descF['price'].errors['pattern']">{{'minimumThreeDigitReq' |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="row" [ngClass]="{ 'is-invalid': submitted && descF['ownerType'].errors}">
+                            <div class="col-md-6 col-6">
+                                <input type="radio" name="ownerType" id="landlord" value='{{"Owner" | translate}}'
+                                    formControlName="ownerType" class="user_radio">
+                                <label for="landlord">
+                                    <div class="owner_box">
+                                        <h6>{{"Owner" | translate}}</h6>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-md-6 col-6">
+                                <input type="radio" name="ownerType" id="authorized" value='{{"Authorized" | translate}}'
+                                    formControlName="ownerType" class="user_radio">
+                                <label for="authorized">
+                                    <div class="owner_box">
+                                        <h6>{{"Authorized" | translate}}</h6>
+                                    </div>
+                                </label>
+                            </div>
+                            <div *ngIf="submitted && descF['ownerType'].errors" class="invalid-feedback">
+                                <div *ngIf="descF['ownerType'].errors['required']">{{"OwnerTypeRequired" | translate}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="!adminApprove">
+                            <p class="nex_btnp"><button class="next_btn" (click)="onSubmitDescrip()">{{"Next" |
+                                    translate}} &nbsp;
+                                     <span *ngIf="dir == 'ltr'">
+                                        <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                        <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                    </span>
+                                    <span *ngIf="dir == 'rtl'">
+                                        <img src="../../assets/images/forms/left-arrow.svg" width="15px">
+                                        <img src="../../assets/images/forms/left-arrow.svg" width="15px">
+                                    </span>
+                                </button></p>
+                        </div>
+                        <div class="form-group" *ngIf="adminApprove">
+                            <p class="nex_btnp"><button class="next_btn" (click)="onSubmitDescrip()">{{"updateExit" |
+                                    translate}} &nbsp;
+                                </button></p>
+                        </div>
+                    </form>
+                </div>
+                <div class="ques_sec" *ngIf="cateIDd == 1 || cateIDd == 10">
+                    <form [formGroup]="descriptionFormAppart">
+                        <div class="form-group">
+                            <input type="text" placeholder="{{'Title' | translate}}*"
+                                class="form-control ques_field title_fie" formControlName="title"
+                                [ngClass]="{ 'is-invalid': submitted && apartF['title'].errors}">
+                            <div *ngIf="submitted && apartF['title'].errors" class="invalid-feedback">
+                                <div *ngIf="apartF['title'].errors['maxlength']">{{"max50Chars" | translate}}</div>
+                                <div *ngIf="apartF['title'].errors['required']">{{"TitleRequired" | translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!-- <div class="example-label-container">
+                                <label id="example-name-label" class="example-name-label">{{"AreaSquareMeter" |
+                                    translate}}</label>
+                                <label class="example-value-label flot_cond">{{areaValue.value}} {{"m2" |
+                                    translate}}</label>
+                            </div>
+                            <mat-slider min="0" max="1000" step="5" class="slider">
+                                <input matSliderThumb formControlName="areaInSqmt" #areaValue
+                                    [ngClass]="{ 'is-invalid': submitted && apartF['areaInSqmt'].errors}">
+                                <div *ngIf="submitted && apartF['areaInSqmt'].errors" class="invalid-feedback">
+                                    <div *ngIf="apartF['areaInSqmt'].errors['required']">{{"AreaRequired" | translate}}
+                                    </div>
+                                </div>
+                            </mat-slider> -->
+                            <input type="number" placeholder="{{'AreaSquareMeter' | translate}}*"
+                                class="form-control ques_field price_fie" formControlName="areaInSqmt"
+                                [ngClass]="{ 'is-invalid': submitted && apartF['areaInSqmt'].errors}"
+                                oninput="if(!this.value.match('^[1-9][0-9]*$'))this.value='';">
+                            <div *ngIf="submitted && apartF['areaInSqmt'].errors" class="invalid-feedback">
+                                <div *ngIf="apartF['areaInSqmt'].errors['required']">{{"AreaRequired" |
+                                    translate}}
+                                </div>
+                                <div *ngIf="apartF['areaInSqmt'].errors['pattern']">{{'MaximumEightDigitsAllowed' |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!-- <div class="example-label-container">
+                                <label id="example-name-label" class="example-name-label">{{"StreetLengthMeter" |
+                                    translate}}</label>
+                                <label class="example-value-label flot_cond">{{streetLeng.value}} m</label>
+                            </div>
+                            <mat-slider min="0" max="100" step="1" class="slider">
+                                <input matSliderThumb formControlName="streetLength" #streetLeng
+                                    [ngClass]="{ 'is-invalid': submitted && apartF['streetLength'].errors}">
+                                <div *ngIf="submitted && apartF['streetLength'].errors" class="invalid-feedback">
+                                    <div *ngIf="apartF['streetLength'].errors['required']">{{"StreetLengthRequired" |
+                                        translate}}</div>
+                                </div>
+                            </mat-slider> -->
+                            <input type="number" placeholder="{{'StreetLengthMeter' | translate}}*"
+                                class="form-control ques_field price_fie" formControlName="streetLength"
+                                [ngClass]="{ 'is-invalid': submitted && apartF['streetLength'].errors}"
+                                oninput="if(!this.value.match('^[1-9][0-9]*$'))this.value='';">
+                            <div *ngIf="submitted && apartF['streetLength'].errors" class="invalid-feedback">
+                                <div *ngIf="apartF['streetLength'].errors['required']">{{"StreetLengthRequired" |
+                                    translate}}
+                                </div>
+                                <div *ngIf="apartF['streetLength'].errors['pattern']">{{'MaximumEightDigitsAllowed' |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" placeholder="{{'PhoneNumber' | translate}}*"
+                                class="form-control ques_field price_fie" formControlName="phoneNumber"
+                                [ngClass]="{ 'is-invalid': submitted && apartF['phoneNumber'].errors}" readonly>
+                            <div *ngIf="submitted && apartF['phoneNumber'].errors" class="invalid-feedback">
+                                <div *ngIf="apartF['phoneNumber'].errors['required']">{{"PhoneNumberRequired" |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" placeholder="{{'Price' | translate}}*"
+                                class="form-control ques_field price_fie" formControlName="price"
+                                [ngClass]="{ 'is-invalid': submitted && apartF['price'].errors}"
+                                oninput="if(!this.value.match('^[1-9][0-9]*$'))this.value='';">
+                            <div *ngIf="submitted && apartF['price'].errors" class="invalid-feedback">
+                                <div *ngIf="apartF['price'].errors['required']">{{"PriceRequired" | translate}}</div>
+                                <div *ngIf="apartF['price'].errors['pattern']">{{'minimumThreeDigitReq' |
+                                    translate}}</div>
+                            </div>
+                        </div>
+                        <div class="row" [ngClass]="{ 'is-invalid': submitted && apartF['ownerType'].errors}">
+                            <div class="col-md-6 col-6">
+                                <input type="radio" name="ownerType" id="landlord" value='{{"Owner" | translate}}'
+                                    formControlName="ownerType" class="user_radio">
+                                <label for="landlord">
+                                    <div class="owner_box">
+                                        <h6>{{"Owner" | translate}}</h6>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="col-md-6 col-6">
+                                <input type="radio" name="ownerType" id="authorized" value='{{"Authorized" | translate}}'
+                                    formControlName="ownerType" class="user_radio">
+                                <label for="authorized">
+                                    <div class="owner_box">
+                                        <h6>{{"Authorized" | translate}}</h6>
+                                    </div>
+                                </label>
+                            </div>
+                            <div *ngIf="submitted && apartF['ownerType'].errors" class="invalid-feedback">
+                                <div *ngIf="apartF['ownerType'].errors['required']">{{"OwnerTypeRequired" | translate}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" *ngIf="!adminApprove">
+                            <p class="nex_btnp"><button class="next_btn" (click)="onSubmitDescrip()">{{"Next" |
+                                    translate}} &nbsp;
+                                    <span *ngIf="dir == 'ltr'">
+                                        <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                        <img src="../../assets/images/forms/right-arrow.svg" width="10px">
+                                    </span>
+                                    <span *ngIf="dir == 'rtl'">
+                                        <img src="../../assets/images/forms/left-arrow.svg" width="15px">
+                                        <img src="../../assets/images/forms/left-arrow.svg" width="15px">
+                                    </span>
+                                </button></p>
+                        </div>
+                        <div class="form-group" *ngIf="adminApprove">
+                            <p class="nex_btnp"><button class="next_btn" (click)="onSubmitDescrip()">{{"updateExit" |
+                                    translate}} &nbsp;
+                                </button></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

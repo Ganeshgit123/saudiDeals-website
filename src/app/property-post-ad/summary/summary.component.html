@@ -1,0 +1,188 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">{{"Uploading" | translate}}...</p>
+</ngx-spinner>
+<section class="porgress_sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="progress_ul">
+                    <li class="active">{{"Description" | translate}}
+                        <p class="progress_path active"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                    <li>{{"Specifications" | translate}}
+                        <p class="progress_path active"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                    <li>{{"ImagesLocation" | translate}}
+                        <p class="progress_path active"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                    <li>{{"Extras" | translate}}
+                        <p class="progress_path active"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                    <li>{{"Summary" | translate}}
+                        <p class="progress_path active"><img src="../../assets/images/header/chat_icon.svg"></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-1"></div>
+            <div class="col-lg-8 col-md-10">
+                <div class="breadcrumb">
+                    <p class="cate_head">
+                        <span *ngIf="category == 'rent'">{{"PropertyForRent" | translate}}</span>
+                        <span *ngIf="category == 'sale'">{{"PropertyForSale" | translate}}</span>
+                        <img src="../../assets/images/header/right-arrow.png" width="15px">
+                        <span>{{cateeName}}</span>
+                        <img src="../../assets/images/header/right-arrow.png" width="15px" style="margin:0 5px;">
+                        <a>{{"Summary" | translate}}</a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-1 col-lg-1"></div>
+        </div>
+        <div class="row mb-4 mt-2">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-6 col-md-3" *ngFor='let item of imageArray; let i = index'>
+                        <p class="text-center"><img class="imgss" src="{{item.url}}"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10 col-md-12">
+                <div class="back_ul" *ngFor="let item of getPostedData;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="summary_ul" *ngIf="item.title != null">
+                                <li class="tit_left_content">{{"Title" | translate}}</li>
+                                <li class="tit_right_content">{{item.title}}</li>
+                            </ul>
+                            <ul class="summary_ul" *ngIf="item.description != null">
+                                <li class="tit_left_content">{{"Description" | translate}}</li>
+                                <li class="tit_right_content" [innerHTML]="item.description"></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-7">
+                            <ul class="summary_ul" *ngIf="item.areaInSqmt != null">
+                                <li class="left_side_cont">{{"AreaInm2" | translate}}</li>
+                                <li class="right_side_cont">{{item.areaInSqmt}}</li>
+                            </ul>
+                            <ul class="summary_ul" *ngIf="item.widthInMtr != null">
+                                <li class="left_side_cont">{{"WidthInm" | translate}}</li>
+                                <li class="right_side_cont">{{item.widthInMtr}}</li>
+                            </ul>
+                            <ul class="summary_ul" *ngIf="item.lengthInMtr != null">
+                                <li class="left_side_cont">{{"LengthInm" | translate}}</li>
+                                <li class="right_side_cont">{{item.lengthInMtr}}</li>
+                            </ul>
+                            <ul class="summary_ul" *ngIf="item.propetyType != null">
+                                <li class="left_side_cont">{{"PropertyType" | translate}}</li>
+                                <li class="right_side_cont">{{item.propetyType}}</li>
+                            </ul>
+                            <ul class="summary_ul" *ngIf="item.ownerType != null">
+                                <li class="left_side_cont">{{"OwnerType" | translate}}</li>
+                                <li class="right_side_cont">{{item.ownerType}}</li>
+                            </ul>
+                            <ul class="summary_ul" *ngIf="item.rentalTerm != null">
+                                <li class="left_side_cont">{{"RentalTerm" | translate}}</li>
+                                <li class="right_side_cont">{{item.rentalTerm}}</li>
+                            </ul>
+                            <ul class="summary_ul" *ngIf="item.streetLength != null">
+                                <li class="left_side_cont">{{"StreetLight" | translate}}</li>
+                                <li class="right_side_cont">{{item.streetLength}}</li>
+                            </ul>
+                            <ul class="summary_ul" *ngIf="item.noBedrooms != null">
+                                <li class="left_side_cont">{{"NoOfBedrooms" | translate}}</li>
+                                <li class="right_side_cont">{{item.noBedrooms}}</li>
+                            </ul>
+                            <ul class="summary_ul" *ngIf="item.noBathrooms != null">
+                                <li class="left_side_cont">{{"NoOfBathrooms" | translate}}</li>
+                                <li class="right_side_cont">{{item.noBathrooms}}</li>
+                            </ul>
+                            <ul class="summary_ul" *ngIf="item.noFloors != null">
+                                <li class="left_side_cont">{{"NoOfFloors" | translate}}</li>
+                                <li class="right_side_cont">{{item.noFloors}}</li>
+                            </ul>
+                            <ul class="summary_ul" *ngIf="item.noLivingRooms != null">
+                                <li class="left_side_cont">{{"NoOfLivingRooms" | translate}}</li>
+                                <li class="right_side_cont">{{item.noLivingRooms}}</li>
+                            </ul>
+                            <ul class="summary_ul" *ngIf="item.propertyAge != null">
+                                <li class="left_side_cont">{{"PropertyAge" |translate}}</li>
+                                <li class="right_side_cont">{{item.propertyAge}}</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-5">
+                            <ul class="summary_ul" *ngIf="item.provinceId != null">
+                                <li class="left_side_cont">{{"Province" | translate}}</li>
+                                <li class="right_side_cont">{{item.provincesName}}</li>
+                            </ul>
+                            <ul class="summary_ul" *ngIf="item.cityId != null">
+                                <li class="left_side_cont">{{"City" | translate}}</li>
+                                <li class="right_side_cont">{{item.cityName}}</li>
+                            </ul>
+                            <ul class="summary_ul" *ngIf="item.furnished != null">
+                                <li class="left_side_cont">{{"Furnished" | translate}}</li>
+                                <li class="right_side_cont">
+                                    <span *ngIf="item.furnished == 1">{{"Yes" | translate}}</span>
+                                    <span *ngIf="item.furnished == 0">{{"No" | translate}}</span>
+                                </li>
+                            </ul>
+                            <ul class="summary_ul" *ngIf="item.kitchen != null">
+                                <li class="left_side_cont">{{"Kitchen" | translate}}</li>
+                                <li class="right_side_cont">
+                                    <span *ngIf="item.kitchen == 1">{{"Yes" | translate}}</span>
+                                    <span *ngIf="item.kitchen == 0">{{"No" | translate}}</span>
+                                </li>
+                            </ul>
+                            <ul class="summary_ul" *ngIf="item.garage != null">
+                                <li class="left_side_cont">{{"Garage" | translate}}</li>
+                                <li class="right_side_cont">
+                                    <span *ngIf="item.garage == 1">{{"Yes" | translate}}</span>
+                                    <span *ngIf="item.garage == 0">{{"No" | translate}}</span>
+                                </li>
+                            </ul>
+                            <ul class="summary_ul" *ngIf="item.elevator != null">
+                                <li class="left_side_cont">{{"Elevator"  | translate}}</li>
+                                <li class="right_side_cont">
+                                    <span *ngIf="item.elevator == 1">{{"Yes" | translate}}</span>
+                                    <span *ngIf="item.elevator == 0">{{"No" | translate}}</span>
+                                </li>
+                            </ul>
+                            <ul class="summary_ul" *ngIf="item.waterSupply != null">
+                                <li class="left_side_cont">{{"WaterSupply" | translate}}</li>
+                                <li class="right_side_cont">
+                                    <span *ngIf="item.waterSupply == 1">{{"Yes" | translate}}</span>
+                                    <span *ngIf="item.waterSupply == 0">{{"No" | translate}}</span>
+                                </li>
+                            </ul>
+                            <ul class="summary_ul" *ngIf="item.electricitySupply != null">
+                                <li class="left_side_cont">{{"ElectricitySupply" | translate}}</li>
+                                <li class="right_side_cont">
+                                    <span *ngIf="item.electricitySupply == 1">{{"Yes" | translate}}</span>
+                                    <span *ngIf="item.electricitySupply == 0">{{"No" | translate}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn_sec">
+                    <div class="row">
+                        <div class="col-6 col-md-6">
+                            <button class="edit_btn" (click)="editPost()">{{"Edit" | translate}}</button>
+                        </div>
+                        <div class="col-6 col-md-6">
+                            <p class="text-end"><button class="submit_btn" (click)="placeAdSubmit()">{{"PlaceAd" | translate}}</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+    </div>
+</section>

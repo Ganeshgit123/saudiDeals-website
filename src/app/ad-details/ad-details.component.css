@@ -1,0 +1,602 @@
+.categ_sec {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.category_ul {
+    padding-left: 0;
+    list-style-type: none;
+    text-align: center;
+}
+
+.category_ul li {
+    display: inline-block;
+    text-align: center;
+    padding: 25px 4rem;
+    font-size: var(--heading-h6);
+    font-weight: 500;
+    color: var(--text-dark-color);
+}
+
+.riyal_logo_size {
+    width: 18px;
+}
+
+.category_ul li a {
+    color: var(--text-dark-color);
+    padding: 20px 10px;
+}
+
+.category_ul li a:hover {
+    color: var(--main-color);
+    border-bottom: 5px solid var(--main-color);
+    border-radius: 3px;
+}
+
+.breadcrumb {
+    padding: 1.5rem 0 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.cate_head a {
+    font-size: var(--heading-h6);
+    font-weight: 500;
+    color: var(--main-dark-color);
+    padding-bottom: 10px;
+}
+
+/* --------------------Category Section End----------------- */
+
+/* --------------------gallery section start---------------- */
+.ad_title h2 {
+    font-size: var(--heading-h2);
+    color: var(--black-color);
+    padding: 10px 0 0 0;
+    margin-bottom: 2px;
+}
+
+.ad_title p {
+    color: var(--text-color);
+}
+
+gallery {
+    height: 600px !important;
+    margin-top: -30px;
+}
+
+.gal_box {
+    margin-bottom: 20px;
+}
+
+/* --------------------gallery section End---------------- */
+
+/* --------------------Item Overview start---------------- */
+.item_sec {
+    padding: 20px 0 0px 0;
+}
+
+.item_sec h3 {
+    font-size: var(--heading-h4);
+    font-weight: 600;
+    color: var(--black-color);
+    padding: 10px 0;
+}
+
+.custom_width {
+    width: 20%;
+}
+
+.data_box {
+    padding: 10px;
+    background: var(--accord-color);
+    border-radius: 10px;
+    height: 120px;
+    margin-bottom: 20px;
+}
+
+.data_box h6 {
+    font-size: var(--small-size);
+    font-weight: 500;
+    text-align: center;
+}
+
+.data_box img {
+    width: 30px;
+}
+
+/* --------------------Item Overview End---------------- */
+
+/* --------------------Additonal Details start---------------- */
+.additional_ul {
+    padding-left: 20px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 0;
+}
+
+.additional_ul:lang(ar) {
+    padding-right: 20px;
+    padding-left: auto;
+}
+
+.additional_ul li {
+    display: inline-block;
+    list-style-type: none;
+    padding: 15px 0;
+}
+
+.additional_ul li.left_side_cont {
+    color: var(--text-dark-color);
+    font-size: var(--heading-h6);
+    font-weight: 500;
+    width: 50%;
+    vertical-align: top;
+}
+
+.additional_ul li.right_side_cont {
+    color: var(--text-dark-color);
+    font-size: var(--heading-h6);
+    font-weight: 400;
+    width: 50%;
+}
+
+/* --------------------Additonal Details End---------------- */
+
+/* --------------------Description Start---------------- */
+.desc_sec {
+    padding: 15px 0 10px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.desc_sec h3 {
+    font-size: var(--heading-h4);
+    font-weight: 600;
+    color: var(--black-color);
+    padding: 10px 0;
+}
+
+.desc_sec h6 {
+    color: var(--text-dark-color);
+    font-size: var(--heading-h6);
+    font-weight: 400;
+    padding: 10px 0;
+}
+
+/* --------------------Description End---------------- */
+
+/* --------------------Location Start---------------- */
+.location_sec {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+.location_sec h3 {
+    font-size: var(--heading-h4);
+    font-weight: 600;
+    color: var(--black-color);
+    padding: 10px 0;
+}
+
+.loc_img {
+    width: 25px;
+}
+
+.location_p {
+    padding-top: 10px;
+}
+
+.location_p span {
+    color: var(--text-dark-color);
+    font-size: var(--heading-h6);
+    font-weight: 500;
+    padding: 10px 0 0 10px;
+}
+
+.location_p span:lang(ar) {
+    padding: 10px 10px 0 0;
+}
+
+.map_btn {
+    float: right;
+    position: relative;
+    top: -20px;
+}
+
+.map_btn:lang(ar) {
+    float: left;
+}
+
+.map_btn button {
+    border: 1px solid var(--main-color);
+    background: var(--white-color);
+    color: var(--main-color);
+    font-size: var(--para-size);
+    font-weight: 500;
+    border-radius: 6px;
+    padding: 8px 20px;
+}
+
+.map_btn button:hover {
+    background: var(--main-color);
+    color: var(--white-color);
+}
+
+.map_btn button .loc_img {
+    margin-right: 10px;
+}
+
+.map_btn button .loc_img:lang(ar) {
+    margin-left: 10px;
+    margin-right: auto;
+}
+
+/* --------------------Location End---------------- */
+
+/* --------------------Button Section Start---------------- */
+.price_sec {
+    position: sticky;
+    top: 10px;
+}
+
+.price_title h2 {
+    font-size: var(--heading-h3);
+    color: var(--main-color);
+    padding: 10px 0;
+    text-align: end;
+}
+
+.price_title h2:lang(ar) {
+    direction: ltr;
+    text-align: left;
+}
+
+.price_title h2 span {
+    font-size: var(--heading-h6);
+    color: var(--text-color);
+}
+
+.btn_sec {
+    background: #FBFBFB;
+    border-radius: 6px;
+}
+
+.chat_btn {
+    background: var(--main-color);
+    font-size: var(--para-size);
+    font-weight: 500;
+    text-align: center;
+    color: var(--white-color);
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 6px;
+}
+
+.chat_btn:hover {
+    border: 1px solid var(--main-color);
+    background: var(--white-color);
+    color: var(--main-color);
+}
+
+.num_btn {
+    border: 1px solid var(--main-color);
+    background: var(--white-color);
+    color: var(--main-color);
+    font-size: var(--para-size);
+    font-weight: 500;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    width: 100%;
+}
+
+.num_btn:hover {
+    background: var(--main-color);
+    color: var(--white-color);
+    border: none;
+}
+
+.whatapp_btn {
+    border: 1px solid var(--main-color);
+    background: var(--white-color);
+    color: var(--main-color);
+    font-size: var(--para-size);
+    font-weight: 500;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.whatapp_btn:hover {
+    background: var(--main-color);
+    color: var(--white-color);
+    border: none;
+}
+
+/* --------------------Button Section End---------------- */
+
+/* --------------------Phone Number Section Start---------------- */
+.user_name {
+    font-size: var(--heading-h6);
+    font-weight: 600;
+    color: var(--text-dark-color);
+}
+
+.user_type {
+    font-size: var(--small-size);
+    font-weight: 500;
+    color: var(--text-light-color);
+    text-align: right;
+}
+
+.content_sec {
+    padding: 0 40px;
+}
+
+.number {
+    border: none;
+    background: var(--main-color);
+    color: var(--white-color);
+    font-size: var(--para-size);
+    font-weight: 500;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px 0;
+}
+
+.tip_sec {
+    background: var(--border-color);
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.tip_sec h6 {
+    font-size: var(--para-size);
+    font-weight: 600;
+}
+
+.tip_ul {
+    margin-bottom: 10px;
+}
+
+.tip_ul li {
+    font-size: var(--para-size);
+    font-weight: 500;
+}
+
+/* --------------------Phone Number Section End---------------- */
+/* --------------------Favorite Section Start---------------- */
+.fav_sec {
+    text-align: end;
+    position: relative;
+    top: 1.5rem;
+    z-index: 3;
+    right: 1.5rem;
+}
+
+.fav_sec:lang(ar) {
+    text-align: inherit;
+}
+
+.favor_btn {
+    background: var(--white-color);
+    padding: 6px 15px;
+    color: var(--text-dark-color);
+    border-radius: 6px;
+    border: none;
+    margin-right: 1rem;
+    font-size: var(--small-size);
+    font-weight: 500;
+}
+
+.favor_btn:lang(ar) {
+    margin-left: 1rem;
+    margin-right: auto;
+}
+
+.favor_btn:hover {
+    background: var(--main-color);
+    color: var(--white-color);
+}
+
+.favor_btn img {
+    width: 16px;
+    margin-right: 8px;
+}
+
+.favor_btn img:lang(ar) {
+    margin-left: 8px;
+    margin-right: auto;
+}
+
+.favor_btn:hover>img {
+    filter: invert(100%) sepia(0%) saturate(17%) hue-rotate(277deg) brightness(105%) contrast(105%);
+}
+
+.share_btn {
+    background: var(--white-color);
+    padding: 6px 15px;
+    color: var(--text-dark-color);
+    border-radius: 6px;
+    border: none;
+    font-size: var(--small-size);
+    font-weight: 500;
+}
+
+.share_btn:hover {
+    background: var(--main-color);
+    color: var(--white-color);
+}
+
+/* --------------------Favorite Section End---------------- */
+/* --------------------Property Section Start---------------- */
+.prop_value .prop_ico {
+    margin-right: 10px;
+    position: relative;
+    top: -2px;
+}
+
+.prop_value .prop_ico:lang(ar) {
+    margin-left: 10px;
+    margin-right: auto;
+}
+
+.prop_value {
+    font-size: var(--heading-h6);
+    font-weight: 500;
+    color: var(--text-dark-color);
+    margin-right: 40px;
+}
+
+.prop_value:lang(ar) {
+    margin-left: 40px;
+    margin-right: auto;
+}
+
+.prop_location_sec {
+    padding: 10px 0;
+}
+
+.loc_img {
+    width: 25px;
+}
+
+.modal-title {
+    margin-bottom: 0;
+    font-size: var(--heading-h5);
+    color: var(--black-color);
+    font-weight: 500;
+}
+
+.project_social_icon {
+    list-style: none;
+    padding-left: 0;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.project_social_icon li {
+    display: inline-block;
+    padding-right: 20px;
+    font-size: var(--heading-h4);
+}
+
+.project_social_icon li:lang(ar) {
+    padding-left: 20px;
+    padding-right: auto;
+}
+
+.project_social_icon li a {
+    color: var(--main-dark-color);
+}
+
+.posted_sec {
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.posted_sec p {
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+
+.posted_sec .uer_name {
+    color: var(--black-color);
+}
+
+.img_file {
+    width: 60px;
+    border-radius: 50%;
+}
+
+.end_class {
+    text-align: end;
+}
+
+.mobile_price_section {
+    display: none;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 1023px) {
+    gallery {
+        height: 300px !important;
+        margin-top: -30px;
+    }
+
+    .category_ul li {
+        padding: 25px 30px;
+    }
+
+    .custom_width {
+        width: 50%;
+    }
+
+    .item_sec {
+        padding-left: 15px;
+    }
+
+    .prop_location_sec {
+        padding: 0 15px;
+    }
+
+    .prop_value {
+        margin-right: 20px;
+    }
+
+    .location_p {
+        padding-top: 0;
+    }
+
+    .desc_sec {
+        padding: 15px;
+    }
+
+    .breadcrumb {
+        padding: 5px 0;
+        margin-bottom: 0;
+    }
+
+    .cate_head {
+        margin-bottom: 0;
+    }
+
+    .cate_head a {
+        padding-bottom: 0;
+    }
+
+    .ad_title h2 {
+        font-size: var(--heading-h4);
+    }
+
+    .data_box {
+        margin-bottom: 10px;
+    }
+
+    .price_sec {
+        display: none;
+    }
+
+    .price_title h2 {
+        margin-bottom: 0;
+    }
+
+    .mobile_price_section {
+        display: block;
+    }
+
+    .num_btn {
+        width: 50%;
+        margin-right: 10px;
+    }
+
+    .whatapp_btn {
+        width: 40%;
+        margin-left: 10px;
+        margin-top: 0;
+    }
+}

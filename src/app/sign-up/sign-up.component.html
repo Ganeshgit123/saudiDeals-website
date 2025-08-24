@@ -1,0 +1,90 @@
+<section class="user_img_sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-center"><img src="../../assets/images/login/login_user.svg" width="150px"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <h6 class="otp_head">{{"Createaccount" | translate}}</h6>
+                <form [formGroup]="signupForm">
+                    <div class="form-group">
+                        <input type="text" class="form-control signup_form_field" placeholder="{{'FullName' | translate}}"
+                            formControlName="userName"
+                            [ngClass]="{ 'is-invalid': submitted && signupF['userName'].errors}">
+                        <div *ngIf="submitted && signupF['userName'].errors" class="invalid-feedback">
+                            <div *ngIf="signupF['userName'].errors['required']">{{"NameRequired" | translate}}</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-3">
+                            <div class="form-group">
+                                <input type="text" id="number" class="form-control signup_form_field"
+                                    formControlName="countryCode" readonly>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-9 col_set">
+                            <div class="form-group">
+                                <input type="number" class="form-control signup_form_field" placeholder="{{'MobileNumber' | translate}}"
+                                    formControlName="mobileNumber"
+                                    [ngClass]="{ 'is-invalid': submitted && signupF['mobileNumber'].errors }">
+                                <div *ngIf="submitted && signupF['mobileNumber'].errors" class="invalid-feedback">
+                                    <div *ngIf="signupF['mobileNumber'].errors['required']">{{"MobileRrequired" | translate}}</div>
+                                    <div *ngIf="signupF['mobileNumber'].errors['pattern']">{{"Ninedigitsonlyallowed" | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control signup_form_field" placeholder="{{'EmailAddress' | translate}}"
+                            formControlName="email" [ngClass]="{ 'is-invalid': submitted && signupF['email'].errors }">
+                        <div *ngIf="submitted && signupF['email'].errors" class="invalid-feedback">
+                            <div *ngIf="signupF['email'].errors['required']">{{"EmailRequired" | translate}}</div>
+                            <div *ngIf="signupF['email'].errors['pattern']">{{"PleaseprovidevalidEmail" | translate}}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row" [ngClass]="{ 'is-invalid': submitted && signupF['userType'].errors}">
+                        <div class="col-md-6">
+                            <input type="radio" name="userType" id="owner" value="OWNER" formControlName="userType"
+                                class="user_radio">
+                            <label for="owner">
+                                <div class="owner_box">
+                                <img src="../../assets/images/category/single_user.svg" alt="user">
+                                <h6>{{'Owner' | translate}}</h6>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="radio" name="userType" id="agent" value="DEALER" formControlName="userType"
+                                class="user_radio">
+                            <label for="agent">
+                                <div class="owner_box">
+                                    <img src="../../assets/images/category/dealer.svg" alt="dealer">
+                                    <h6>{{'DealerAgent' | translate}}</h6>
+                                </div>
+                            </label>
+                        </div>
+                        <div *ngIf="submitted && signupF['userType'].errors" class="invalid-feedback">
+                            <div *ngIf="signupF['userType'].errors['required']">{{'UserTypeRequired' | translate}}</div>
+                        </div>
+                    </div> -->
+                    <p *ngIf="errorMsg" style="color: red;">{{msg}}</p>
+                    <button class="proced_btn" (click)="onSignUp()" *ngIf="!errorMsg">{{"Signup" | translate}}</button>
+                    <button class="proced_btn" routerLink="/login" *ngIf="errorMsg">{{"login" | translate}}</button>
+                </form>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <p class="agree_btn">{{"BySigningUp" | translate}} <a routerLink="/terms-of-use" target="_blank">{{"TermsofUse" | translate}}</a>.</p>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+</section>

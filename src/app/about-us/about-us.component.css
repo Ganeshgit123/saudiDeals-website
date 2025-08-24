@@ -1,0 +1,22 @@
+/* .cont_section{
+    background: url(../../assets/images/contact_banner.png);
+    height: 350px;
+    background-size: cover;
+    background-repeat: no-repeat;
+} */
+.contact_heading{
+    text-align: center;
+    color: var(--white-color);
+    font-size: 40px;
+    font-weight: 600;
+    margin-top: 14%;
+}
+.about_section{
+    padding: 40px 0;
+}
+.about_section h6{
+    font-size: var(--heading-h5);
+    font-weight: 500;
+    color: var(--text-light-color);
+    line-height: 1.5;
+}

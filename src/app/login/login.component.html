@@ -1,0 +1,52 @@
+<section class="login_background">
+    <div class="container-fluid">
+        <div class="website-logo">
+            <a routerLink="/">
+                <div class="logo">
+                    <img class="logo-size" src="assets/images/background_logo.png" alt="">
+                </div>
+            </a>
+        </div>
+        <div class="row">
+            <div class="img-holder">
+                <div class="bg"></div>
+                <div class="info-holder">
+                </div>
+            </div>
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <h3>{{"GetmorethingsPlatform" | translate}}</h3>
+                        <p>{{"AccessWebIndustry" | translate}}</p>
+                        <div class="page-links">
+                            <a routerLink="/login" class="active">{{"login" | translate}}</a>
+                            <a routerLink="/sign-up">{{"Register" | translate}}</a>
+                        </div>
+                        <form [formGroup]="loginForm">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-3">
+                                    <div class="form-group">
+                                        <input type="text" id="number" class="form-control signup_form_field"
+                                            formControlName="countryCode" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9 col-md-9 col-9 col_set">
+                                    <div class="form-group">
+                                        <input type="number" class="form-control signup_form_field" placeholder="{{'MobileNumber' | translate}}"
+                                            formControlName="mobileNumber"
+                                            [ngClass]="{ 'is-invalid': submitted && f['mobileNumber'].errors }">
+                                        <div *ngIf="submitted && f['mobileNumber'].errors" class="invalid-feedback">
+                                            <div *ngIf="f['mobileNumber'].errors['required']">{{"MobileRrequired" | translate}}</div>
+                                            <div *ngIf="f['mobileNumber'].errors['pattern']">{{"Ninedigitsonlyallowed" | translate}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="ibtn" (click)="onSubmit()">{{"SendOTP" | translate}}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

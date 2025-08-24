@@ -1,0 +1,312 @@
+.porgress_sec {
+    padding: 40px 0;
+}
+
+.progress_ul {
+    padding-left: 0;
+    text-align: center;
+}
+
+.progress_ul li {
+    list-style-type: none;
+    text-align: center;
+    display: inline-block;
+    width: 20%;
+    font-size: var(--heading-h6);
+    color: var(--text-light-color);
+}
+
+.progress_ul li.active {
+    color: var(--text-dark-color);
+}
+
+.progress_ul li:after {
+    position: absolute;
+    width: 13.5%;
+    margin-top: -2.1rem;
+    margin-left: 1.25rem;
+    background-color: var(--border-color);
+    content: "";
+    display: inline-block;
+    height: 3px;
+    vertical-align: middle;
+}
+.progress_ul li.active:after {
+    position: absolute;
+    width: 13.5%;
+    margin-top: -2.1rem;
+    margin-left: 1.25rem;
+    background-color: var(--main-color);
+    content: "";
+    display: inline-block;
+    height: 3px;
+    vertical-align: middle;
+}
+.progress_ul li:lang(ar):after{
+    margin-right: 1.2rem;
+    margin-left: auto;
+    width: 13%;
+}
+.progress_ul li:last-child:after {
+    display: none;
+}
+
+.progress_path {
+    margin-top: 10px;
+}
+
+.progress_path img {
+    width: 40px;
+    border-radius: 50%;
+    padding: 6px;
+    border: 2px solid var(--border-color);
+}
+
+.progress_path.active img {
+    border: none;
+    padding: 8px;
+    background: var(--main-color);
+}
+
+.breadcrumb {
+    padding-top: 2rem;
+}
+
+.cate_head {
+    text-align: center;
+}
+
+.cate_head span {
+    margin: 0 10px;
+    font-size: var(--heading-h6);
+    font-weight: 500;
+    color: var(--main-dark-color);
+}
+
+.cate_head a {
+    margin: 0 10px;
+    font-size: var(--heading-h6);
+    font-weight: 500;
+    color: var(--main-dark-color);
+}
+
+.sec_link {
+    color: var(--main-color) !important;
+    text-decoration: underline !important;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.ques_field {
+    height: 45px;
+    border: 2px solid var(--border-color);
+    font-size: var(--para-size);
+    width: 100%;
+    background: var(--white-color);
+    border-radius: 6px;
+}
+
+::placeholder {
+    font-size: var(--para-size);
+    color: var(--text-light-color) !important;
+}
+
+.form-select:focus {
+    box-shadow: none;
+}
+
+.next_btn {
+    border: 1px solid var(--main-color);
+    padding: 10px 20px;
+    color: var(--main-color);
+    font-size: var(--para-size);
+    font-weight: 500;
+    background: var(--white-color);
+    border-radius: 6px;
+    transition: transform .2s;
+}
+
+.next_btn:hover {
+    transform: scale(1.1);
+}
+
+.mat-mdc-form-field {
+    width: 100% !important;
+}
+
+mat-slider {
+    width: 100% !important;
+}
+label{
+    display: inline;
+}
+.slider .invalid-feedback {
+    position: absolute;
+    margin-top: 2rem !important;
+}
+
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    display: none;
+}
+
+[type="radio"]:checked~label .owner_box {
+    border: 2px solid var(--main-color);
+}
+
+.owner_box {
+    text-align: center;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    padding: 5px 0;
+    margin: 0px 0px 20px 0;
+}
+.owner_box:hover{
+    cursor: pointer;
+}
+
+.owner_box h6 {
+    font-size: var(--para-size);
+    font-weight: 500;
+    color: var(--text-light-color);
+    padding-top: 8px;
+    margin-bottom: 8px;
+}
+
+[type="radio"]:checked~label .cont_box {
+    border: 2px solid var(--main-color) !important;
+    background: var(--main-color);
+}
+
+[type="radio"]:checked~label .cont_box h6{
+    color: var(--white-color);
+}
+
+.cont_box {
+    text-align: center;
+    border: 2px solid var(--border-color);
+    border-left: none !important;
+    padding: 5px 0;
+    margin: 0px 0px 10px 0;
+}
+.cont_box:lang(ar){
+    border-right: none !important;
+    border-left: 2px solid var(--border-color) !important;
+    margin: 10px 0px 0px 0;
+}
+.cont_box.first{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border: 2px solid var(--border-color) !important;
+}
+.cont_box.first:lang(ar){
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border: 2px solid var(--border-color) !important;
+}
+.cont_box.last{
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.cont_box.last:lang(ar){
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+.cont_box:hover{
+    cursor: pointer;
+}
+.pad_right{
+    padding-right: 0 !important;
+}
+.pad_right:lang(ar){
+    padding-left: 0 !important;
+    padding-right: 10px !important;
+}
+.pad_left{
+    padding-left: 0 !important;
+}
+.pad_left:lang(ar){
+    padding-right: 0 !important;
+    padding-left: 0 auto !important;
+}
+.pad_right_mobile{
+    padding-right: 0 !important;
+}
+.pad_right_mobile:lang(ar){
+    padding-left: 0 !important;
+    padding-right: 0 auto !important;
+}
+.cont_box h6 {
+    font-size: var(--para-size);
+    font-weight: 500;
+    color: var(--text-light-color);
+    padding-top: 8px;
+    margin-bottom: 8px;
+}
+
+
+.is-invalid .owner_box,
+.is-invalid .agent_box {
+    border: 1px solid red;
+}
+
+.is-invalid .invalid-feedback {
+    display: block;
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.nex_btnp{
+    text-align: end;
+}
+.nex_btnp:lang(ar){
+    text-align: left;
+}
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+    .porgress_sec {
+        padding: 20px 0 40px 0;
+    }
+
+    .progress_ul li {
+        font-size: var(--small-size);
+    }
+
+    .progress_ul li:after {
+        width: 9%;
+    }
+    .progress_ul li.active:after {
+        width: 9%;
+    }
+     .progress_ul li:lang(ar):after{
+        width: 8.8%;
+    }
+    .breadcrumb {
+        padding-top: 0;
+    }
+
+    .cate_head a {
+        font-size: var(--para-size);
+    }
+
+    .selct_box {
+        margin: 2rem 0px;
+    }
+    .pad_right_mobile{
+        padding-right: 15px !important;
+    }
+    .pad_right_mobile:lang(ar){
+        padding-left: 10px !important;
+        padding-right: auto !important;
+    }
+     .progress_ul:lang(ar){
+        padding-right: 0;
+        padding-left:0 auto;
+    }
+}
