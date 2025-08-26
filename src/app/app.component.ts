@@ -1,9 +1,10 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
 import {
   Router, Event as RouterEvent, NavigationStart, NavigationEnd, NavigationCancel,
   NavigationError, RouteConfigLoadStart, RouteConfigLoadEnd
 } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,9 @@ import { TranslateService } from "@ngx-translate/core";
   styleUrls: ['./app.component.css'],
   standalone: false
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
+  private navSub?: Subscription;
+
   @HostListener('document:contextmenu', ['$event'])
   onRightClick(event: MouseEvent) {
     event.preventDefault();
@@ -39,6 +42,23 @@ export class AppComponent {
   footer: any;
   logoHeader: any;
   ngOnInit(): void {
+    // Prevent Angular from forcing scroll resets
+    this.navSub = this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        // Do nothing → let iOS handle scroll restore
+      }
+    });
+
+    // Fix iOS BFCache delayed restore
+    window.onpageshow = (event: PageTransitionEvent) => {
+      if (event.persisted) {
+        // Safari restored from cache → force repaint to smooth scroll
+        requestAnimationFrame(() => {
+          const scrollEl = document.scrollingElement || document.documentElement;
+          scrollEl.scrollTop = scrollEl.scrollTop; // trigger reflow
+        });
+      }
+    };
     this.router.events
       .subscribe((event) => {
         if (event instanceof NavigationEnd) {
@@ -72,5 +92,9 @@ export class AppComponent {
       });
     this.lang = sessionStorage.getItem("lang") || "ar";
     this.dir = sessionStorage.getItem("dir") || "rtl";
+  }
+
+  ngOnDestroy(): void {
+    this.navSub?.unsubscribe();
   }
 }

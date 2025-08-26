@@ -136,14 +136,26 @@ export class AdDetailsComponent implements OnInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.onStableSub = this.ngZone.onStable.subscribe(() => {
-      setTimeout(() => {
-        window.scrollTo(0, 0); // fallback (no behavior option for iOS)
-        document.documentElement.scrollTop = 0; // extra fallback
-        document.body.scrollTop = 0; // iOS specific
-        this.onStableSub?.unsubscribe(); // Unsubscribe after scroll
-      }, 50); // 50ms is usually enough, can tweak to 100 if needed
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          // Detect the correct scrollable element (iOS sometimes ignores window/body)
+          const scrollEl = document.scrollingElement || document.documentElement;
+
+          // Reset scroll position (covers iOS + Android)
+          window.scrollTo(0, 0);
+          document.body.scrollTop = 0;
+          document.documentElement.scrollTop = 0;
+          scrollEl.scrollTop = 0;
+
+          // Force reflow (iOS Safari quirk)
+          void (scrollEl as HTMLElement).offsetHeight;
+
+          this.onStableSub?.unsubscribe();
+        }, 100); // Slightly longer delay for iOS layout
+      });
     });
   }
+
 
   showPhone(content) {
     this.modalService.open(content, { centered: true });
