@@ -159,7 +159,7 @@
     "LiveSoon": "يبث قريبا",
     "ContinuePostingAd": "استمر في نشر الاعلان",
     "Delete": "حذف",
-    "AreYouSureRemoveThisPost ?": "هل انت متأكد من انك تريد حذف هذا الاعلان؟",
+    "AreYouSureRemoveThisPost": "هل انت متأكد من انك تريد حذف هذا الاعلان؟",
     "Cancel": "الغاء",
     "YesRemove": "نعم, حذف",
     "Rent": "ايجار",
@@ -408,6 +408,6 @@
     "AdIsExpiredToday": "انتهت صلاحية الاعلان اليوم",
     "Expired": "انتهت",
     "updateExit": "تعديل و خروج",
-    "SaudiArabia":"السعودية",
-    "BySigningUp":"بالتسجيل أنا أوافق على"
+    "SaudiArabia": "السعودية",
+    "BySigningUp": "بالتسجيل أنا أوافق على"
 }
