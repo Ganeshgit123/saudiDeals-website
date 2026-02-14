@@ -135,7 +135,9 @@
           <span class="text_set">{{"warrantySpecs" | translate}}</span>
           <span class="drop_icon"><img src="assets/images/iconDown.svg"></span>
         </div>
-        <div class="dropdown_content last" *ngIf="filterSecShow" (click)="$event.stopPropagation()">
+        <div class="dropdown_content last" *ngIf="filterSecShow" (click)="$event.stopPropagation()"
+          (touchstart)="$event.stopPropagation()" (pointerdown)="$event.stopPropagation()"
+          (touchend)="$event.stopPropagation()">
           <div *ngIf="(cityOpen && modelOpen) || (cityOpen && modelOpen && trimOpen) || 
           (modelOpen && trimOpen) || (params == 2 && modelOpen) || (params == 2 && cityOpen) ||
           (subSubCategDropOpen && cityOpen)">

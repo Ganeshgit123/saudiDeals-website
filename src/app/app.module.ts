@@ -13,6 +13,7 @@ import { FooterComponent } from './footer/footer.component';
 import { LogoHeaderComponent } from './logo-header/logo-header.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { BfcacheFixService } from './bfcache-fix.service';
 
 export function createTranslateLoader(http: HttpClient): any {
     return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -47,7 +48,8 @@ export function createTranslateLoader(http: HttpClient): any {
             useClass: AuthInterceptor,
             multi: true,
         },
-        provideHttpClient(withInterceptorsFromDi())
+        provideHttpClient(withInterceptorsFromDi()),
+        BfcacheFixService
     ]
 })
 export class AppModule { }

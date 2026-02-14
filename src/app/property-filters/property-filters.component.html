@@ -181,7 +181,9 @@
                     <span class="text_set" *ngIf="propAgeValue !== 0">{{propAgeValue}}</span>
                     <span class="drop_icon"><img src="assets/images/iconDown.svg"></span>
                 </div>
-                <div class="dropdown_content" *ngIf="propAgeDropdown" (click)="$event.stopPropagation()">
+                <div class="dropdown_content" *ngIf="propAgeDropdown" (click)="$event.stopPropagation()"
+                    (touchstart)=" $event.stopPropagation()" (pointerdown)="$event.stopPropagation()"
+                    (touchend)="$event.stopPropagation()">
                     <ul class="beds_ul">
                         <li *ngFor="let age of propAgeArray" (click)="ageClick(age.value)"
                             [ngClass]="{'active': propAgeValue == age.value}">{{age.label | translate}}</li>
@@ -200,7 +202,9 @@
                     <span class="text_set">{{"BathAreaSqft" | translate}}</span>
                     <span class="drop_icon"><img src="assets/images/iconDown.svg"></span>
                 </div>
-                <div class="dropdown_content last" *ngIf="filterSecShow" (click)="$event.stopPropagation()">
+                <div class="dropdown_content last" *ngIf="filterSecShow" (click)="$event.stopPropagation()"
+                    (touchstart)="$event.stopPropagation()" (pointerdown)="$event.stopPropagation()"
+                    (touchend)="$event.stopPropagation()">
                     <div *ngIf="!cityOpen">
                         <ul class="beds_ul" *ngIf="params == 'rent'">
                             <h6 class="filt_title">{{"PropertyAge" | translate}}</h6>

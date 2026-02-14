@@ -5,6 +5,7 @@ import {
 } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { Subscription } from 'rxjs';
+import { BfcacheFixService } from './bfcache-fix.service';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   title = 'saudideals';
   isLoading: any;
-  constructor(private router: Router, private translateservice: TranslateService) {
+  constructor(private router: Router, private translateservice: TranslateService, private bfcacheFix: BfcacheFixService) {
     // Spinner for lazyload modules
     router.events.forEach((event) => {
       if (event instanceof RouteConfigLoadStart) {
