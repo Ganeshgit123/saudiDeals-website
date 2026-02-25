@@ -1606,7 +1606,20 @@ export class MotorFiltersComponent implements OnInit, OnDestroy {
     this.clearFiltBtn = true;
   }
 
-  @HostListener('document:click', ['$event']) onDocumentClick($event: any) {
+  @HostListener('document:click', ['$event'])
+  @HostListener('document:touchstart', ['$event'])
+  onDocumentClick($event: any) {
+    try {
+      const target = $event.target as Element;
+      const root = document.getElementById('motorFiltersRoot');
+      // If the click/touch happened inside this component root, don't close the dropdowns.
+      if (root && target && root.contains(target)) {
+        return;
+      }
+    } catch (e) {
+      // if anything goes wrong, fall back to closing everything
+    }
+
     this.filterSecShow = false;
     this.showDropdown = false;
     this.yearShowDropDown = false;

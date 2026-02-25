@@ -572,7 +572,19 @@ export class PropertyFiltersComponent implements OnInit, OnDestroy {
     this.clearFiltBtn = true;
   }
 
-  @HostListener('document:click', ['$event']) onDocumentClick($event: any) {
+  @HostListener('document:click', ['$event'])
+  @HostListener('document:touchstart', ['$event'])
+  onDocumentClick($event: any) {
+    try {
+      const target = $event.target as Element;
+      const root = document.getElementById('propertyFiltersRoot');
+      if (root && target && root.contains(target)) {
+        return; // inside component — ignore
+      }
+    } catch (e) {
+      // fallback to closing
+    }
+
     this.showDropdown = false;
     this.showBedDropdown = false;
     this.bathShowDropdown = false;
