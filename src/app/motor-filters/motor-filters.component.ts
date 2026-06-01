@@ -366,7 +366,7 @@ export class MotorFiltersComponent implements OnInit, OnDestroy {
     { label: '6-12Months', value: '6-12 months' }, { label: '1-2Years', value: '1-2 years' }, { label: '2-5Years', value: '2-5 years' }, { label: '5-10Years', value: '5-10 years' },
     { label: '10+Years', value: '10+ years' }];
 
-    this.yearArray = ['2025', '2024', '2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015', '2014', '2013', '2012',
+    this.yearArray = ['2026', '2025', '2024', '2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015', '2014', '2013', '2012',
       '2011', '2010', '2009', '2008', '2007', '2006', '2005', '2004', '2003', '2002', '2001', '2000'];
 
     const rawPrice = [{ label: 'All', value: 'all' }, { label: `${riyalImg}0 -&nbsp;${riyalImg}25,000`, value: 1 },
@@ -3033,7 +3033,7 @@ export class MotorFiltersComponent implements OnInit, OnDestroy {
         const contentString = `
       <a href="${dynamicUrl}" (click)="navigateToRoute(${marker.id})">
         <div class="prod_box">
-        <p class="text-center mb-0"><img src="${this.sortImageArray(marker.image)?.[0]?.url || ''}" 
+        <p class="text-center mb-0"><img src="${this.sortImageArray(marker.image)?.[0]?.url || ''}"
         style="border-radius: 10px;" width="100" height="100"></p>
         <div class="price_det">
         <h6 class="price_tag"> ${riyalImg} ${priceAsCurrency}</h6>
