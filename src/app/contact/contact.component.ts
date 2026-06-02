@@ -64,9 +64,9 @@ export class ContactComponent {
     if (this.fileImgUpload) {
       var postData = new FormData();
       postData.append('image', this.fileImgUpload);
-      this.authService.s3upload(postData).subscribe((res: any) => {
+      this.authService.upload(postData).subscribe((res: any) => {
         if (res.success == true) {
-          var updateImg = res.files[0].url;
+          const updateImg = res.url;
           const data = this.contactForm.value;
           this.contactForm.value.mobileNumber = String(this.contactForm.value.mobileNumber);
           data['attachment'] = updateImg;

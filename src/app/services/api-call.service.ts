@@ -24,9 +24,9 @@ export class ApiCallService {
     return localStorage.getItem('SDtoken');
   }
 
-  s3upload(user: any) {
+  upload(user: any) {
     return this.http
-      .post<any>(`${this.s3Endpoint}/upload`, user);
+      .post<any>(`${this.s3Endpoint}/api/upload`, user);
   }
 
   sendOTP(user: any) {

@@ -463,11 +463,10 @@ export class ImagesLocationComponent {
         for (let i = 0; i < this.uploadFiles.length; i++) {
           var postData = new FormData();
           postData.append('image', this.uploadFiles[i].file);
-          this.authService.s3upload(postData).subscribe((res: any) => {
+          this.authService.upload(postData).subscribe((res: any) => {
             if (res.success == true) {
-              // var uploadedImg = res.files[0].url;
               const object = {
-                url: res.files[0].url,
+                url: res.url,
                 order: this.uploadFiles[i].order
               }
               // console.log("uploadimg", uploadedImg)
@@ -533,10 +532,10 @@ export class ImagesLocationComponent {
         for (let i = 0; i < this.uploadFiles.length; i++) {
           var postData = new FormData();
           postData.append('image', this.uploadFiles[i].file);
-          this.authService.s3upload(postData).subscribe((res: any) => {
+          this.authService.upload(postData).subscribe((res: any) => {
             if (res.success == true) {
               const object = {
-                url: res.files[0].url,
+                url: res.url,
                 order: this.uploadFiles[i].order
               }
               this.newUploadImg.push(object);
