@@ -16,7 +16,7 @@ export class ApiCallService {
     .set('Access-Control-Allow-Credentials', 'true')
     .set('language', 'es');
   baseUrl = environment.baseUrl;
-  s3Endpoint = environment.s3Url;
+  // s3Endpoint = environment.s3Url;
   constructor(private http: HttpClient) {
   }
 
@@ -26,7 +26,7 @@ export class ApiCallService {
 
   upload(user: any) {
     return this.http
-      .post<any>(`${this.s3Endpoint}/api/upload`, user);
+      .post<any>(`${this.baseUrl}/api/upload`, user);
   }
 
   sendOTP(user: any) {
