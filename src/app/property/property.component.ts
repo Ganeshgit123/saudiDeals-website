@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { OwlOptions } from "ngx-owl-carousel-o";
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiCallService } from 'src/app/services/api-call.service';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-property',
@@ -61,7 +62,8 @@ export class PropertyComponent {
   recentPropLength: number;
   params: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, public authService: ApiCallService) { }
+  constructor(private router: Router, private route: ActivatedRoute, public authService: ApiCallService,
+    private imageService: ImageService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -77,9 +79,12 @@ export class PropertyComponent {
 
       this.authService.getRecentProperty("RENT").subscribe(
         (res: any) => {
-          let exipryCondition = res.data;
+          let exipryCondition = res.data || [];
           this.recentPropLength = exipryCondition.length;
-          this.recentProperty = exipryCondition.slice(0, 5);
+          this.recentProperty = (exipryCondition.slice(0, 5) || []).map(p => {
+            if (p.image) p.image = this.imageService.normalizeImages(p.image);
+            return p;
+          });
         })
       this.authService.getPropertyCategory("RENT").subscribe(
         (res: any) => {
@@ -94,9 +99,12 @@ export class PropertyComponent {
 
       this.authService.getRecentProperty("SALE").subscribe(
         (res: any) => {
-          let exipryCondition = res.data;
+          let exipryCondition = res.data || [];
           this.recentPropLength = exipryCondition.length;
-          this.recentProperty = exipryCondition.slice(0, 5);
+          this.recentProperty = (exipryCondition.slice(0, 5) || []).map(p => {
+            if (p.image) p.image = this.imageService.normalizeImages(p.image);
+            return p;
+          });
         })
       this.authService.getPropertyCategory("SALE").subscribe(
         (res: any) => {
@@ -133,9 +141,12 @@ export class PropertyComponent {
       })
     this.authService.getRecentProperty(this.propSecondCategActive).subscribe(
       (res: any) => {
-        let exipryCondition = res.data;
+        let exipryCondition = res.data || [];
         this.recentPropLength = exipryCondition.length;
-        this.recentProperty = exipryCondition.slice(0, 5);
+        this.recentProperty = (exipryCondition.slice(0, 5) || []).map(p => {
+          if (p.image) p.image = this.imageService.normalizeImages(p.image);
+          return p;
+        });
       })
     this.authService.getPropetyCount(this.propSecondCategActive).subscribe(
       (res: any) => {

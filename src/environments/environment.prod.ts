@@ -4,5 +4,5 @@ export const environment = {
   // s3Url: 'http://127.0.0.1:8085'
 
   baseUrl: 'https://api.saudideal.com/user',
-  // s3Url: 'https://s3api.saudideal.com'
+  s3Url: 'https://api.saudideal.com'
 };

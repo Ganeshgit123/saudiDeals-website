@@ -1,6 +1,7 @@
 import { Component, HostListener, NgZone, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCallService } from 'src/app/services/api-call.service';
+import { ImageService } from 'src/app/services/image.service';
 import { TranslateService } from '@ngx-translate/core';
 import { CurrencyPipe } from '@angular/common';
 declare const google: any;
@@ -22,7 +23,9 @@ export class PropertyFiltersComponent implements OnInit, OnDestroy {
   dir: any;
   params: any;
   categId: any;
-  postList = [];
+  private _postList: any[] = [];
+  get postList(): any[] { return this._postList; }
+  set postList(value: any[]) { this._postList = (value || []).map(p => { if (p && p.image) p.image = this.imageService.normalizeImages(p.image); return p; }); }
   postListCount: any;
   categArray = [];
   selectedCategory = [];
@@ -67,7 +70,7 @@ export class PropertyFiltersComponent implements OnInit, OnDestroy {
   sessionHistory: any;
 
   constructor(public authService: ApiCallService,
-    private translate: TranslateService, private currencyPipe: CurrencyPipe) { }
+    private translate: TranslateService, private currencyPipe: CurrencyPipe, private imageService: ImageService) { }
 
   ngOnInit(): void {
     const sessionHome = JSON.parse(sessionStorage.getItem('homeFilter'));
@@ -1664,13 +1667,13 @@ export class PropertyFiltersComponent implements OnInit, OnDestroy {
         const contentString = `
       <a href="${dynamicUrl}" (click)="navigateToRoute(${marker.id})">
         <div class="prod_box">
-        <p class="text-center mb-0"><img src="${this.sortImageArray(marker.image)?.[0]?.url || ''}" 
+        <p class="text-center mb-0"><img src="${this.sortImageArray(marker.image)?.[0]?.url || ''}"
         style="border-radius: 10px;" width="100" height="100"></p>
         <div class="price_det">
         <h6 class="price_tag"> ${riyalImg} ${priceAsCurrency}
         <span>/ ${termsCondition}</span>
        </h6>
-       <p class="features">${marker.noBedrooms} ${this.translate.instant("beds")} • 
+       <p class="features">${marker.noBedrooms} ${this.translate.instant("beds")} •
           ${marker.noBathrooms} ${this.translate.instant("Baths")}</p>
         <p class="locat">${marker.areaInSqmt} ${this.translate.instant("m2")}</p>
         </div>

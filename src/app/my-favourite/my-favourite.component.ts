@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { ApiCallService } from 'src/app/services/api-call.service';
 import { ToastrService } from 'ngx-toastr';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
-    selector: 'app-my-favourite',
-    templateUrl: './my-favourite.component.html',
-    styleUrls: ['./my-favourite.component.css'],
-    standalone: false
+  selector: 'app-my-favourite',
+  templateUrl: './my-favourite.component.html',
+  styleUrls: ['./my-favourite.component.css'],
+  standalone: false
 })
 export class MyFavouriteComponent {
   motorFavArray: any = [];
@@ -19,18 +20,24 @@ export class MyFavouriteComponent {
   propFavCount: any;
 
   constructor(private router: Router, private route: ActivatedRoute, public authService: ApiCallService,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService, private imageService: ImageService) { }
 
   ngOnInit(): void {
     this.authService.getMotorFavorites().subscribe(
       (res: any) => {
-        this.motorFavArray = res.data;
+        this.motorFavArray = (res.data || []).map(p => {
+          if (p.image) p.image = this.imageService.normalizeImages(p.image);
+          return p;
+        });
         this.motorFavCount = this.motorFavArray.length;
       })
 
     this.authService.getPropertyFavorites().subscribe(
       (res: any) => {
-        this.propertyFavArray = res.data;
+        this.propertyFavArray = (res.data || []).map(p => {
+          if (p.image) p.image = this.imageService.normalizeImages(p.image);
+          return p;
+        });
         this.propFavCount = this.propertyFavArray.length;
       })
   }

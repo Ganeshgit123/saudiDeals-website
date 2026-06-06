@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { ApiCallService } from 'src/app/services/api-call.service';
 import { ToastrService } from 'ngx-toastr';
+import { ImageService } from 'src/app/services/image.service';
 import { PlatformLocation } from '@angular/common';
 
 @Component({
@@ -68,7 +69,7 @@ export class HomeComponent {
   searchText: string = '';
 
   constructor(private router: Router, private route: ActivatedRoute, public authService: ApiCallService,
-    private toastr: ToastrService, private platformLocation: PlatformLocation) {
+    private toastr: ToastrService, private platformLocation: PlatformLocation, private imageService: ImageService) {
     history.pushState(null, '', location.href);
     this.platformLocation.onPopState(() => {
       history.pushState(null, '', location.href);
@@ -133,19 +134,31 @@ export class HomeComponent {
             }
           }
           // this.popularMotorProducts = res?.popularProducts[0]?.data.slice(0, 6);
-          this.popularMotorProducts = res?.popularProducts[0]?.data.slice(0, 6);
-          this.popularRentProducts = res?.popularProducts[1]?.data.slice(0, 6);
+          this.popularMotorProducts = (res?.popularProducts[0]?.data.slice(0, 6) || []).map(p => {
+            if (p.image) p.image = this.imageService.normalizeImages(p.image);
+            return p;
+          });
+          this.popularRentProducts = (res?.popularProducts[1]?.data.slice(0, 6) || []).map(p => {
+            if (p.image) p.image = this.imageService.normalizeImages(p.image);
+            return p;
+          });
           let viewedUniqueMotors = res?.viewedProducts[0]?.data.filter((obj, index, self) =>
             index === self.findIndex((o) => o.id === obj.id)
           );
           if (viewedUniqueMotors) {
-            this.viewedMotors = viewedUniqueMotors.slice(0, 6);
+            this.viewedMotors = (viewedUniqueMotors.slice(0, 6) || []).map(p => {
+              if (p.image) p.image = this.imageService.normalizeImages(p.image);
+              return p;
+            });
           }
           let viewedUniqueProperty = res?.viewedProducts[1]?.data.filter((obj, index, self) =>
             index === self.findIndex((o) => o.id === obj.id)
           );
           if (viewedUniqueProperty) {
-            this.viewedProperty = viewedUniqueProperty.slice(0, 6);
+            this.viewedProperty = (viewedUniqueProperty.slice(0, 6) || []).map(p => {
+              if (p.image) p.image = this.imageService.normalizeImages(p.image);
+              return p;
+            });
           }
         })
     } else {
@@ -158,8 +171,14 @@ export class HomeComponent {
               this.popularPropertyLength = res?.popularProducts[1].length;
             }
           }
-          this.popularMotorProducts = res?.popularProducts[0]?.data.slice(0, 6);
-          this.popularRentProducts = res?.popularProducts[1]?.data.slice(0, 6);
+          this.popularMotorProducts = (res?.popularProducts[0]?.data.slice(0, 6) || []).map(p => {
+            if (p.image) p.image = this.imageService.normalizeImages(p.image);
+            return p;
+          });
+          this.popularRentProducts = (res?.popularProducts[1]?.data.slice(0, 6) || []).map(p => {
+            if (p.image) p.image = this.imageService.normalizeImages(p.image);
+            return p;
+          });
         })
     }
 

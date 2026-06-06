@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCallService } from 'src/app/services/api-call.service';
+import { ImageService } from 'src/app/services/image.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
@@ -50,13 +51,15 @@ export class ImagesLocationComponent {
   locationNeed = false;
 
   constructor(private router: Router, private route: ActivatedRoute, public authService: ApiCallService,
-    private toastr: ToastrService, public fb: FormBuilder, private spinner: NgxSpinnerService) {
+    private toastr: ToastrService, public fb: FormBuilder, private imageService: ImageService, private spinner: NgxSpinnerService) {
     this.locationImageForm = this.fb.group({
       provinceId: ['', [Validators.required]],
       cityId: ['', [Validators.required]],
       image: [''],
     });
   }
+
+  // Image handling delegated to ImageService
 
   ngOnInit(): void {
     // this.getPosition();
@@ -134,9 +137,13 @@ export class ImagesLocationComponent {
             this.isEdit = false;
           } else {
             this.isEdit = true;
-            this.previews = this.getPostedData.image.sort(function (first, second) {
-              return first.order - second.order;
-            });
+            let images: any = this.getPostedData.image;
+            if (typeof images === 'string') {
+              try { images = JSON.parse(images); } catch (e) { images = [images]; }
+            }
+            if (!Array.isArray(images)) { images = [images]; }
+            images = this.imageService.normalizeImages(images);
+            this.previews = images.sort(function (first: any, second: any) { return (first.order || 0) - (second.order || 0); });
             this.locationImageForm = this.fb.group({
               provinceId: [this.getPostedData.provinceId, [Validators.required]],
               cityId: [this.getPostedData.cityId, [Validators.required]],
@@ -466,7 +473,7 @@ export class ImagesLocationComponent {
           this.authService.upload(postData).subscribe((res: any) => {
             if (res.success == true) {
               const object = {
-                url: res.url,
+                url: this.imageService.getFullImageUrl(res.url),
                 order: this.uploadFiles[i].order
               }
               // console.log("uploadimg", uploadedImg)
@@ -535,7 +542,7 @@ export class ImagesLocationComponent {
           this.authService.upload(postData).subscribe((res: any) => {
             if (res.success == true) {
               const object = {
-                url: res.url,
+                url: this.imageService.getFullImageUrl(res.url),
                 order: this.uploadFiles[i].order
               }
               this.newUploadImg.push(object);

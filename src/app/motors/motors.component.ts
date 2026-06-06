@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { ApiCallService } from 'src/app/services/api-call.service';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-motors',
@@ -42,7 +43,8 @@ export class MotorsComponent {
   cityActive = false;
   recentMotorLength: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, public authService: ApiCallService) { }
+  constructor(private router: Router, private route: ActivatedRoute, public authService: ApiCallService,
+    private imageService: ImageService) { }
 
   ngOnInit(): void {
     this.dir = sessionStorage.getItem('dir') || 'rtl';
@@ -60,9 +62,12 @@ export class MotorsComponent {
 
     this.authService.getRecentMotors().subscribe(
       (res: any) => {
-        let exipryCondition = res.data;
-        this.recentMotors = exipryCondition.slice(0, 5);
+        let exipryCondition = res.data || [];
         this.recentMotorLength = exipryCondition.length;
+        this.recentMotors = (exipryCondition.slice(0, 5) || []).map(p => {
+          if (p.image) p.image = this.imageService.normalizeImages(p.image);
+          return p;
+        });
       })
 
     this.authService.getMotorCategory().subscribe(

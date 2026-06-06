@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { ApiCallService } from 'src/app/services/api-call.service';
+import { ImageService } from 'src/app/services/image.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -31,7 +32,7 @@ export class MyAdsComponent {
   motorImageArray = [];
 
   constructor(private router: Router, private route: ActivatedRoute, public authService: ApiCallService,
-    private translate: TranslateService,) { }
+    private translate: TranslateService, private imageService: ImageService) { }
 
   ngOnInit(): void {
     this.authService.getPostedAllPost().subscribe(
@@ -66,6 +67,13 @@ export class MyAdsComponent {
               })
             })
             this.motorPostArray = onlyMotorActiveValue.reverse();
+            // Normalize image fields so templates can always use `.url`
+            this.motorPostArray = this.motorPostArray.map(post => {
+              if (post.image) {
+                post.image = this.imageService.normalizeImages(post.image);
+              }
+              return post;
+            });
             this.motorPostCount = this.motorPostArray.length;
             // console.log("dswe", this.subscriptionMotorList)
           })
@@ -103,6 +111,13 @@ export class MyAdsComponent {
               })
             })
             this.propertyPostArray = onlyPropertyActiveValue.reverse();
+            // Normalize image fields for consistent rendering
+            this.propertyPostArray = this.propertyPostArray.map(post => {
+              if (post.image) {
+                post.image = this.imageService.normalizeImages(post.image);
+              }
+              return post;
+            });
             this.propPostCount = this.propertyPostArray.length;
             // console.log("dswe", this.subscriptionPropertyList)
           })

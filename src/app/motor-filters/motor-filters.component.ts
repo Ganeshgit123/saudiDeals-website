@@ -1,6 +1,7 @@
 import { Component, HostListener, inject, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCallService } from 'src/app/services/api-call.service';
+import { ImageService } from 'src/app/services/image.service';
 import { TranslateService } from '@ngx-translate/core';
 import { CurrencyPipe } from '@angular/common';
 declare const google: any;
@@ -25,7 +26,9 @@ export class MotorFiltersComponent implements OnInit, OnDestroy {
   dir: any;
   params: any;
   cateeName: any;
-  postList = [];
+  private _postList: any[] = [];
+  get postList(): any[] { return this._postList; }
+  set postList(value: any[]) { this._postList = this.normalizePostList(value); }
   postListCount: any;
   modelCarList = [];
   makeName: any;
@@ -110,8 +113,19 @@ export class MotorFiltersComponent implements OnInit, OnDestroy {
   sessionHistory: any;
 
   constructor(public authService: ApiCallService,
-    private translate: TranslateService, private currencyPipe: CurrencyPipe, private sanitizer: DomSanitizer
+    private translate: TranslateService, private currencyPipe: CurrencyPipe, private sanitizer: DomSanitizer,
+    private imageService: ImageService
   ) { }
+
+  private normalizePostList(data: any[]): any[] {
+    if (!data) return [];
+    return data.map(post => {
+      if (post.image) {
+        post.image = this.imageService.normalizeImages(post.image);
+      }
+      return post;
+    });
+  }
 
   ngOnInit(): void {
     const riyalImg = '<img src="assets/images/saudi_riyal_logo.svg" style="width:11px;">&nbsp;';

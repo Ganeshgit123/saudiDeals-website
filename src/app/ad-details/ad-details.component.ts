@@ -1,6 +1,7 @@
 import { Component, OnInit, NgZone, OnDestroy, inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiCallService } from 'src/app/services/api-call.service';
+import { ImageService } from 'src/app/services/image.service';
 import { ToastrService } from 'ngx-toastr';
 import { Gallery, GalleryItem, ImageItem } from 'ng-gallery';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -44,7 +45,7 @@ export class AdDetailsComponent implements OnInit, OnDestroy {
   propertyFavLength: number = 0;
 
   constructor(public authService: ApiCallService,
-    private toastr: ToastrService, private modalService: NgbModal) { }
+    private toastr: ToastrService, private modalService: NgbModal, private imageService: ImageService) { }
 
   ngOnInit(): void {
     this.loggedUser = localStorage.getItem('saudiDealsLoggedIn');
@@ -66,15 +67,11 @@ export class AdDetailsComponent implements OnInit, OnDestroy {
           this.makeName = this.postArray[0].make;
           this.modelName = this.postArray[0].model;
           this.userId = this.postArray[0].id;
-          const sortedImage = this.postArray[0].image.sort(function (first, second) {
-            return first.order - second.order;
-          });
-          sortedImage.forEach((element: any) => {
-            const object = {
-              srcUrl: element.url,
-              previewUrl: element.url
-            }
-            this.galleryView.push(object);
+          // Normalize images and ensure fully-qualified URLs
+          let images = this.imageService.normalizeImages(this.postArray[0].image);
+          images = images.sort((first: any, second: any) => (first.order || 0) - (second.order || 0));
+          images.forEach((element: any) => {
+            this.galleryView.push({ srcUrl: element.url, previewUrl: element.url });
           });
 
           this.items = this.galleryView.map(item => new ImageItem({ src: item.srcUrl, thumb: item.previewUrl }));
@@ -102,18 +99,14 @@ export class AdDetailsComponent implements OnInit, OnDestroy {
           this.propCategId = this.postArray[0].categoryId;
           this.proType = this.postArray[0].type.toLowerCase();
           this.userId = this.postArray[0].id;
-          const sortedImage = this.postArray[0].image.sort(function (first, second) {
-            return first.order - second.order;
-          });
-          sortedImage.forEach((element: any) => {
-            const object = {
-              srcUrl: element.url,
-              previewUrl: element.url
-            }
-            this.galleryView.push(object);
+          // Normalize images and ensure fully-qualified URLs
+          let images = this.imageService.normalizeImages(this.postArray[0].image);
+          images = images.sort((first: any, second: any) => (first.order || 0) - (second.order || 0));
+          images.forEach((element: any) => {
+            this.galleryView.push({ srcUrl: element.url, previewUrl: element.url });
           });
 
-          //  console.log("img",this.galleryView) 
+          //  console.log("img",this.galleryView)
 
           this.items = this.galleryView.map(item => new ImageItem({ src: item.srcUrl, thumb: item.previewUrl }));
           var userId = this.postArray[0].userId.toString();
